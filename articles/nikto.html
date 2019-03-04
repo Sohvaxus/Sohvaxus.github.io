@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="../favicon/favicon.ico"/>
+    <title>Nikto Web Scanner Tutorial</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../typewriter.js"></script>
+    <link rel="stylesheet" type="text/css" href="../stacksec.css">
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="In-depth explanation and examples of web scanning with Nikto.">
+    <meta name="keywords" content="nikto, wikto, gathering, information gathering, web, scanning, security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,WPA2,wifi,protocol,fix,how to">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<!-- BODY -->
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HEADER -->
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">StackSec</a>
+                </nav>
+            </div>
+            <br /><br />
+            <!-- END OF HEADER -->
+            <div class="col-sm-2">
+                <!-- NAV -->
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <h4>0xN4V</h4>
+                            <ul class="nav navbar-nav">
+                                <li><a href="../index.html" data-chaffle="en">HOME</a></li>
+                                <li><a href="../data.html" data-chaffle="en">>> DOCS</a></li>
+                                <li><a href="../readme.html" data-chaffle="en">README.TXT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- END OF NAV -->
+            </div>
+            <!-- CONTENT -->
+            <div class="col-sm-7">
+                <div class="container-fluid">
+                    <h1>Nikto Web Scanner</h1>
+                    <hr />
+                    <!-- BREADCRUMBS -->
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../data.html">Docs</a></li>
+                        <li class="breadcrumb-item active">Nikto</li>
+                    </ol>
+                    <div class="row top-buffer">
+                        <div class="col-sm-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">0x5UMM4RY</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Author:</td>
+                                        <td>Chris Sullo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>License:</td>
+                                        <td>GPL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Software:</td>
+                                        <td>Nikto</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Written in:</td>
+                                        <td>Perl</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date created:</td>
+                                        <td>December 17, 2012</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Updated:</td>
+                                        <td>Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GitHub:</td>
+                                        <td><a href="https://github.com/sullo/nikto">Nikto</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <!-- ARTICLE CONTENT -->
+                        <ol>
+                            <li><h5>Description</h5></li>
+                                <p>Nikto is an Open Source web server scanner which performs comprehensive tests against web servers for multiple items, including over 6700 potentially dangerous files/CGIs, checks for outdated versions of over 1250 servers, and version specific problems on over 270 servers. It also checks for server configuration items such as the presence of multiple index files, HTTP server options, and will attempt to identify installed web servers and software. Scan items and plugins are frequently updated and can be automatically updated.</p>
+                                <p>Nikto is built on LibWhisker2 (by RFP) and can run on any platform which has a Perl environment. It supports SSL, proxies, host authentication, attack encoding and more. It can be updated automatically from the command-line, and supports the optional submission of updated version data back to the maintainers.</p>
+
+                                <p>The name "Nikto" is taken from the movie "The Day the Earth Stood Still", and of course subsequent abuse by Bruce Campbell in "Army of Darkness".</p>
+                            <li><h5>Cheatsheet</h5></li>
+                            <br />
+                            <p>Scan the target 192.168.1.1 on port 80. Port 80 is the default port if none is given.</p>
+                            <code>
+                                <p># Syntax</p>
+                                <p>nikto -h [target IP] -p [port](,[port],[port],...)</p>
+                                <p># Syntax alternative</p>
+                                <p>nikto -h https://[target IP]:[port]/</p>
+                                <br />
+                                <p># Example</p>
+                                <p>nikto -h 192.168.1.1</p>
+                            </code>
+                            <br />
+                            <p>Scan the target 192.168.1.1 on port 443. Multiple ports can be used, seperated by a comma or specified by a range.</p>
+                            <code>
+                                <p># Example</p>
+                                <p>nikto -h 192.168.1.1 -p 443</p>
+                                <br />
+                                <p># Multiple ports - Comma serperated</p>
+                                <p>nikto -h 192.168.1.1 -p 80,8080,443</p>
+                                <br />
+                                <p># Multiple ports - Specified range</p>
+                                <p>nikto -h 192.168.1.1 -p 80-90</p>
+                            </code>
+                            <br />
+                            <p>Scan the target 192.168.1.1 on port 443. Nikto will check HTTP port 80 first by default, and if that fails, HTTPS port 443. If you're sure it's an SSL server, you can use the -s (-ssl) parameter. This will speed up the process.</p>
+                            <code>
+                                <p># Example</p>
+                                <p>nikto -h 192.168.1.1 -p 443 -ssl</p>
+                            </code>
+                            <br />
+                            <p>Scan through a proxy server.</p>
+                            <code>
+                                <p># Syntax</p>
+                                <p>nikto -h [target IP] -p [port] -useproxy [proxy IP]</p>
+                                <br />
+                                <p># Example</p>
+                                <p>nikto -h 192.168.0.1 -p 443 -useproxy 127.0.0.1:8080</p>
+                            </code>
+                            <br />
+                            <p><u>Update Nikto</u></p>
+                            <code>
+                                <p>nikto -update</p>
+                            </code>
+                            <br />
+                            <p>-h : Specifies the target host</p>
+                            <p>-p : Specifies the port(s). Multiple ports can be added, seperated by a comma (,) or specified as a range</p>
+                            <p>-s : (-ssl) Speeds up the scan if you're sure the target uses SSL. This option only tests SSL on the ports specified.</p>
+                            <p>-useproxy : Specifies the use of a given HTTP proxy via which to conduct scans. Nikto does not currently support SOCKS proxies.</p>
+                        </ol>
+                        <center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+                        <h5>50URC35:<h5>
+                        <ul id="sources">
+                            <li><a href="https://en.wikipedia.org/wiki/Nikto_Web_Scanner">Nikto Wiki</a></li>
+                            <li><a href="https://github.com/sullo/nikto">Nikto GitHub</a></li>
+                            <li><a href="https://cirt.net/nikto2-docs/">Nikto full documentation</a></li>
+                            
+                        </ul>
+                        <!-- END OF ARTICLE CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <!-- END OF CONTENT -->
+            <!-- SCRIPTS -->
+            <script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+            <script>
+                var elements = document.querySelectorAll('[data-chaffle]');
+                var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+                Array.prototype.forEach.call(elements, function (el) {
+                    var chaffle = new Chaffle(el)
+                    el.addEventListener('mouseover', function () {
+                        chaffle.init();
+                    });
+                });
+
+                Array.prototype.forEach.call(elm, function (el) {
+                    var chaffle = new Chaffle(el, {
+                        delay: 200
+                    })
+                    setInterval(function(){
+                        chaffle.init();
+                    }, 8000)
+                });
+            </script>
+            <!-- END OF SCRIPTS -->
+        </div>
+    </div>
+<!-- END OF BODY -->
+</body>
+</html>

@@ -1,0 +1,161 @@
+body {
+    font-family: Consolas, monaco, monospace;
+    font-style: normal;
+    background-color: #242423;
+    color: #56D440;
+}
+
+body a {
+    color: #56D440;
+}
+
+body a:hover, body li a:hover{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+h1 {
+    color: #56D440;
+    text-align: center;
+    font-family: Consolas, monaco, monospace;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 24.4px;
+}
+
+h5 {
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 15px;
+}
+hr {
+    color: #888888;
+}
+
+footer {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.table th {
+   text-align: center;   
+}
+
+#links {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+.typewrite {
+    color: #56D440;
+    font-family: Consolas, monaco, monospace;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 16.4px;
+}
+
+.navbar {
+    font-family: Consolas, monaco, monospace;
+    margin-bottom: 0;
+    background-color: #242423;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+}
+
+.navbar .navbar-collapse .navbar-nav a, .navbar .navbar-header a, a {
+    color: #56D440;
+}
+
+.navbar .navbar-collapse .navbar-nav a:hover, .navbar .navbar-header a:hover, a:hover {
+    color: #FFFFFF;
+}
+
+p {
+    font-family: Consolas, monaco, monospace;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 16.4x;
+    color: #D6CDC9;
+}
+
+.navbar-brand {
+    color: #26FF0F;
+}
+
+/* make sidebar nav vertical */ 
+.navbar-header .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+    max-width: none;
+}
+.navbar .navbar-collapse ul {
+    float: none;
+    display: block;
+}
+.navbar .navbar-collapse .navbar-nav li {
+    float: none;
+    display: block;
+}
+.navbar .navbar-collapse .navbar-nav li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.breadcrumb {
+    background-color: #242423;
+}
+
+.row {
+    height: 100%;
+}
+
+code {
+    font-family: Consolas, monaco, monospace;
+    background-color: #242423;
+    border: 1px solid #999;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+code p {
+    font-size: 13px;
+    color: white;
+}
+
+body p>a, body p>i>a, tr>td>a {
+    color: red;
+}
+
+#sources a {
+    color: red;
+}
+
+li {
+  margin: 10px 0;
+}

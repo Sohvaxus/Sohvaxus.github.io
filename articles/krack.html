@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="../favicon/favicon.ico"/>
+    <title>Hacking WPA2 - KRACK - Key Reinstallation Attack</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../typewriter.js"></script>
+    <link rel="stylesheet" type="text/css" href="../stacksec.css">
+    
+    <meta charset="UTF-8">
+    <meta name="description" content="In-depth explanation and examples about KRACK, a key reinstallation attack against the WPA2 wifi standard.">
+    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,WPA2,wifi,protocol,fix,how to">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<!-- BODY -->
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- HEADER -->
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">StackSec</a>
+                </nav>
+            </div>
+            <br /><br />
+            <!-- END OF HEADER -->
+            <div class="col-sm-2">
+                <!-- NAV -->
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <h4>0xN4V</h4>
+                            <ul class="nav navbar-nav">
+                                <li><a href="../index.html" data-chaffle="en">HOME</a></li>
+                                <li><a href="../data.html" data-chaffle="en">>> DOCS</a></li>
+                                <li><a href="../readme.html" data-chaffle="en">README.TXT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- END OF NAV -->
+            </div>
+            <!-- CONTENT -->
+            <div class="col-sm-7">
+                <div class="container-fluid">
+                    <h1>KRACK - Key Reinstallation Attack</h1>
+                    <hr />
+                    <!-- BREADCRUMBS -->
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="../data.html">Docs</a></li>
+                        <li class="breadcrumb-item active">KRACK WPA2 exploitation</li>
+                    </ol>
+                    <div class="row top-buffer">
+                        <div class="col-sm-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">0x5UMM4RY</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Software:</td>
+                                        <td>WPA2, <a href="https://en.wikipedia.org/wiki/Wpa_supplicant">wpa_supplicant</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date found:</td>
+                                        <td>2016</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vulnerable version(s):</td>
+                                        <td>/</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date patched:</td>
+                                        <td>/</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Patched version(s):</td>
+                                        <td>/</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-4">
+                            <center><img src="../images/KRACK-logo-small.png" alt="Heartbleed" height="175" width="150"></center>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <!-- ARTICLE CONTENT -->
+                        <ol>
+                            <li><h5>Description</h5></li>
+                            <p>Under construction</p>
+                            <li><h5>How to exploit it?</h5></li>
+                            <li><h5>How to protect yourself?</h5></li>
+                        </ol>
+                        <center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+                        <h5>50URC35:<h5>
+                        <ul id="sources">
+                            <li><a href="https://en.wikipedia.org/wiki/KRACK">KRACK Wikipedia</a></li>
+                        </ul>
+                        <!-- END OF ARTICLE CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <!-- END OF CONTENT -->
+            <!-- SCRIPTS -->
+            <script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+            <script>
+                var elements = document.querySelectorAll('[data-chaffle]');
+                var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+                Array.prototype.forEach.call(elements, function (el) {
+                    var chaffle = new Chaffle(el)
+                    el.addEventListener('mouseover', function () {
+                        chaffle.init();
+                    });
+                });
+
+                Array.prototype.forEach.call(elm, function (el) {
+                    var chaffle = new Chaffle(el, {
+                        delay: 200
+                    })
+                    setInterval(function(){
+                        chaffle.init();
+                    }, 8000)
+                });
+            </script>
+            <!-- END OF SCRIPTS -->
+        </div>
+    </div>
+<!-- END OF BODY -->
+</body>
+</html>

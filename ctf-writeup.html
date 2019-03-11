@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="shortcut icon" href="favicon/favicon.ico"/>
-    <title>StackSec - Tutorials</title>
+    <title>Sohvaxus - Write-Up Documentation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
     
     <meta charset="UTF-8">
     <meta name="description" content="Write-ups from multipe CTF challenges. Retired HackTheBox machines, Vulnhub, ...">
-    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,secu,write,docu,information security">
+    <meta name="keywords" content="capture,the,flag,ctf,hackthebox, htb,jerry,security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln">
     <meta name="author" content="John Doe">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -22,50 +22,62 @@
     <div class="container-fluid">
         <div class="row">
             <!-- HEADER -->
-            <?php include './PHP/header.php'?>
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Sohvaxus</a>
+                </nav>
+            </div>
+            <br /><br />
             <!-- END OF HEADER -->
             <div class="col-sm-2">
                 <!-- NAV -->
-                <?php include './PHP/navbar.php';?>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <p>General<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/index.html"> HOME</a></li>
+                                <li><a href="/data.html">DOCS</a></li>
+                                <li><a href="/readme.html">README.TXT</a></li>
+                            </ul>
+                            <p>CTF<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/ctf-writeup.html">WRITE-UP</a></li>
+                                <li><a href="/ctf-tutorial.html">TUTORIAL</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <!-- END OF NAV -->
             </div>
             <!-- CONTENT -->
             <div class="col-sm-8">
                 <div class="container-fluid">
-                    <h1>Tutorials</h1>
+                    <h1>Write-Up</h1>
                     <hr />
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Tutorial</li>
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Write-Up</li>
                     </ol>
-                    <center><p>This is the location to search for CTF tutorials.</p></center>
+                    <center><p>This is the location to search for CTF write-up documentation.</p></center>
                     <br />
-                    <h4>Recon</h4>
-                    <br /><br />
-                    <br />
-                    <h4>Exploitation</h4>
-                    <br /><br />
-                    <br />
-                    <h4>Post Exploitation / Priv Esc</h4>
+                    <h4>HackTheBox.eu (HTB)</h4>
                     <br /><br />
                     <div class="row top-buffer">
                         <div class="col-sm-2">
-                            <img src="images/linux.png" alt="Heartbleed" height="90" width="90">
+                            <img src="images/jerry.png" alt="Jerry" height="90" width="90">
                         </div>
                         <div class="col-sm-10">
-                            <a href="CTF/tutorial/ubuntulinux.php">Linux - LinEnum.sh</a>
-                            <p>A tutorial for enumeration with LinEnum.sh</p>
+                            <a href="CTF/writeup/htb/jerry.html">Jerry</a>
+                            <p>Jerry was one of the easiest boxes i've done so far. It was very straight forward with no rabbit holes. Unfortunatly there was no priv esc, as the user and root flag were together in the same file.</p>
                         </div>
                     </div>
-                    <br />
-                    <h4>Maintaining Access</h4>
-                    <br /><br />
-                    <br />
-                    <h4>Covering Tracks</h4>
-                    <br /><br />
-                    <br />
-                    <h4>Misc</h4>
-                    <br /><br />
                     <br />
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>StackSec - CTF Write-up - Jerry</title>
+    <title>Sohvaxus - CTF Write-up - Jerry</title>
     <link rel="shortcut icon" href="../../../favicon/favicon.ico"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +22,38 @@
     <div class="container-fluid">
         <div class="row">
             <!-- HEADER -->
-            <?php include '../../../PHP/header.php'?>
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Sohvaxus</a>
+                </nav>
+            </div>
+            <br /><br />
             <!-- END OF HEADER -->
             <div class="col-sm-2">
                 <!-- NAV -->
-                <?php include '../../../PHP/navbar.php'?>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <p>General<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/index.html"> HOME</a></li>
+                                <li><a href="/data.html">DOCS</a></li>
+                                <li><a href="/readme.html">README.TXT</a></li>
+                            </ul>
+                            <p>CTF<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/ctf-writeup.html">WRITE-UP</a></li>
+                                <li><a href="/ctf-tutorial.html">TUTORIAL</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <!-- END OF NAV -->
             </div>
             <!-- CONTENT -->
@@ -36,8 +63,8 @@
                     <hr />
                     <!-- BREADCRUMBS -->
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/ctf-writeup.php">Write-up</a></li>
+                        <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/ctf-writeup.html">Write-up</a></li>
                         <li class="breadcrumb-item active">Jerry</li>
                     </ol>
                     <div class="row top-buffer">
@@ -72,9 +99,9 @@
                                     <p>|_http-title: Apache Tomcat/7.0.88</p>
                                 </code>
                                 <br />
-                                <p>As we can see, port 8080 is open, and is running Apache Tomcat 7.0.88. Surfing to the web page, we are presented with a default Tomcat page. Next, we want to enumerate the website for directories and/or possible vulnerabilities. A nice tool to do this with is <a href="/articles/nikto.php">Nikto</a>.</p>
+                                <p>As we can see, port 8080 is open, and is running Apache Tomcat 7.0.88. Surfing to the web page, we are presented with a default Tomcat page. Next, we want to enumerate the website for directories and/or possible vulnerabilities. A nice tool to do this with is <a href="/articles/nikto.html">Nikto</a>.</p>
                                 <br />
-                                <li><a href="/articles/nikto.php">Nikto</a></li>
+                                <li><a href="/articles/nikto.html">Nikto</a></li>
                                 <p>Used command:</p>
                                 <code>
                                     <p>root@kali:~/Documents/htb/Jerry# nikto -h 10.10.10.95 -p 8080</p>
@@ -112,7 +139,7 @@
                                     <p>+ 1 host(s) tested</p>
                                 </code>
                                 <br />
-                                <p><a href="/articles/nikto.php">Nikto</a> found some default login credentials on 10.10.10.95:8080/manager/html</p>
+                                <p><a href="/articles/nikto.html">Nikto</a> found some default login credentials on 10.10.10.95:8080/manager/html</p>
                                 <p>Username: tomcat</p>
                                 <p>Password: s3cret</p>
                                 <br />

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="shortcut icon" href="favicon/favicon.ico"/>
-    <title>Sohvaxus - Hacking, vulnerability and exploit documentation</title>
+    <title>StackSec - Hacking, vulnerability and exploit documentation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,33 +22,11 @@
     <div class="container-fluid">
         <div class="row">
             <!-- HEADER -->
-            <div class"col">
-                <nav class="navbar navbar-inverse">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Sohvaxus</a>
-                </nav>
-            </div>
-            <br /><br />
+            <?php include './PHP/header.php'?>
             <!-- END OF HEADER -->
             <div class="col-sm-2">
                 <!-- NAV -->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <h4>0xN4V</h4>
-                            <ul class="nav navbar-nav">
-                                <li><a href="index.html" data-chaffle="en">HOME</a></li>
-                                <li><a href="#" data-chaffle="en">>> DOCS</a></li>
-                                <li><a href="readme.html" data-chaffle="en">README.TXT</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <?php include './PHP/navbar.php';?>
                 <!-- END OF NAV -->
             </div>
             <!-- CONTENT -->
@@ -57,7 +35,7 @@
                     <h1>Documents</h1>
                     <hr />
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                         <li class="breadcrumb-item active">Docs</li>
                     </ol>
                     <center><p>This is the location to search for documentation about tools or vulnerabilities. What you can also find here are tutorials and cheatsheets.</p></center>
@@ -69,7 +47,7 @@
                             <img src="images/heartbleed.png" alt="Heartbleed" height="90" width="75">
                         </div>
                         <div class="col-sm-10">
-                            <a href="articles/heartbleed.html">Heartbleed vulnerability</a>
+                            <a href="articles/heartbleed.php">Heartbleed vulnerability</a>
                             <p>Heartbleed is a vulnerability in the OpenSSL implementation - OpenSSL implemented the widely used protocols: SSL (Secure Sockets Layer) and TLS (Transport Layer Security). The flaw in OpenSSL gives an attacker the ability to extract encrypted data from TLS/SSL secured networks.</p>
                         </div>
                     </div>
@@ -96,7 +74,7 @@
                             <img src="images/tools-icon-white.png" alt="Tool" height="75" width="75">
                         </div>
                         <div class="col-sm-10">
-                            <a href="articles/theharvester.html">TheHarvester</a>
+                            <a href="articles/theharvester.php">TheHarvester</a>
                             <p>TheHarvester is an OSINT tool for gathering subdomains, email addresses, open ports, banners, employee names, and much more from different public sources. (Google, Bing, PGP key servers, ...). In order to gather this information it will do active and passive information gathering.</p>
                         </div>
                     </div>
@@ -106,7 +84,7 @@
                             <img src="images/tools-icon-white.png" alt="Tool" height="75" width="75">
                         </div>
                         <div class="col-sm-10">
-                            <a href="articles/nikto.html">Nikto</a>
+                            <a href="articles/nikto.php">Nikto</a>
                             <p>Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items, including over 6700 potentially dangerous files/CGIs, checks for outdated versions of over 1250 servers, and version specific problems on over 270 servers. It also checks for server configuration items such as the presence of multiple index files, HTTP server options, and will attempt to identify installed web servers and software. Scan items and plugins are frequently updated and can be automatically updated.</p>
                         </div>
                     </div>
@@ -116,16 +94,16 @@
                             <img src="images/tools-icon-white.png" alt="Tool" height="75" width="75">
                         </div>
                         <div class="col-sm-10">
-                            <a href="articles/netcat.html">Netcat</a>
+                            <a href="articles/netcat.php">Netcat</a>
                             <p>Netcat (often abbreviated to nc) is a computer networking utility for reading from and writing to network connections using TCP or UDP. Netcat is designed to be a dependable back-end that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and investigation tool, since it can produce almost any kind of connection its user could need and has a number of built-in capabilities.</p>
                         </div>
                     </div>
                     <br />
                     <h4>0xTUT0R14L5</h4>
                     <br /><br />
-                    <h4>0xWR1T3UP5</h4>
+                    <!--<h4>0xWR1T3UP5</h4>
                     <br /><br />
-                    <!-- <div class="row top-buffer">
+                    <div class="row top-buffer">
                         <div class="col-sm-2">
                             <img src="images/tools-icon-white.png" alt="Tool" height="75" width="75">
                         </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="shortcut icon" href="favicon/favicon.ico"/>
-    <title>Sohvaxus - ReadMe.txt</title>
+    <title>StackSec - ReadMe.txt</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,33 +22,11 @@
     <div class="container-fluid">
         <div class="row">
             <!-- HEADER -->
-            <div class"col">
-                <nav class="navbar navbar-inverse">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Sohvaxus</a>
-                </nav>
-            </div>
-            <br /><br />
+            <?php include './PHP/header.php'?>
             <!-- END OF HEADER -->
             <div class="col-sm-2">
                 <!-- NAV -->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <h4>0xN4V</h4>
-                            <ul class="nav navbar-nav">
-                                <li><a href="index.html" data-chaffle="en">HOME</a></li>
-                                <li><a href="data.html" data-chaffle="en">DOCS</a></li>
-                                <li><a href="#" data-chaffle="en">>> README.TXT</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                <?php include './PHP/navbar.php'?>
                 <!-- END OF NAV -->
             </div>
             <!-- CONTENT -->

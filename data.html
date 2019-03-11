@@ -22,11 +22,38 @@
     <div class="container-fluid">
         <div class="row">
             <!-- HEADER -->
-            <?php include './PHP/header.php'?>
+            <div class"col">
+                <nav class="navbar navbar-inverse">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Sohvaxus</a>
+                </nav>
+            </div>
+            <br /><br />
             <!-- END OF HEADER -->
             <div class="col-sm-2">
                 <!-- NAV -->
-                <?php include './PHP/navbar.php';?>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <p>General<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/index.php"> HOME</a></li>
+                                <li><a href="/data.php">DOCS</a></li>
+                                <li><a href="/readme.php">README.TXT</a></li>
+                            </ul>
+                            <p>CTF<p>
+                            <ul class="nav navbar-nav">
+                                <li><a href="/ctf-writeup.php">WRITE-UP</a></li>
+                                <li><a href="/ctf-tutorial.php">TUTORIAL</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <!-- END OF NAV -->
             </div>
             <!-- CONTENT -->

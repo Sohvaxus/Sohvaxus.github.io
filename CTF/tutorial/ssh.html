@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SSH - Port forwarding, tunneling and other tips and tricks</title>
+    <title>SSH - Tunneling, port forwarding and proxy tutorial</title>
     <link rel="shortcut icon" href="../../favicon/favicon.ico"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
     
     <meta charset="UTF-8">
     <meta name="description" content="SSH Tunneling, port forwarding and other tips and tricks.">
-    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,port,forwarding,forward,scanning,tunneling,black,white,grey,hat,information,info,book,write,secu,bleeding,heart,protect,exploitation,information security">
+    <meta name="keywords" content="security,hacking,hack,tunneling,krack,crack,stack,memory,proxy,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,ssh,vulnerable,exploitable,vuln,port,forwarding,forward,scanning,tunneling,black,white,grey,hat,information,info,book,write,secu,bleeding,heart,protect,exploitation,information security">
     <meta name="author" content="John Doe">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -59,7 +59,7 @@
             <!-- CONTENT -->
             <div class="col-sm-7">
                 <div class="container-fluid">
-                    <h1>SSH - Tunneling, port forwarding, ...</h1>
+                    <h1>SSH - Tunneling, port forwarding and proxy tutorial</h1>
                     <hr />
                     <!-- BREADCRUMBS -->
                      <ol class="breadcrumb">
@@ -110,7 +110,7 @@
                     <div class="row top-buffer">
                         <!-- ARTICLE CONTENT -->
                         <p>0xL1NK#~ <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH Wiki</a></p>
-                        <p>Last updated: 08 april 2019</p>
+                        <p>Last updated: 09 april 2019</p>
                         <ol>
                             <li><h5>Description</h5>
                                 <p>Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. Typical applications include remote command-line login and remote command execution, but any network service can be secured with SSH.</p>
@@ -120,13 +120,23 @@
                                 <p>SSH was designed as a replacement for Telnet and for unsecured remote shell protocols such as the Berkeley rlogin, rsh, and rexec protocols. Those protocols send information, notably passwords, in plaintext, rendering them susceptible to interception and disclosure using packet analysis. The encryption used by SSH is intended to provide confidentiality and integrity of data over an unsecured network, such as the Internet, although files leaked by Edward Snowden indicate that the National Security Agency can sometimes decrypt SSH, allowing them to read the contents of SSH sessions.</p>
                             </li>
                             <li><h5>SSH Tunneling</h5>
-                                <ul style="list-style-type:none">
-                                    <li><p>Local Port Forwarding</p>
-                                    </li>
-                                    <li><p>Remote Port Forwarding</p>
-                                    </li>
-                                    <li><p>Dynamic Port Forwarding</p>
-                                    </li>
+                                <ol>
+                                    <li>Local Port Forwarding</li>
+                                    <br />
+                                    <center><img src="../../images/SSH_localforward.png" alt="SSH Local Port Forwarding" height="143" width="543"></center>
+                                    <br />
+                                    <p>The client wants to access a resource on the server in a different subnet, let's say a webserver (port 80), but he's denied by the firewall. The firewall denies all incoming traffic, except for SSH on port 22. The client is allowed to SSH to the server, and we can leverage this with the command below.</p>
+                                    <p>The command will create an SSH tunnel on port 22 and route all traffic trough this tunnel to the server. This means that if you execute the command below, then navigate to <strong>http://localhost:8080</strong> in a browser, you will be able to navigate to the webserver on port 80 through the SSH tunnel.</p>
+                                    <br />
+                                    <code>
+                                        <p># SSH Tunnel to bypass firewall restriction on port 80</p>
+                                        <p>ssh -L 8080:192.168.0.5:80 remoteuser@192.168.0.5</p>
+                                        <br />
+                                        <p># Syntax</p>
+                                        <p>ssh -L &lt;LPORT&gt;:&lt;RHOST&gt;:&lt;RPORT&gt; user@&lt;RHOST&gt;</p>
+                                    </code>
+                                    <li>Remote Port Forwarding</li>
+                                    <li>Dynamic Port Forwarding</li>
                                 </ul>
                             </li>
                         </ol>

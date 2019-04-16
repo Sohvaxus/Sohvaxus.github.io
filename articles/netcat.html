@@ -183,6 +183,7 @@ nc: connect to localhost port 83 (tcp) failed: Connection refused
                             </code>
                              <br />
                             <p>To only display successful connections, use the following command:</p>
+                            <p><i><strong>Note:</strong> Only " ... | grep succeeded" will not work. 2>&1 causes stderr of a program to be written to the same file descriptor as stdout. nc writes to stderr by default, pipe will only get stdout hence grep will miss the data.</i></p>
                             <code>
                                 <p>nc -z -v localhost 1-100 2>&1 | grep succeeded</p>
                             </code>

@@ -150,10 +150,54 @@
                                 <p>nc -w 3 192.168.0.1 4444 < filename.txt</p>
                             </code>
                             <br />
+                            <p><b><u>Simple portscan</u></b></p>
+                            <p>The following command will probe port 1 to 100 on a target. Both successful and unsuccessful connections will be displayed.</p>
+                            <code>
+                                <p># Syntax</p>
+                                <p>nc -z -v [Target IP] [Port range]</p>
+
+                                <p># Example</p>
+                                <p>nc -z -v localhost 1-100</p>
+                            </code>
+                             <br />
+                            <p>This will output the following:</p>
+                            <code>
+                                <pre>
+...
+nc: connect to localhost port 51 (tcp) failed: Connection refused
+nc: connect to localhost port 52 (tcp) failed: Connection refused
+<span style=color:yellow;>Connection to localhost 53 port [tcp/domain] succeeded!</span>
+nc: connect to localhost port 54 (tcp) failed: Connection refused
+nc: connect to localhost port 55 (tcp) failed: Connection refused
+nc: connect to localhost port 56 (tcp) failed: Connection refused
+...
+nc: connect to localhost port 77 (tcp) failed: Connection refused
+nc: connect to localhost port 78 (tcp) failed: Connection refused
+nc: connect to localhost port 79 (tcp) failed: Connection refused
+<span style=color:yellow;>Connection to localhost 80 port [tcp/http] succeeded!</span>
+nc: connect to localhost port 81 (tcp) failed: Connection refused
+nc: connect to localhost port 82 (tcp) failed: Connection refused
+nc: connect to localhost port 83 (tcp) failed: Connection refused
+...
+                                </pre>
+                            </code>
+                             <br />
+                            <p>To only display successful connections, use the following command:</p>
+                            <code>
+                                <p>nc -z -v localhost 1-100 2>&1 | grep succeeded</p>
+                            </code>
+                             <br />
+                            <p>This outputs only the following:</p>
+                            <code>
+                                <p>Connection to localhost 53 port [tcp/domain] succeeded!</p>
+                                <p>Connection to localhost 80 port [tcp/http] succeeded!</p>
+                            </code>
+                             <br />
                             <p><strong>-l</strong> : Specifies Netcat to listen for an incoming connection. (can not be used with: -s, -p and -z)</p>
                             <p><strong>-v</strong> : Specifies Netcat to give more verbose output.</p>
                             <p><strong>-p</strong> : Specifies the source port.</p>
                             <p><strong>-w</strong> : Specifies a timeout period.</p>
+                            <p><strong>-z</strong> : Specifies that nc should scan for listening daemons, without sending any data to them. (Can not be used with: -l)</p>
                         </ol>
                         <center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
                         <h5>50URC35:<h5>

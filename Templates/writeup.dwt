@@ -67,9 +67,9 @@
 				<!-- CONTENT -->
 				<div class="col-sm-8" id="content-page">
 					<div class="container-fluid"><!-- TemplateBeginEditable name="h1" -->
-					  <h1>Netcat</h1>
+					  	<h1>Netcat</h1>
+						<br />
 					<!-- TemplateEndEditable -->
-					<br />
 					<hr class="solid">
 						<!-- BREADCRUMBS -->
 						<ol class="breadcrumb">

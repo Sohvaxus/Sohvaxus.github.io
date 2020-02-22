@@ -16,7 +16,7 @@ body a:hover, body li a:hover{
 
 html {
     position: relative;
-    min-height: 100%;
+    height: 100%;
 }
 
 h1 {
@@ -52,6 +52,17 @@ footer {
     overflow: hidden;
 }
 
+#navigation {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 1.5%;
+	width: 10%;
+}
+
+#content-page {
+	width: 80%;
+}
+
 .table th {
    text-align: center;   
 }
@@ -79,9 +90,14 @@ footer {
     margin-bottom: 0;
     background-color: #242423;
     border: 0;
+	border-radius: 0px;
     font-size: 11px !important;
     letter-spacing: 4px;
     opacity: 0.9;
+}
+
+.navbar-inverse {
+	background-color: #333333;
 }
 
 .navbar .navbar-collapse .navbar-nav a, .navbar .navbar-header a, a {
@@ -125,22 +141,35 @@ p {
     padding-bottom: 12px;
 }
 
+.navbar-collapse {
+	padding-left: 0px;
+}
+
 .breadcrumb {
     background-color: #242423;
 }
 
-.row {
-    height: 100%;
+#content-img {
+	width: 10%;
 }
 
 code {
     font-family: Consolas, monaco, monospace;
     background-color: #333330;
-    border: 1px solid #999;
+    border: 1px solid #1a1a1a;
     display: block;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-left: 10px;
+}
+
+.tag {
+	border: 1px solid #1a1a1a;
+	background-color: #333333;
+  	font-size: 75%;
+  	margin-left: 1%;
+  	padding-left: 2%;
+  	padding-right: 2%;
 }
 
 code p {
@@ -166,4 +195,30 @@ body p>a, body p>i>a, tr>td>a {
 
 li {
   margin: 10px 0;
+}
+
+hr.solid {
+	border-top: 2px solid #1a1a1a;
+}
+
+#search {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  background-color: #333333;
+  width: 100%;
+  font-size: 14px;
+  padding: 5px 10px 5px 15px;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 5px;
+}
+
+#contentlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#contentlist li a {
+  margin-top: -1px; /* Prevent double borders */
 }

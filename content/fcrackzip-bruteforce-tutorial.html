@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en"><!-- InstanceBegin template="/Templates/content.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- InstanceBeginEditable name="title" -->
+		<title>How to bruteforce ZIP files with FCrackZip</title>
+		<!-- InstanceEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../typewriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- InstanceBeginEditable name="description" -->
+		<meta name="description" content="fcrackzip searches each zipfile given for encrypted files and tries to guess the password. All files must be encrypted with the same password, the more files you provide, the better.">
+		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="keywords" -->
+		<meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,secu,bleeding,heart,protect,exploitation,information security">
+		<!-- InstanceEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar">
+								<p>General<p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid"><!-- InstanceBeginEditable name="h1" -->
+					  <h1>How to bruteforce ZIP files with FCrackZip</h1>
+					<!-- InstanceEndEditable -->
+					<br />
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- InstanceBeginEditable name="breadcrumb" -->
+						  	<li class="breadcrumb-item active">FCrackZip</li>
+							<!-- InstanceEndEditable -->
+					    </ol>
+						<div class="row top-buffer">
+							<div class="col-sm-8">
+								<table class="table table-bordered">
+									<thead>
+									<tr>
+										<th colspan="2">0x5UMM4RY</th>
+									</tr>
+									</thead>
+									<!-- InstanceBeginEditable name="table" -->
+									<tbody>
+										<tr>
+											<td>Author:</td>
+											<td>Marc Lehmann</td>
+										</tr>
+										<tr>
+											<td>License:</td>
+											<td>Open Source</td>
+										</tr>
+										<tr>
+											<td>Software:</td>
+											<td>FCrackZip</td>
+										</tr>
+										<tr>
+											<td>Date created:</td>
+											<td>Before 2008</td>
+										</tr>
+										<tr>
+											<td>Updated:</td>
+											<td>No</td>
+										</tr>
+										<tr>
+											<td>Website:</td>
+											<td><a href="http://oldhome.schmorp.de/marc/fcrackzip.html">FCrackZip</a></td>
+										</tr>
+									</tbody>
+									<!-- InstanceEndEditable -->
+								</table>
+						  </div>
+							<div class="col-sm-4">
+								<!-- InstanceBeginEditable name="image" -->
+							  	<center><img src="../images/zip.png" alt="FCrackZip" height="160" width="160"></center>
+								<!-- InstanceEndEditable --></div>
+					  </div>
+						<!-- InstanceBeginEditable name="article" -->
+						<div class="row top-buffer">
+							<!-- ARTICLE CONTENT -->
+							<p>0xL1NK#~ <a href="http://manpages.ubuntu.com/manpages/trusty/man1/fcrackzip.1.html">FCrackZip Manpages</a></p>
+							<p>Last updated: 27 march 2019</p>
+							<ol>
+								<li><h5>Description</h5>
+									<p><i>fcrackzip</i> searches each zipfile given for encrypted files and tries to guess the password. All files must be encrypted with the same password, the more files you provide, the better.</p>
+								</li>
+								<li><h5>Bruteforce the ZIP</h5>
+									<p>The command below will bruteforce <strong>file.zip</strong> with a given wordlist. In this case the wordlist is the well known <strong>rockyou.txt</strong>.</p>
+									<code>
+										<p># Syntax</p>
+										<p>fcrackzip -u -D -p [wordlist] [ZIP file]</p>
+										<br />
+										<p># Example</p>
+										<p>fcrackzip -u -D -p ~/rockyou.txt ~/file.zip</p>
+									</code>
+									<br />
+									<p><strong>-u</strong> : Try to decompress the first file by calling unzip with the guessed password. This weeds out false positives when not enough files have been given.</p>
+									<p><strong>-D</strong> : Select dictionary mode. In this mode, fcrackzip will read passwords from a file, which must contain one password per line and should be alphabetically sorted.</p>
+									<p><strong>-p</strong> : Set initial (starting) password for brute-force searching to string, or use the file with the name string to supply passwords for dictionary searching.</p>
+								</li>
+							</ol>
+							<!-- START CONTENT HERE -->
+
+							<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+							<h5>50URC35:<h5>
+							<ul id="sources">
+								<li><a href="http://manpages.ubuntu.com/manpages/trusty/man1/fcrackzip.1.html">FCrackZip Manpage</a></li>
+								<li><a href="http://oldhome.schmorp.de/marc/fcrackzip.html">FCrackZip Main Page</a></li>
+							</ul>
+							<!-- END OF ARTICLE CONTENT -->
+                    	</div>
+					  <!-- InstanceEndEditable --></div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- SCRIPTS -->
+				<script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+				<script>
+					var elements = document.querySelectorAll('[data-chaffle]');
+					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+					Array.prototype.forEach.call(elements, function (el) {
+						var chaffle = new Chaffle(el)
+						el.addEventListener('mouseover', function () {
+							chaffle.init();
+						});
+					});
+
+					Array.prototype.forEach.call(elm, function (el) {
+						var chaffle = new Chaffle(el, {
+							delay: 200
+						})
+						setInterval(function(){
+							chaffle.init();
+						}, 8000)
+					});
+				</script>
+				<!-- END OF SCRIPTS -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+<!-- InstanceEnd --></html>

@@ -1,116 +1,156 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<!doctype html>
+<html lang="en"><!-- InstanceBegin template="/Templates/index.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-    gtag('config', 'UA-41632606-2');
-    </script>
-    <link rel="shortcut icon" href="favicon/favicon.ico"/>
-    <title>Sohvaxus - ReadMe.txt</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="typewriter.js"></script>
-    <link rel="stylesheet" type="text/css" href="stacksec.css">
-    
-    <meta charset="UTF-8">
-    <meta name="description" content="Sohvaxus security documentation">
-    <meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write">
-    <meta name="author" content="John Doe">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<!-- BODY -->
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- HEADER -->
-            <div class"col">
-                <nav class="navbar navbar-inverse">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Sohvaxus</a>
-                </nav>
-            </div>
-            <br /><br />
-            <!-- END OF HEADER -->
-            <div class="col-sm-2">
-                <!-- NAV -->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <p>General<p>
-                            <ul class="nav navbar-nav">
-                                <li><a href="/index.html"> HOME</a></li>
-                                <li><a href="/data.html">DOCS</a></li>
-                                <li><a href="/readme.html">README.TXT</a></li>
-                            </ul>
-                            <p>CTF<p>
-                            <ul class="nav navbar-nav">
-                                <li><a href="/ctf-writeup.html">WRITE-UP</a></li>
-                                <li><a href="/ctf-tutorial.html">TUTORIAL</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- END OF NAV -->
-            </div>
-            <!-- CONTENT -->
-            <div class="col-sm-7">
-                <div class="container-fluid">
-                    <h1>0xR34DM3.TXT</h1>
-                    <hr />
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">ReadMe.txt</li>
-                    </ol>
-                    <div class="row top-buffer">
-                        <p href="" class="typewrite" data-period="2000" data-type='["Disclaimer:"]'><span class="wrap"></span></p>
-                        <br />
-                        <center><p> All data presented on this site is put here for educational purposes. Whatever you learn here, can be used in a good way, or in a bad way. I'm not your dad so i can't tell you what to do or what not to do. Also me, or any authors on this site can not be held responsible for your actions. So use this information responsibly.</p>
-                        <p>This website is a collection of documentation about subjects that i find interesting. I learn best by taking a subject, and then write a bunch of documentation about it. Also by documenting these subjects, it's very easy to look them up in the future, should i've forgotten some commands or details.</p>
-                        <p>The reason i put this documentation online, is because maybe other people can benefit from it somehow. I try to be as detailed as possible, because that's how in the end you really understand a subject.</p>
-                        <p>Enjoy the free information! :)</p>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <!-- END OF CONTENT -->
-            <!-- SCRIPTS -->
-            <script src="chaffle/chaffle.min.js" charset="utf-8"></script>
-            <script>
-                var elements = document.querySelectorAll('[data-chaffle]');
-                var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="favicon/favicon.ico"/>
+		<!-- InstanceBeginEditable name="title" -->
+		<title>Sohvaxus - ReadMe.txt</title>
+		<!-- InstanceEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="typewriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="stacksec.css">
 
-                Array.prototype.forEach.call(elements, function (el) {
-                    var chaffle = new Chaffle(el)
-                    el.addEventListener('mouseover', function () {
-                        chaffle.init();
-                    });
-                });
+		<meta charset="UTF-8">
+		<!-- InstanceBeginEditable name="description" -->
+		<meta name="description" content="Sohvaxus security documentation">
+		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="keywords" -->
+		<meta name="keywords" content="security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write">
+		<!-- InstanceEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar">
+								<p>General<p>
+								<ul class="nav navbar-nav">
+									<li><a href="index.html">HOME</a></li>
+									<li><a href="readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid"><!-- InstanceBeginEditable name="content" -->
+						<h1>0xR34DM3.TXT</h1>
+						<hr />
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active">ReadMe.txt</li>
+						</ol>
+						<div class="row top-buffer">
+							<p href="" class="typewrite" data-period="2000" data-type='["Disclaimer:"]'><span class="wrap"></span></p>
+							<br />
+							<center><p> All data presented on this site is put here for educational purposes. Whatever you learn here, can be used in a good way, or in a bad way. I'm not your dad so i can't tell you what to do or what not to do. Also me, or any authors on this site can not be held responsible for your actions. So use this information responsibly.</p>
+							<p>This website is a collection of documentation about subjects that i find interesting. I learn best by taking a subject, and then write a bunch of documentation about it. Also by documenting these subjects, it's very easy to look them up in the future, should i've forgotten some commands or details.</p>
+							<p>The reason i put this documentation online, is because maybe other people can benefit from it somehow. I try to be as detailed as possible, because that's how in the end you really understand a subject.</p>
+							<p>Enjoy the free information! :)</p>
+							</center>
+						</div>
+					<!-- InstanceEndEditable -->
+					
+					</div>
+				</div>
+				<!-- QuickNav bar
+				<div class="col-sm-2">
+					<h4>0xP0PUL4R<h4>
+					<br />
+					<div id="links">
+						<div class="row">
+							<a href="articles/heartbleed.html">>> Heartbleed vulnerability</a>
+						</div>
+						<br />
+						<div class="row">
+							<a href="articles/krack.html">>> KRACK WPA2 exploitation</a>
+						</div>
+					</div>
+				</div> -->
+				<!-- END OF CONTENT -->
+				<!-- SCRIPTS -->
+				<script src="chaffle/chaffle.min.js" charset="utf-8"></script>
+				<script>
+					var elements = document.querySelectorAll('[data-chaffle]');
+					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
 
-                Array.prototype.forEach.call(elm, function (el) {
-                    var chaffle = new Chaffle(el, {
-                        delay: 200
-                    })
-                    setInterval(function(){
-                        chaffle.init();
-                    }, 8000)
-                });
-            </script>
-            <!-- END OF SCRIPTS -->
-        </div>
-    </div>
-<!-- END OF BODY -->
-</body>
-</html>
+					Array.prototype.forEach.call(elements, function (el) {
+						var chaffle = new Chaffle(el)
+						el.addEventListener('mouseover', function () {
+							chaffle.init();
+						});
+					});
+
+					Array.prototype.forEach.call(elm, function (el) {
+						var chaffle = new Chaffle(el, {
+							delay: 200
+						})
+						setInterval(function(){
+							chaffle.init();
+						}, 8000)
+					});
+				</script>
+				<script>
+					function search() {
+						var input, filter, ul, li, a, i, tags;
+						input = document.getElementById("search");
+						filter = input.value.toUpperCase();
+						ul = document.getElementById("contentlist");
+						li = ul.getElementsByTagName("li");
+						for (i = 0; i < li.length; i++) {
+							var txtValue = '';
+							tags = li[i].getElementsByClassName("tag");
+							for (j = 0; j < tags.length; j++) {
+								console.log("Adding " + tags[j].textContent + " to txtValue...");
+								txtValue = txtValue + " " + tags[j].textContent
+								console.log(txtValue);
+							}
+							
+							//console.log(txtValue);
+							if (txtValue.toUpperCase().indexOf(filter) > -1) {
+								li[i].style.display = "";
+							} else {
+								li[i].style.display = "none";
+							}
+						}
+					}
+				</script>
+				<!-- END OF SCRIPTS -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+<!-- InstanceEnd --></html>

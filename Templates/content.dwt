@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- TemplateBeginEditable name="title" -->
+		<title>Netcat Tutorial</title>
+		<!-- TemplateEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../typewriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- TemplateBeginEditable name="description" -->
+		<meta name="description" content="In-depth explanation and examples of web scanning with Nikto.">
+		<!-- TemplateEndEditable -->
+		<!-- TemplateBeginEditable name="keywords" -->
+		<meta name="keywords" content="netcat, gathering, information gathering, web, scanning, security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,WPA2,wifi,protocol,fix,how to">
+		<!-- TemplateEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar">
+								<p>General<p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid"><!-- TemplateBeginEditable name="h1" -->
+					  <h1>Netcat</h1>
+					<!-- TemplateEndEditable -->
+					<br />
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- TemplateBeginEditable name="breadcrumb" -->
+						  	<li class="breadcrumb-item active">Netcat</li>
+							<!-- TemplateEndEditable -->
+					    </ol>
+						<div class="row top-buffer">
+							<div class="col-sm-8">
+								<table class="table table-bordered">
+									<thead>
+									<tr>
+										<th colspan="2">0x5UMM4RY</th>
+									</tr>
+									</thead>
+									<!-- TemplateBeginEditable name="table" -->
+									<tbody>
+									  <tr>
+									    <td>Author:</td>
+									    <td>*Hobbit*</td>
+								      </tr>
+									  <tr>
+									    <td>License:</td>
+									    <td>GPL</td>
+								      </tr>
+									  <tr>
+									    <td>Software:</td>
+									    <td>Netcat (nc)</td>
+								      </tr>
+									  <tr>
+									    <td>Date created:</td>
+									    <td>January 2, 2007</td>
+								      </tr>
+									  <tr>
+									    <td>Updated:</td>
+									    <td>Yes</td>
+								      </tr>
+									  <tr>
+									    <td>Website:</td>
+									    <td><a href="http://nc110.sourceforge.net">Netcat</a></td>
+								      </tr>
+								    </tbody>
+									<!-- TemplateEndEditable -->
+								</table>
+						  </div>
+							<div class="col-sm-4">
+								<!-- TemplateBeginEditable name="image" -->
+							  	<center><img src="../images/ssh.png" alt="SSH" height="160" width="160"></center>
+								<!-- TemplateEndEditable --></div>
+					  </div>
+						<!-- TemplateBeginEditable name="article" -->
+						<div class="row top-buffer">
+						  <!-- ARTICLE CONTENT -->
+						  <p>Last updated: 16 april 2019</p>
+						  <ol>
+						    <li>
+						      <h5>Description</h5>
+					        </li>
+						    <p>Netcat (often abbreviated to nc) is a computer networking utility for reading from and writing to network connections using TCP or UDP. Netcat is designed to be a dependable back-end that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and investigation tool, since it can produce almost any kind of connection its user could need and has a number of built-in capabilities.</p>
+						    <li>
+						      <h5>Cheatsheet</h5>
+					        </li>
+						    <p>Make a connection on a given port. Start the listener on the system that will receive the connection.</p>
+						    <code>
+						      <p># Start the listener on a given [port] and launch /bin/sh shell when a connection is made.</p>
+						      <p>nc -lvp [port] -e /bin/sh</p>
+						      <br />
+						      <p># Example</p>
+						      <p>nc -lvp 4444 -e /bin/sh</p>
+					        </code> <br />
+						    <p>Establish a connection to the listening host on the given port.</p>
+						    <code>
+						      <p># Establish connection.</p>
+						      <p>nc [IP address] [port]</p>
+						      <br />
+						      <p># Example</p>
+						      <p>nc 192.168.0.1 4444</p>
+					        </code> <br />
+						    <p><b><u>Transfer a file</u></b></p>
+						    <p>On the <span style="color:red;">receiving</span> end, start the listener on a given port. The connection will output the input from the connection in your specified filename.</p>
+						    <code>
+						      <p># Start the listener on a given [port]. The connection will output the input from the connection in your specified [file].</p>
+						      <p>nc -l -p [port] > [file]</p>
+						      <br />
+						      <p># Example</p>
+						      <p>nc -l -p 4444 > filename.txt</p>
+						      <p># Example with verbose output</p>
+						      <p>nc -lvp 4444 > filename.txt</p>
+					        </code> <br />
+						    <p>On the <span style="color:red;">sending</span> end, stablish a connection to the listening port. Input the filename you want to transfer to the destination.</p>
+						    <code>
+						      <p># Establish connection and input the [file]</p>
+						      <p>nc -w 3 [destination] [port] < [file]</p>
+						      <br />
+						      <p># Example</p>
+						      <p>nc -w 3 192.168.0.1 4444 < filename.txt</p>
+					        </code> <br />
+						    <p><b><u>Simple portscan</u></b></p>
+						    <p>The following command will probe port 1 to 100 on a target. Both successful and unsuccessful connections will be displayed.</p>
+						    <code>
+						      <p># Syntax</p>
+						      <p>nc -z -v [Target IP] [Port range]</p>
+						      <p># Example</p>
+						      <p>nc -z -v localhost 1-100</p>
+					        </code> <br />
+						    <p>This will output the following:</p>
+						    <code>
+						      <pre>
+	...
+	nc: connect to localhost port 51 (tcp) failed: Connection refused
+	nc: connect to localhost port 52 (tcp) failed: Connection refused
+	<span style=color:yellow;>Connection to localhost 53 port [tcp/domain] succeeded!</span>
+	nc: connect to localhost port 54 (tcp) failed: Connection refused
+	nc: connect to localhost port 55 (tcp) failed: Connection refused
+	nc: connect to localhost port 56 (tcp) failed: Connection refused
+	...
+	nc: connect to localhost port 77 (tcp) failed: Connection refused
+	nc: connect to localhost port 78 (tcp) failed: Connection refused
+	nc: connect to localhost port 79 (tcp) failed: Connection refused
+	<span style=color:yellow;>Connection to localhost 80 port [tcp/http] succeeded!</span>
+	nc: connect to localhost port 81 (tcp) failed: Connection refused
+	nc: connect to localhost port 82 (tcp) failed: Connection refused
+	nc: connect to localhost port 83 (tcp) failed: Connection refused
+	...
+									</pre>
+					        </code> <br />
+						    <p>To only display successful connections, use the following command:</p>
+						    <p><i><strong>Note:</strong> Only " ... | grep succeeded" will not work. 2>&1 causes stderr of a program to be written to the same file descriptor as stdout. nc writes to stderr by default, pipe will only get stdout hence grep will miss the data.</i></p>
+						    <code>
+						      <p>nc -z -v localhost 1-100 2>&1 | grep succeeded</p>
+					        </code> <br />
+						    <p>This outputs only the following:</p>
+						    <code>
+						      <p>Connection to localhost 53 port [tcp/domain] succeeded!</p>
+						      <p>Connection to localhost 80 port [tcp/http] succeeded!</p>
+					        </code> <br />
+						    <p><strong>-l</strong> : Specifies Netcat to listen for an incoming connection. (can not be used with: -s, -p and -z)</p>
+						    <p><strong>-v</strong> : Specifies Netcat to give more verbose output.</p>
+						    <p><strong>-p</strong> : Specifies the source port.</p>
+						    <p><strong>-w</strong> : Specifies a timeout period.</p>
+						    <p><strong>-z</strong> : Specifies that nc should scan for listening daemons, without sending any data to them. (Can not be used with: -l)</p>
+					      </ol>
+						  <center>
+						    <b>
+						      <p>** For more information, check out the extra links and sources. **</p>
+					        </b>
+					      </center>
+						  <h5>
+						  50URC35:
+						  <h5>
+						  <ul id="sources">
+						    <li><a href="http://nc110.sourceforge.net">Netcat Website</a></li>
+						    <li><a href="https://en.wikipedia.org/wiki/Netcat">Netcat Wiki</a></li>
+						    <li><a href="http://www.tutorialspoint.com/unix_commands/nc.htm">Netcat Parameters</a></li>
+					      </ul>
+						  <!-- END OF ARTICLE CONTENT -->
+					    </div>
+					  <!-- TemplateEndEditable --></div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- SCRIPTS -->
+				<script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+				<script>
+					var elements = document.querySelectorAll('[data-chaffle]');
+					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+					Array.prototype.forEach.call(elements, function (el) {
+						var chaffle = new Chaffle(el)
+						el.addEventListener('mouseover', function () {
+							chaffle.init();
+						});
+					});
+
+					Array.prototype.forEach.call(elm, function (el) {
+						var chaffle = new Chaffle(el, {
+							delay: 200
+						})
+						setInterval(function(){
+							chaffle.init();
+						}, 8000)
+					});
+				</script>
+				<!-- END OF SCRIPTS -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+</html>

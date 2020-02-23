@@ -59,10 +59,6 @@ footer {
 	width: 10%;
 }
 
-.table th {
-   text-align: center;   
-}
-
 #links {
     font-size: 15px;
     font-style: normal;
@@ -216,6 +212,27 @@ li {
 
 hr.solid {
 	border-top: 2px solid #1a1a1a;
+}
+
+td {
+	border: 1px solid #1a1a1a;
+}
+
+.table th {
+   text-align: center;   
+}
+
+.table {
+	border:none;
+	border-collapse: collapse;
+}
+
+thead, tbody tr:nth-child(even){
+	background-color: #333333;
+}
+
+tbody {
+	border: 2px solid #1a1a1a;
 }
 
 #search {

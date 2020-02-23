@@ -111,11 +111,11 @@
 									<!-- TemplateEndEditable -->
 								</table>
 						  </div>
-							<div class="col-sm-4">
-								<!-- TemplateBeginEditable name="image" -->
-							  	<center><img src="../images/ssh.png" alt="SSH" height="160" width="160"></center>
-								<!-- TemplateEndEditable --></div>
-					  </div>
+						<div class="col-sm-4">
+							<!-- TemplateBeginEditable name="image" -->
+							<center><img src="../images/ssh.png" alt="SSH" height="160" width="160"></center>
+							<!-- TemplateEndEditable --></div>
+					  	</div>
 						<!-- TemplateBeginEditable name="article" -->
 						<div class="row top-buffer">
 						  <!-- ARTICLE CONTENT -->

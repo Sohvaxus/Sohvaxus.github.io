@@ -237,7 +237,7 @@ def post(self):
 								<ol>
 									<li>Poppin' the shell</li>
 									<p>Since the eval() function is present in the python function that creates a new brew entry, we will leverage the craft-api endpoint once again to create a new brew:</p>
-									<center></center><img src="../images/craft/create_brew.png" style="max-height:659;max-width:1423;" class="image"></center>
+									<center></center><img src="../images/craft/create_brew.PNG" style="max-height:659;max-width:1423;" class="image"></center>
 									<br />
 									<p>Click 'Try it out'. Since the parameter 'abv' is being evaluated, this parameter will be vulnerable to code injection. Change the payload so that 'abv' contains the code you want to execute on the webserver, and an id that does not exist yet. The rest can be random. Since the language this api is written in is python, your code you inject will also have to be in python.</p>
 									<code>

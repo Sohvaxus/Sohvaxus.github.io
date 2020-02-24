@@ -138,11 +138,11 @@
 										<p>The client wants to access a resource on the server in a different subnet, let's say a webserver (port 80), but he's denied by the firewall. The firewall denies all incoming traffic, except for SSH on port 22. The client is allowed to SSH to the server, and we can leverage this with the command below.</p>
 										<br />
 										<code>
-											<p># SSH Tunnel to bypass firewall restriction on port 80</p>
-											<p>ssh -L 8080:192.168.0.5:80 remoteuser@192.168.0.5</p>
-											<br />
-											<p># Syntax</p>
-											<p>ssh -L &lt;LPORT&gt;:&lt;RHOST&gt;:&lt;RPORT&gt; user@&lt;RHOST&gt;</p>
+# SSH Tunnel to bypass firewall restriction on port 80
+ssh -L 8080:192.168.0.5:80 remoteuser@192.168.0.5
+
+# Syntax
+ssh -L &lt;LPORT&gt;:&lt;RHOST&gt;:&lt;RPORT&gt; user@&lt;RHOST&gt;
 										</code>
 										<br />
 										<p>The command will create an SSH tunnel on port 22 and route all traffic through this tunnel to the server. This means that if you execute the command below, then navigate to <strong>http://localhost:8080</strong> in a browser, you will be able to navigate to the webserver on port 80 through the SSH tunnel. The green arrow in the schema above represents the SSH tunnel.</p>

@@ -166,14 +166,20 @@ p {
 
 code {
     font-family: Consolas, monaco, monospace;
+	font-size: 13px;
+	color: white;
     background-color: #333330;
     border: 1px solid #1a1a1a;
     display: block;
-    padding-top: 20px;
-    padding-bottom: 10px;
     padding-left: 10px;
 	width: 100%;
 	overflow:auto;
+	white-space:pre;
+}
+
+code p {
+    font-size: 13px;
+    color: white;
 }
 
 .tag {
@@ -183,19 +189,6 @@ code {
   	margin-left: 1%;
   	padding-left: 2%;
   	padding-right: 2%;
-}
-
-code p {
-    font-size: 13px;
-    color: white;
-}
-
-code pre {
-    border: none;
-    font-family: Consolas, monaco, monospace;
-    background-color: #333330;
-    font-size: 13px;
-    color: white;
 }
 
 body p>a, body p>i>a, tr>td>a {

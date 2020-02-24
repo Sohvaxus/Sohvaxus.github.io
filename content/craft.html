@@ -118,7 +118,7 @@
 						<!-- InstanceBeginEditable name="article" -->
 						<ol>
 							<li><h5>Description</h5></li>
-							<p>The user portion of this box revolves around the Gogs Craft API. In order to gain root we have to exploit an application called Vault. To start off i added craft.htb to my /etc/hosts file pointing to 10.10.10.110.</p>
+							<p>The user portion of this box revolves around the Gogs Craft API. We have to exploit an eval() vulnerability and dump a database to get the user flag. In order to gain root we have to exploit an application called Vault. To start off i added craft.htb to my /etc/hosts file pointing to 10.10.10.110.</p>
 							<li><h5>Recon</h5></li>
 							<ol>
 								<li>Nmap</li>
@@ -489,7 +489,7 @@ root@craft:~# wc -c root.txt
 33 root.txt
 									</code>
 									<br />
-									<p>Congratulations, your are now root on Craft! :)</p>
+									<p>Congratulations, we are now root on Craft! :)</p>
 								</ol>
 					 	</ol>
 						<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>

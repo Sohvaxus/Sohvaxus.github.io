@@ -108,6 +108,7 @@ p {
     font-weight: 500;
     line-height: 16.4x;
     color: #D6CDC9;
+ 	word-break: break-word;
 }
 
 .navbar-brand {

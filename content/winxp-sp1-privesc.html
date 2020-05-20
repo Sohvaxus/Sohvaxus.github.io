@@ -258,14 +258,14 @@ SERVICE_NAME: SSDPSRV
         SERVICE_START_NAME : NT AUTHORITY\LocalService							
 							</code>
 							<br />
-							<p>It is! Now let's try to start SSDPSRV again.</p>
+							<p>SSDPSRV is successfully set to AUTOMATIC (AUTO_START)! Now let's try to start SSDPSRV again.</p>
 							<code>
 C:\> net start SSDPSRV
 The SSDP Discovery Service service is starting.
 The SSDP Discovery Service service was started successfully.							
 							</code>
 							<br />
-							<p>Awesome! We now have our dependency running to start the upnphost service. If we run upnphost now though, it won't do much good for us. We first need to edit its parameters so the service will execute a binary of our choice. There are multiple ways to approach this. One option is to generate your own binary with msfvenom, but that's out of scope for this article. What we will do is upload the netcat binary (nc.exe) to our victim. Again, don't forget to put your FTP session is binary, or you won't be able to execute the executable via CLI.</p>
+							<p>Awesome! We now have our dependency running to start the upnphost service. If we run upnphost now though, it won't do much good for us. We first need to edit its parameters so the service will execute a binary of our choice. There are multiple ways to approach this. One option is to generate our own binary with msfvenom, but that's out of scope for this article. What we will do is upload the netcat binary (nc.exe) to our victim. Again, don't forget to put your FTP session is binary, or you won't be able to execute the executable via CLI.</p>
 							<p>You can download the Windows executables (32bit and 64bit) from Netcat <a href="https://eternallybored.org/misc/netcat/">here</a>.</p>
 							<p>Once nc.exe is uploaded to your victim, take note of it's current path, because we will need it now we are going to edit the parameters from the upnphost service. Execute the commands below to edit the path of the binary that the upnphost service will execute when it's started.</p>
 							<code>

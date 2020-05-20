@@ -27,7 +27,7 @@
 		<meta name="description" content="A site with documentation about security, exploits and vulnerabilities. Want to know more about hacking tools? You'll find it here!">
 		<!-- InstanceEndEditable -->
 		<!-- InstanceBeginEditable name="keywords" -->
-		<meta name="keywords" content="security,hacking,hack,hacks,hackers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,kali,linux,windows,vulnerable,exploitable,vuln,scanning,nmap,black,white,grey,hat,information,info,information security">
+		<meta name="keywords" content="security,hacking,hack,hacks,hackers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,kali,linux,windows,vulnerable,exploitable,vuln,scanning,nmap,black,white,grey,hat,information,info,recon,privilege,escalation,hackthebox,ctf,foothold,privesc,evasion">
 		<!-- InstanceEndEditable -->
 		<meta name="author" content="Sohvaxus">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,11 +77,34 @@
 							<li>
 								<div class="row top-buffer">
 									<div class="col-sm-2" id="content-img">
+										<img src="images/privesc.png" alt="Privilege Escalation" height="100" width="100">
+									</div>
+									<div class="col-sm-10">
+										<a href="content/winxp-sp1-privesc.html">Windows XP SP1 Privilege Escalation to System</a>
+										<p><i>may 20th 2020</i></p>
+										<p>This method of privilege escalation relies on vulnerable Microsoft Services. Most services in newer Windows versions (starting from Windows XP SP2) are no longer vulnerable. Vulnerable in this case, means that we can edit the services' parameters. This particular article focusses on the services SSDPSRV and upnphost.</p>
+										<span>Tags:</span>
+										<a class="tag">windows</a>
+										<a class="tag">xp</a>
+										<a class="tag">SP1</a>
+										<a class="tag">SP0</a>
+										<a class="tag">privilege</a>
+										<a class="tag">escalation</a>
+										<a class="tag">system</a>
+										<a class="tag">upnphost</a>
+										<a class="tag">SSDPSRV</a>
+									</div>
+								</div>
+								<hr class="solid">
+							</li>
+							<li>
+								<div class="row top-buffer">
+									<div class="col-sm-2" id="content-img">
 										<img src="images/craft_table.png" alt="Craft" height="90" width="90">
 									</div>
 									<div class="col-sm-10">
 										<a href="content/craft.html">HackTheBox.eu - Craft</a>
-										<p><i>25 february 2020</i></p>
+										<p><i>february 25th 2020</i></p>
 										<p>The user portion of this box revolves around the Gogs Craft API. We have to exploit an eval() vulnerability and dump a database to get the user flag. In order to gain root we have to exploit an application called Vault.</p>
 										<span>Tags:</span>
 										<a class="tag">htb</a>
@@ -100,7 +123,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/ssh.html">SSH - Port forwarding, tunneling and other tips and tricks</a>
-										<p><i>08 april 2019</i></p>
+										<p><i>april 08th 2019</i></p>
 										<p>SSH provides a secure channel over an unsecured network in a client–server architecture, connecting an SSH client application with an SSH server. The protocol specification distinguishes between two major versions, referred to as SSH-1 and SSH-2. The standard TCP port for SSH is 22. SSH is generally used to access Unix-like operating systems, but it can also be used on Microsoft Windows. Windows 10 uses OpenSSH as its default SSH client.</p>
 										<span>Tags:</span>
 										<a class="tag">ssh</a>
@@ -119,7 +142,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/fcrackzip-bruteforce-tutorial.html">FCrackZip - ZIP Bruteforce Tutorial</a>
-										<p><i>27 march 2019</i></p>
+										<p><i>march 27th 2019</i></p>
 										<p><i>fcrackzip</i> searches each zipfile given for encrypted files and tries to guess the password. All files must be encrypted with the same password, the more files you provide, the better.</p>
 										<span>Tags:</span>
 										<a class="tag">fcrackzip</a>
@@ -138,7 +161,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/jerry.html">HackTheBox.eu - Jerry</a>
-										<p><i>12 january 2019</i></p>
+										<p><i>january 12th 2019</i></p>
 										<p>Jerry was one of the easiest boxes i've done so far. It was very straight forward with no rabbit holes. Unfortunatly there was no priv esc, as the user and root flag were together in the same file.</p>
 										<span>Tags:</span>
 										<a class="tag">htb</a>
@@ -157,7 +180,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/netcat.html">Netcat</a>
-										<p><i>12 january 2019</i></p>
+										<p><i>january 12th 2019</i></p>
 										<p>Netcat (often abbreviated to nc) is a computer networking utility for reading from and writing to network connections using TCP or UDP. Netcat is designed to be a dependable back-end that can be used directly or easily driven by other programs and scripts. At the same time, it is a feature-rich network debugging and investigation tool, since it can produce almost any kind of connection its user could need and has a number of built-in capabilities.</p>
 										<span>Tags:</span>
 										<a class="tag">netcat</a>
@@ -176,7 +199,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/nikto.html">Nikto - Web Scanner Tutorial</a>
-										<p><i>21 november 2018</i></p>
+										<p><i>november 21th 2018</i></p>
 										<p>Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items, including over 6700 potentially dangerous files/CGIs, checks for outdated versions of over 1250 servers, and version specific problems on over 270 servers. It also checks for server configuration items such as the presence of multiple index files, HTTP server options, and will attempt to identify installed web servers and software. Scan items and plugins are frequently updated and can be automatically updated.</p>
 										<span>Tags:</span>
 										<a class="tag">nikto</a>
@@ -197,7 +220,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/theharvester.html">TheHarvester - Information Gathering Tutorial</a>
-										<p><i>21 november 2018</i></p>
+										<p><i>november 21th 2018</i></p>
 										<p>TheHarvester is an OSINT tool for gathering subdomains, email addresses, open ports, banners, employee names, and much more from different pulic sources. (Google, Bing, PGP key servers, ...). In order to gather this information it will do active and passive information gathering.</p>
 										<span>Tags:</span>
 										<a class="tag">theharvester</a>
@@ -216,7 +239,7 @@
 									</div>
 									<div class="col-sm-10">
 										<a href="content/heartbleed.html">Heartbleed vulnerability</a>
-										<p><i>21 november 2018</i></p>
+										<p><i>november 21th 2018</i></p>
 										<p>Heartbleed is a vulnerability in the OpenSSL implementation - OpenSSL implemented the widely used protocols: SSL (Secure Sockets Layer) and TLS (Transport Layer Security). The flaw in OpenSSL gives an attacker the ability to extract encrypted data from TLS/SSL secured networks.</p>
 										<span>Tags:</span>
 										<a class="tag">heartbleed</a>

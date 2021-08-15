@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en"><!-- InstanceBegin template="/Templates/content.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- InstanceBeginEditable name="title" -->
+		<title>Gobuster Guide</title>
+		<!-- InstanceEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../typewriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- InstanceBeginEditable name="description" -->
+		<meta name="description" content="In-depth explanation and examples of Gobuster, a brute force tool for web directories/files, subdomains and vhosts.">
+		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="keywords" -->
+		<meta name="keywords" content="gobuster,enumeration,golang,dns,subdirectories,hacking,ctf,tutorial,howto,brute,force,dir,vhost,subdomain">
+		<!-- InstanceEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar" style="min-width: 110px;border:none;margin-left:2%">
+								<p>General<p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid"><!-- InstanceBeginEditable name="h1" -->
+					  <h1>Gobuster Guide</h1>
+					<!-- InstanceEndEditable -->
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- InstanceBeginEditable name="breadcrumb" -->
+							<li class="breadcrumb-item active">Gobuster</li>
+						<!-- InstanceEndEditable -->
+					    </ol>
+						<div class="row top-buffer">
+							<div class="col-sm-8">
+								<table class="table">
+									<!-- InstanceBeginEditable name="table" -->
+									<tbody>
+										<tr>
+											<td>Author:</td>
+											<td>OJ Reeves</td>
+										</tr>
+										<tr>
+											<td>License:</td>
+											<td>Apache-2.0</td>
+										</tr>
+										<tr>
+											<td>Software:</td>
+											<td>Gobuster</td>
+										</tr>
+										<tr>
+											<td>Written in:</td>
+											<td>Go</td>
+										</tr>
+										<tr>
+											<td>Date created:</td>
+											<td>July 21, 2015</td>
+										</tr>
+										<tr>
+											<td>Updated:</td>
+											<td>Yes</td>
+										</tr>
+										<tr>
+											<td>GitHub:</td>
+											<td><a href="https://github.com/OJ/gobuster">Gobuster</a></td>
+										</tr>
+									</tbody>
+									<!-- InstanceEndEditable -->
+								</table>
+						  </div>
+						<div class="col-sm-4">
+							<!-- InstanceBeginEditable name="image" -->
+								<!-- InstanceEndEditable --></div>
+					  	</div>
+						<!-- InstanceBeginEditable name="article" -->
+						<div class="row top-buffer">
+							<!-- ARTICLE CONTENT -->
+							<p>Last updated: 15 august 2021</p>
+							<ol>
+								<li><h5>Description</h5></li>
+									<p>Gobuster is a tool used to brute force URLs (directories and sites) from websites, DNS subdomains, Virtual Host names and open Amazon S3 buckets. It can be particularly useful during CTF challenges that require you to brute force webserver data, but also during pentest engagements.</p>
+								<li><h5>Installation on Linux (Kali)</h5></li>
+								<p>GoBuster is not on Kali by default. In case you have to install it, this is how.</p>
+								<p>1. Since Gobuster is written in the Go language, we need to install the Go environment on our Kali machine. Download the Go installer file <a href="https://golang.org/doc/install">here</a> from their official site. At the time of writing, the file is called "go1.16.7.linux-amd64.tar.gz". You will need at least version 1.16.0 to compile Gobuster.</p>
+								<p>2. Navigate to the directory where the file you just downloaded is stored, and run the following command:</p>
+								<code>
+# Don't forget to change the filename in this command to the version you downloaded.
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.7.linux-amd64.tar.gz
+								</code>
+								<br />
+								<p>3. Add /usr/local/bin/go to your PATH environment variable.</p>
+								<code>
+export PATH=$PATH:/usr/local/go/bin
+								</code>
+								<br />
+								<p>4. Check if the Go environment was properly installed with the following command:</p>
+								<code>
+go version
+								</code>
+								<br />
+								<p>5. Finally it's time to install Gobuster. Make sure your Go version is >1.16.0, else this step will not work. The easiest way to install Gobuster now is to run the following command, this will install the latest version of Gobuster:</p>
+								<code>
+go install github.com/OJ/gobuster/v3@latest
+								</code>
+								<br />
+								<p>In case you want to compile Gobuster yourself, please refer to the instructions on the <a href="https://github.com/OJ/gobuster">Gobuster Github page.</a></p>
+								<li><h5>Cheatsheet</h5></li>
+								<code>
+# Syntax
+gobuster [mode] -u [target ip] -w [wordlist]
+								</code>
+								<br />
+								<p>Gobuster can run in multiple scanning modes, at the time of writing these are: dir, dns and vhost.</p>
+								<p><u>DIR mode</u> - Used for directory/file bruteforcing</p>
+								<code>
+# Syntax
+gobuster dir -u [target ip] -w [wordlist]
+
+# Example
+gobuster dir -u 192.168.0.1 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+								</code>
+								<br />
+								<p><u>DNS mode</u> - Used for DNS subdomain bruteforcing</p>
+								<code>
+# Syntax
+gobuster dns -d [target site] -w [wordlist]
+									
+# Standard example
+gobuster dns -d example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+									
+# Example with show ip
+gobuster dns -d example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -i
+									
+# Example of force processing of a domain that has wildcard entries
+gobuster dns -d 0.0.1.example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt --wildcard
+								</code>
+								<br />
+								<p><u>VHOST mode</u> - Used for VHOST bruteforcing</p>
+								<code>
+# Syntax
+gobuster vhost -u [target site] -w [vhost list]
+
+# Example
+gobuster vhost -u https://example.com -w common-vhosts.txt
+								</code>
+								<br />
+								<p><u>Global flags</u></p>
+								<p><strong>-h</strong> : (--help) Print the global help menu.</p>
+								<p><strong>-z</strong> : (--noprogress) Don't display progress.</p>
+								<p><strong>-o</strong> : (--output [filename]) Output results to a file.</p>
+								<p><strong>-q</strong> : (--quiet) Don't print banner and other noise.</p>
+								<p><strong>-t</strong> : (--threads [number]) Number of concurrent threads (default 10).</p>
+								<p><strong>-v</strong> : (--verbose) Verbose output (errors).</p>
+								<p><strong>-w</strong> : (--wordlist [wordlist]) Path to wordlist.</p>
+								<p><u>DIR mode flags</u></p>
+								<p><strong>-h</strong> : (--help) Print the DIR mode help menu.</p>
+								<p><strong>-f</strong> : (--addslash) Append "/" to each request.</p>
+								<p><strong>-c</strong> : (--cookies [string]) Cookies to use for the requests.</p>
+								<p><strong>-e</strong> : (--expanded) Expanded mode, print full URLs.</p>
+								<p><strong>-x</strong> : (--extensions [string]) File extension(s) to search for.</p>
+								<p><strong>-r</strong> : (--followredirect) Follow redirects.</p>
+								<p><strong>-H</strong> : (--headers [stringArray]) Specify HTTP headers, -H 'Header1: val1' -H 'Header2: val2'.</p>
+								<p><strong>-l</strong> : (--includelength) Include the length of the body in the output.</p>
+								<p><strong>-k</strong> : (--insecuressl) Skip SSL certificate verification.</p>
+								<p><strong>-n</strong> : (--nostatus) Don't print status codes.</p>
+								<p><strong>-U</strong> : (--username [string]) Username for Basic Auth.</p>
+								<p><strong>-P</strong> : (--password [string]) Password for Basic Auth.</p>
+								<p><strong>-p</strong> : (--proxy [string]) Proxy to use for requests [http(s)://host:port].</p>
+								<p><strong>-s</strong> : (--statuscodes [string])Positive status codes (will be overwritten with statuscodesblacklist if set) (default "200,204,301,302,307,401,403").</p>
+								<p><strong>-b</strong> : (--statuscodesblacklist [string]) Negative status codes (will override statuscodes if set).</p>
+								<p><strong>-u</strong> : (--url [string]) The target URL.</p>
+								<p><strong>-a</strong> : (--useragent [string]) Set the User-Agent string (default "gobuster/3.0.1").</p>
+								<p><strong>--timeout [duration]</strong> : HTTP Timeout (default 10s).</p>
+								<p><strong>--wildcard</strong> : Force continued operation when wildcard found.</p>
+								<p><u>DNS mode flags</u></p>
+								<p><strong>-h</strong> : (--help) Print the DNS mode help menu.</p>
+								<p><strong>-d</strong> : (--domain [string]) The target domain.</p>
+								<p><strong>-r</strong> : (--resolver [string]) Use custom DNS server (format server.com or server.com:port).</p>
+								<p><strong>-c</strong> : (--showcname) Show CNAME records (cannot be used with '-i' option).</p>
+								<p><strong>-i</strong> : (--showips) Show IP addresses.</p>
+								<p><strong>--timeout [duration]</strong> : DNS resolver timeout (default 1s).</p>
+								<p><strong>--wildcard</strong> : Force continued operation when wildcard found.</p>
+								<p><u>VHOST mode flags</u></p>
+								<p><strong>-h</strong> : (--help) Print the VHOST mode help menu.</p>
+								<p><strong>-r</strong> : (--followredirect) Follow redirects.</p>
+								<p><strong>-H</strong> : (--headers [stringArray]) Specify HTTP headers, -H 'Header1: val1' -H 'Header2: val2'.</p>
+								<p><strong>-c</strong> : (--cookies [string]) Cookies to use for the requests.</p>
+								<p><strong>-k</strong> : (--insecuressl) Skip SSL certificate verification.</p>
+								<p><strong>-U</strong> : (--username [string]) Username for Basic Auth.</p>
+								<p><strong>-P</strong> : (--password [string]) Password for Basic Auth.</p>
+								<p><strong>-u</strong> : (--url [string]) The target URL.</p>
+								<p><strong>-p</strong> : (--proxy [string]) Proxy to use for requests [http(s)://host:port].</p>
+								<p><strong>-a</strong> : (--useragent [string]) Set the User-Agent string (default "gobuster/3.0.1").</p>
+								<p><strong>--timeout [duration]</strong> : HTTP Timeout (default 10s).</p>
+							</ol>
+							<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
+							<h5>50URC35:<h5>
+							<ul id="sources">
+								<li><a href="https://github.com/OJ/gobuster">Gobuster GitHub</a></li>
+								<li><a href="https://golang.org/">Go Language Homepage</a></li>
+							</ul>
+							<!-- END OF ARTICLE CONTENT -->
+						</div>
+					  <!-- InstanceEndEditable --></div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- SCRIPTS -->
+				<script src="../chaffle/chaffle.min.js" charset="utf-8"></script>
+				<script>
+					var elements = document.querySelectorAll('[data-chaffle]');
+					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
+
+					Array.prototype.forEach.call(elements, function (el) {
+						var chaffle = new Chaffle(el)
+						el.addEventListener('mouseover', function () {
+							chaffle.init();
+						});
+					});
+
+					Array.prototype.forEach.call(elm, function (el) {
+						var chaffle = new Chaffle(el, {
+							delay: 200
+						})
+						setInterval(function(){
+							chaffle.init();
+						}, 8000)
+					});
+				</script>
+				<!-- END OF SCRIPTS -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+<!-- InstanceEnd --></html>

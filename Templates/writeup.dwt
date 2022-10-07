@@ -257,30 +257,19 @@
 						</ul>
 					  	<!-- TemplateEndEditable -->
 						</div>
+						<!-- COMMENTS -->
+						<script src="https://utteranc.es/client.js"
+							repo="Sohvaxus/Sohvaxus.github.io"
+							issue-term="pathname"
+							theme="github-dark"
+							crossorigin="anonymous"
+							async>
+						</script>
+						<!-- END OF COMMENTS -->
 					</div>
 				</div>
 				<!-- END OF CONTENT -->
 				<!-- SCRIPTS -->
-				<script>
-					var elements = document.querySelectorAll('[data-chaffle]');
-					var elm = document.querySelectorAll('[data-chaffle-onLoad]');
-
-					Array.prototype.forEach.call(elements, function (el) {
-						var chaffle = new Chaffle(el)
-						el.addEventListener('mouseover', function () {
-							chaffle.init();
-						});
-					});
-
-					Array.prototype.forEach.call(elm, function (el) {
-						var chaffle = new Chaffle(el, {
-							delay: 200
-						})
-						setInterval(function(){
-							chaffle.init();
-						}, 8000)
-					});
-				</script>
 				<!-- END OF SCRIPTS -->
 			</div>
 		</div>

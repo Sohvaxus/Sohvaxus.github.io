@@ -121,7 +121,7 @@
 						<!-- InstanceBeginEditable name="article" -->
 						<div class="row top-buffer">
 							<!-- ARTICLE CONTENT -->
-							<p>Last updated: august 30th 2023</p>
+							<p>Last updated: march 28th 2024</p>
 							<ol>
 								<li><h5>Description</h5></li>
 									<p>Gobuster is a tool used to brute force URLs (directories and files) from websites, DNS subdomains, Virtual Host names and open Amazon S3 buckets. It can be particularly useful during CTF challenges that require you to brute force webserver data, but also during pentest engagements.</p>
@@ -164,6 +164,9 @@ gobuster dir -u [target ip] -w [wordlist]
 
 # Example
 gobuster dir -u http://192.168.0.1:8080 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+									
+# Example to search for specific file extensions, like PHP. For multiple extension: -x .php, .txt, ...
+gobuster dir -u http://192.168.0.1:8080 -x .php -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
 									
 # Example which excludes pages with a certain length
 gobuster dir -u http://192.168.0.1:8080 -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt --exclude-length 9265

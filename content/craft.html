@@ -54,7 +54,7 @@
 					<nav class="navbar navbar-default">
 						<div class="container-fluid">
 							<div class="collapse navbar-collapse" id="navbar" style="min-width: 110px;border:none;margin-left:2%">
-								<p>General<p>
+								<p>General</p>
 								<ul class="nav navbar-nav">
 									<li><a href="../index.html">HOME</a></li>
 									<li><a href="../readme.html">README.TXT</a></li>
@@ -202,7 +202,7 @@ Password: 4aUh0A8PbVJxgd
 								</code>
 								<br />
 								<p>The good thing about these credentials is, is that now we can create an authentication token of our own to send authenticated requests to the craft-api endpoint. As you know from a little while back, we found the page https://api.craft.htb/api/ . This page has an option to generate our own authentication token.</p>
-								<center></center><img src="../images/craft/login_auth.PNG" style="max-height:417;max-width:1422;" class="image"></center>
+								<center><img src="../images/craft/login_auth.PNG" alt="Create authentication token" style="max-height:417;max-width:1422;" class="image"></center>
 								<br />
 								<p>In order to leverage this, click on 'Try it out' -> Execute. An authentication window will pop up asking for a username and password. Enter the credentials we just found, this should give you an authentication token as such:</p>
 								<code>
@@ -237,7 +237,7 @@ def post(self):
 								<ol>
 									<li>Poppin' the shell</li>
 									<p>Since the eval() function is present in the python function that creates a new brew entry, we will leverage the craft-api endpoint once again to create a new brew:</p>
-									<center></center><img src="../images/craft/create_brew.PNG" style="max-height:659;max-width:1423;" class="image"></center>
+									<center><img src="../images/craft/create_brew.PNG" alt="Create brew" style="max-height:659;max-width:1423;" class="image"></center>
 									<br />
 									<p>Click 'Try it out'. Since the parameter 'abv' is being evaluated, this parameter will be vulnerable to code injection. Change the payload so that 'abv' contains the code you want to execute on the webserver, and an id that does not exist yet. The rest can be random. Since the language this api is written in is python, your code you inject will also have to be in python.</p>
 									<code>
@@ -493,7 +493,7 @@ root@craft:~# wc -c root.txt
 								</ol>
 					 	</ol>
 						<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
-						<h5>50URC35:<h5>
+						<h5>50URC35:</h5>
 						<ul id="sources">
 							<li><a href="https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords/">Vault documentation</a></li>
 						</ul>
@@ -514,7 +514,6 @@ root@craft:~# wc -c root.txt
 				<!-- SCRIPTS -->
 				<!-- END OF SCRIPTS -->
 			</div>
-		</div>
 	<!-- END OF BODY -->
 	</body>
 <!-- InstanceEnd --></html>

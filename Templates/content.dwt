@@ -54,7 +54,7 @@
 					<nav class="navbar navbar-default">
 						<div class="container-fluid">
 							<div class="collapse navbar-collapse" id="navbar" style="min-width: 110px;border:none;margin-left:2%">
-								<p>General<p>
+								<p>General</p>
 								<ul class="nav navbar-nav">
 									<li><a href="../index.html">HOME</a></li>
 									<li><a href="../readme.html">README.TXT</a></li>
@@ -177,7 +177,7 @@
 	...
 	nc: connect to localhost port 51 (tcp) failed: Connection refused
 	nc: connect to localhost port 52 (tcp) failed: Connection refused
-	<span style=color:yellow;>Connection to localhost 53 port [tcp/domain] succeeded!</span>
+	<span style="color:yellow;">Connection to localhost 53 port [tcp/domain] succeeded!</span>
 	nc: connect to localhost port 54 (tcp) failed: Connection refused
 	nc: connect to localhost port 55 (tcp) failed: Connection refused
 	nc: connect to localhost port 56 (tcp) failed: Connection refused
@@ -185,7 +185,7 @@
 	nc: connect to localhost port 77 (tcp) failed: Connection refused
 	nc: connect to localhost port 78 (tcp) failed: Connection refused
 	nc: connect to localhost port 79 (tcp) failed: Connection refused
-	<span style=color:yellow;>Connection to localhost 80 port [tcp/http] succeeded!</span>
+	<span style="color:yellow;">Connection to localhost 80 port [tcp/http] succeeded!</span>
 	nc: connect to localhost port 81 (tcp) failed: Connection refused
 	nc: connect to localhost port 82 (tcp) failed: Connection refused
 	nc: connect to localhost port 83 (tcp) failed: Connection refused
@@ -215,7 +215,7 @@
 					      </center>
 						  <h5>
 						  50URC35:
-						  <h5>
+						  </h5>
 						  <ul id="sources">
 						    <li><a href="http://nc110.sourceforge.net">Netcat Website</a></li>
 						    <li><a href="https://en.wikipedia.org/wiki/Netcat">Netcat Wiki</a></li>

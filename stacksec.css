@@ -147,7 +147,7 @@ p {
 	height: 100%;
 }
 
-#content-img {
+.content-img {
 	width: 10%;
 }
 
@@ -201,7 +201,7 @@ body p>a, body p>i>a, tr>td>a {
 }
 
 li {
-  margin: 10px 0;
+  	margin: 10px 0;
 }
 
 hr.solid {

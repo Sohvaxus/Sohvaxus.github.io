@@ -19,15 +19,11 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="../typewriter.js"></script>
 		<link rel="stylesheet" type="text/css" href="../stacksec.css">
 
 		<meta charset="UTF-8">
 		<!-- InstanceBeginEditable name="description" -->
 		<meta name="description" content="A guide which dives deeper in the MITRE ATT&CK techniques used by adversaries. In this guide the focus will be on using reconnaissance tools like GoBuster, Nmap and DirSearch as well as online tools to gather information using the Active Scanning techniques.">
-		<!-- InstanceEndEditable -->
-		<!-- InstanceBeginEditable name="keywords" -->
-		<meta name="keywords" content="mitre,pre,att&ck,enterprise,recon,reconnaissance,ip block,subdomain,tutorial,guide,nmap,scanning,domain,vulnerability,exploit,example,examples,discovering,gobuster,dirsearch,ffuf">
 		<!-- InstanceEndEditable -->
 		<meta name="author" content="Sohvaxus">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,7 +72,7 @@
 						<ol class="breadcrumb">
 						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
 							<!-- InstanceBeginEditable name="breadcrumb" -->
-							<li class="breadcrumb-item"><a href="mitre-attck-content.html">MITRE ATT&amp;CK</a></li>
+							<li class="breadcrumb-item"><a href="mitre-attack-contents.html">MITRE ATT&amp;CK</a></li>
 						  	<li class="breadcrumb-item active">Active Scanning</li>
 							<!-- InstanceEndEditable -->
 					    </ol>
@@ -96,33 +92,33 @@
 							<p>&emsp;&emsp;<a href="#dirsearch_directory_bruteforce">&gt; 1.3.2 DirSearch directory bruteforce</a></p>
 							<p>&emsp;&emsp;<a href="#ffuf_subdomain_bruteforce">&gt; 1.3.3 ffuf subdomain bruteforce</a></p>
 							<br />
-						  <ol>
+						  	<ol>
 								<li>
 						      		<h5>Active Scanning</h5>
 					        	</li>
 							  	<h6 id="scanning_ip_blocks">1.1 Scanning IP Blocks</h6>
 							  	<br />
-								<p>Certain companies may have IP blocks or IP ranges of public IP addresses assigned to them. Usually this is the case for larger companies like Microsoft, Google. These IP blocks can be scanned to gather information on the company. Each IP address in the IP block(s) found can be iterated and compared against a DNS database to generate a list of (sub)domains related to that company. Every result could be a vector for further information gathering, or compromise of the company. Let's dive in to how this works.</p>
+								<p>Larger companies like Microsoft or Google may have IP blocks or IP ranges of public IP addresses assigned to them. These IP blocks can be scanned to gather information on the company. Each IP address in the IP block(s) found can be iterated, checked for availability and a reverse IP lookup can be performed to generate a list of (sub)domains related to that company. Every result could be a vector for further information gathering, or compromise of the company. Let's learn how we go about gathering this information.</p>
 								<h6 id="finding_ip_blocks">1.1.1 Finding IP blocks</h6>
 								<br />
-								<p>A toolkit i find useful in finding company IP blocks is the <a href="https://bgp.he.net/">BGP Toolkit</a>. It allows you to query for information using an ASN number, company name or an IP address. The goal is to obtain an ASN number, which you can then use to display IP block information. If you don't have an ASN number yet, you can obtain it by querying with a company name or ip address.</p>
+								<p>A useful toolkit in finding company IP blocks is the <a href="https://bgp.he.net/">BGP Toolkit</a>. It allows you to query for information using an ASN number, company name or an IP address. If you haven't got an ASN number yet then the initial goal is to obtain one, which you can then use to display IP block information. You can obtain the ASN number by querying the tooliit with a company name or an IP address.</p>
 
-							  	<p>In this example i will query for "Porsche". As you can see the tool returns multiple results, including 7 ASN numbers. Since Porsche's roots are in germany, i'm going to pick <a href="https://bgp.he.net/AS33848">AS33848</a>.</p>
+							  	<p>In the following example we will query for "Porsche". As you can see the tool returns multiple results, including 7 ASN numbers. Since Porsche's roots are in germany, we're going to pick <a href="https://bgp.he.net/AS33848">AS33848</a>.</p>
 							  
 							  	<center><img src="../images/mitre/porsche_query.PNG" alt="Porsche query" class="image" style="max-height:65%;max-width:100%;"></center><br />
 							  
-							  	<p>We get a lot of information about the company once we get a proper ASN number. There are multiple tabs available to us with information, but the most useful to us at this point is <a href="https://bgp.he.net/AS33848#_prefixes">Prefixes v4</a>. Here we can see multiple IP block ranges which are in use by Porsche. All of those which have at least a matching description can be used to gather more information on Porsche.</p>
+							  	<p>We get a lot of information about the company once we get a proper ASN number. There are multiple tabs available to us with information, but the most useful one at this point is <a href="https://bgp.he.net/AS33848#_prefixes">Prefixes v4</a>. Here we can see multiple IP block ranges which are in use by Porsche. All of those which have at least a matching description can be used to gather more information on Porsche.</p>
 							  	
 						  		<center><img src="../images/mitre/porsche_prefixes.PNG" alt="Porsche prefixes" class="image" style="max-height:65%;max-width:65%;"></center> <br />
 							  	<h6 id="finding_subdomains">1.1.2 Finding (sub)domains</h6>
 								<br />
 							  	
 							  	<h6>BGP Toolkit</h6>
-							  	<p>One way to get a list of subdomains is to navigate to an IP block on the <a href="https://bgp.he.net/">BGP Toolkit</a> and select the <a href="https://bgp.he.net/net/84.21.32.0/22#_dnsrecords">DNS tab</a>. I chose the first IP block in the list (<a href="https://bgp.he.net/net/84.21.32.0/22">84.21.32.0/22</a>). Although this method seems to provide outdated information for certain endpoints. A couple of subdomains i've tested were no longer online. A better approach would be to use <a href="https://nmap.org/">Nmap</a>.</p>
+							  	<p>One way to get a list of subdomains is to navigate to an IP block on the <a href="https://bgp.he.net/">BGP Toolkit</a> and select the <a href="https://bgp.he.net/net/84.21.32.0/22#_dnsrecords">DNS tab</a>. We will take the first IP block in the list (<a href="https://bgp.he.net/net/84.21.32.0/22">84.21.32.0/22</a>). Although this method seems to provide outdated information for certain endpoints. A couple of subdomains i've tested were no longer online. A better approach would be to use <a href="https://nmap.org/">Nmap</a>.</p>
 							  
 							  	<center><img src="../images/mitre/porsche_dns.PNG" alt="Porsche DNS" class="image" style="max-height:65%;max-width:100%;"></center> <br />
 							  	<h6>Nmap</h6>
-							  	<p>Another way to gather subdomains on IP blocks is to run an Nmap scan. In the code below i've used the <strong>-sn</strong> option to perform a host discovery scan without a port scan. This simply sends an ICMP echo request and some other packets to every IP in the IP range to check if they're reachable. If they are, it will also attempt to do a reverse DNS lookup on the ip address to discover a possible domain attached to the ip address. In general this seems to be a better way to discover active endpoints as this only returns endpoints which are currently online.</p>
+							  	<p>A better way to gather subdomains on IP blocks is to run an Nmap scan. In the code below the <strong>-sn</strong> option is used to perform a host discovery scan without an additional port scan. This simply sends an ICMP echo request and some other packets to every IP in the IP range to check if they're reachable. If they are, it will also attempt to do a reverse DNS lookup on the IP address to discover a possible domain attached to the IP address. In general this seems to be a superior way to discover active endpoints as this only returns endpoints which are currently online.</p>
 							  	<code>
 ┌─[r00t@parrot]─[~]
 └──╼ $nmap -sn 84.21.32.0/22
@@ -160,10 +156,10 @@ Host is up (0.17s latency).
 							  <hr class="solid">
 								<h6 id="vulnerability_scanning">1.2 Vulnerability Scanning</h6>
 								<br />
-							  <p>With the information we've found so far it's possible to do more in-depth enumeration for each endpoint. With more in-depth scanning it's possible to discover more information like which hardware and software is running on the endpoints with the corresponding version numbers, which are important to identify possible exploits.</p>
+							  <p>With the information we've found so far it's possible to do more in-depth enumeration for each endpoint. With more in-depth scanning it's possible to discover more information such as which hardware and software is running on the endpoints with the corresponding version numbers, which are important to identify possible exploits.</p>
 								<h6 id="nmap_service_scan">1.2.1 Nmap service and version scan</h6>
 								<br />
-							  <p>Aggressive scanning of online endpoints without permission is not ideal, so i'm not going to continue with Porsche for that in this part. Instead i have a very good example of how an Nmap scan which probes for more information than a host discovery scan can discover a critical vulnerability in a Windows 7 system. The following Nmap scan has discovered that our target system is running Windows 7 Service Pack 1, which we did not know before the scan.</p><br>
+							  <p>Aggressive scanning of online endpoints without permission is not ideal, so we're not going to use Porsche for this example. Instead, here is a very good example of how an Nmap service and version scan can discover a critical vulnerability in a Windows 7 system. The following Nmap scan has discovered that our target system is running Windows 7 Service Pack 1, which we did not know before the scan.</p><br>
 								<code>
 └──╼ $nmap -sC -sV 192.168.0.44
 Starting Nmap 7.92 ( https://nmap.org ) at 2024-09-07 02:34 CET
@@ -185,7 +181,7 @@ Service Info: Host: HARIS-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
 							  <br />
 							  	<h6 id="nmap_vulnerability_scan">1.2.2 Nmap vulnerability scan</h6>
 								<br />
-							  <p>Now we could further leverage the power of Nmap and scan for specific vulnerabilities. Since Nmap detected the OS version on port 445, i will narrow the vulnerability scan down to port 445 to speed up the scan. The <strong>-script</strong> option can be used to specify that we want to do a vulnerability scan using Nmap.</p>
+							  <p>Now we could further leverage the power of Nmap and scan for specific vulnerabilities. Since Nmap detected the operating system version on port 445, we will narrow the vulnerability scan down to port 445 to speed up the scan. The <strong>-script</strong> option can be used to specify that we want to do a vulnerability scan using Nmap.</p>
 							  <code>
 └──╼ $nmap -script vuln 192.168.0.44 -p 445
 Starting Nmap 7.92 ( https://nmap.org ) at 2024-09-07 03:14 CET
@@ -221,7 +217,7 @@ Host script results:
 
 Nmap done: 1 IP address (1 host up) scanned in 50.24 seconds
 							  </code> <br />
-							  <p>As you can see Nmap has discovered a critical RCE vulnerability. If we Google about ms17-010 we quickly find out that this is related to the <a href="https://en.wikipedia.org/wiki/EternalBlue">EternalBlue</a> exploit. This is a simple example of how an endpoint can be scanned to gather information about it and possibly exploit it. In the following example the same scan is executed against a Linux system to enumerate open TCP ports with associated services running on them, with possible version numbers.</p>
+							  <p>As we can see Nmap has discovered a critical RCE vulnerability. If we Google about ms17-010, we quickly find out that this is related to the <a href="https://en.wikipedia.org/wiki/EternalBlue">EternalBlue</a> exploit. This is a simple example of how an endpoint can be scanned to gather information about it and possibly exploit it. In the following example the same scan is executed against a Linux system to enumerate open TCP ports with associated services running on them, with possible version numbers.</p>
 							  <code>
 Starting Nmap 7.93 ( https://nmap.org ) at 2024-09-07 17:33 CEST
 Nmap scan report for 192.168.0.43
@@ -243,13 +239,13 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 9.04 seconds
 							  </code> <br />
-						  	<p>With the information we get from this scan it's good practice to search the web for possible exploits for each version of services we found. While it's not always possible to directly exploit a service, it's great to know which ports are open. We could for example run a number of enumeration tools on port 80 like <a href="nikto.html">Nikto</a> or <a href="gobuster.html">GoBuster</a> to gather more info like subdomains or possible exploits, or perform manual testing to look for vulnerabilities like <a href="https://portswigger.net/web-security/ssrf">SSRF</a> or <a href="https://book.hacktricks.xyz/pentesting-web/sql-injection">SQL injection</a> etc.</p>
+						  	<p>With this information it's good practice to search the web for possible exploits for each version of the services we found. While it's not always possible to directly exploit a service, it's great to know which ports are open. We could for example run a number of enumeration tools on port 80 like <a href="nikto.html">Nikto</a> or <a href="gobuster.html">GoBuster</a> to gather more info like subdomains or possible exploits, or perform manual testing to look for vulnerabilities like <a href="https://portswigger.net/web-security/ssrf">SSRF</a> or <a href="https://book.hacktricks.xyz/pentesting-web/sql-injection">SQL injection</a> etc.</p>
 						  	<hr class="solid">
 						  	<h6 id="wordlist_scanning">1.3 Wordlist scanning</h6>
 							<br />
-							  <p>Scanning the IP blocks from your target is a good way to gather information about them, but there is a way to gather more information, and that's by bruteforcing. For example, it's possible to take any wordlist and run it against an endpoint you found to discover hidden subdomains or directories. This way you can uncover hidden administrative portals, sensitive files or even development portals. The tools i usually use for this type of reconnaissance are <a href="gobuster.html">GoBuster</a>, <a href="https://github.com/maurosoria/dirsearch">DirSearch</a> and <a href="https://github.com/ffuf/ffuf">ffuf</a>. These tools work very well with the default wordlists from DirBuster or with <a href="https://github.com/danielmiessler/SecLists">SecLists</a>. In the following example i used GoBuster to bruteforce for directories on a webserver.</p>
+							  <p>Scanning the IP blocks of your target is a good way to gather information about them, but there is a way to gather more - possibly hidden - information, and that's by bruteforcing. For example, it's possible to take any wordlist and run it against an endpoint you found to discover hidden subdomains or directories. This way you can uncover hidden administrative portals, sensitive files or even development portals. The tools i usually use for this type of reconnaissance are <a href="gobuster.html">GoBuster</a>, <a href="https://github.com/maurosoria/dirsearch">DirSearch</a> and <a href="https://github.com/ffuf/ffuf">ffuf</a>. These tools work very well with the default wordlists from DirBuster or with <a href="https://github.com/danielmiessler/SecLists">SecLists</a>. In the following example i used GoBuster to bruteforce for directories on a webserver.</p>
 							  <h6 id="gobuster_directory_bruteforce">1.3.1 Gobuster directory bruteforce</h6>
-							  <p><span style="color:cyan;">** Beware **</span> - Bruteforcing is a very noisy thing to do. When running an unthrottled bruteforce attack on anything that's monitored, the logs of your target will light up like a christmas tree. If stealth needs to be maintained then consider a very patient, or even completely different approach.</p>
+							  <p><span style="color:cyan;">** Beware **</span> - Bruteforcing is a very noisy thing to do. When running an unthrottled bruteforce attack on anything that's being monitored, the logs of your target will light up like a christmas tree. If stealth needs to be maintained then consider a very patient, or even completely different approach.</p>
 							  <code>
 root@linux:~# gobuster dir -u http://192.168.0.1 -w /usr/share/dirb/wordlists/common.txt
 ===============================================================
@@ -279,9 +275,9 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
 <span style="color:yellow;">/uploads (Status: 301)</span>
 ===============================================================
 							  </code> <br />
-							  <p>As you can see Gobuster returned some interesting directories like <strong>/dev</strong> and <strong>/uploads</strong>. These results were found with a default wordlist from DirBuster called common.txt.</p>
+							  <p>Gobuster returned some interesting directories like <strong>/dev</strong> and <strong>/uploads</strong>. These results were found with a default wordlist from DirBuster called common.txt.</p>
 							  <h6 id="dirsearch_directory_bruteforce">1.3.2 DirSearch directory bruteforce</h6>
-							  <p>Although one specific tool can yield great results, it never hurts to run another one for good measure. Sometimes you would be surprised what else comes falling out the tree when you shake it a bit more. In the following example i use DirSearch on a different webserver. By default DirSearch uses it's own internal worldlist, but it is possible to provide other ones.</p>
+							  <p>Although one specific tool can yield great results, it never hurts to run another one for good measure. Sometimes you would be surprised what else comes falling out the tree when you shake it a bit more. The following example shows DirSearch bruteforcing a different webserver. By default DirSearch uses it's own internal worldlist, but it is possible to provide your own.</p>
 							  <code>
 └──╼ $sudo python3 dirsearch.py -u http://192.168.0.1
   _|. _ _  _  _  _ _|_    v0.4.3
@@ -311,7 +307,7 @@ Target: http://192.168.0.1/
 							  </code> <br />
 							  <p>The DirSearch scan resulted in a couple of interesting directories called <strong>/control</strong> and <strong>/control/login</strong> which could be investigated further.</p>
 							  <h6 id="ffuf_subdomain_bruteforce">1.3.3 ffuf subdomain bruteforce</h6>
-							  <p>Another vector for information gathering would be to bruteforce subdomains. This can by done with an interesting web fuzzer called <a href="https://github.com/ffuf/ffuf">ffuf</a>. It's a little more complex to use, but i will show you an example.</p>
+							  <p>Another vector for information gathering would be to bruteforce subdomains. This can be done with an interesting web fuzzer called <a href="https://github.com/ffuf/ffuf">ffuf</a>. It's a little more complex to use, but below is a good example of how to perform a scan.</p>
 							  <code>
 └──╼ $ffuf -u http://devvortex.htb -H "Host: FUZZ.devvortex.htb" -w /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -mc all -ac
 
@@ -341,7 +337,7 @@ ________________________________________________
 
 :: Progress: [19966/19966] :: Job [1/1] :: 1449 req/sec :: Duration: [0:00:17] :: Errors: 0 ::
 							  </code> <br />
-							  <p>In this final example i supplied ffuf with a SecLists subdomains wordlist, a target host from <a href="https://www.hackthebox.com/">HackTheBox</a>, and the location in the URL where the tool should bruteforce indicated by the word FUZZ. As the result shows, the tool tried 19966 options from the wordlist in 17 seconds and returns one positive result which is dev.devvortex.htb. This certainly is a very interesting subdomain to investigate further.</p>
+							  <p>This final example shows ffuf supplied with a SecLists subdomains wordlist, a target host from <a href="https://www.hackthebox.com/">HackTheBox</a>, and the location in the URL where the tool should bruteforce indicated by the word FUZZ. As the result shows, the tool tried 19966 options from the wordlist in 17 seconds and returns one positive result which is dev.devvortex.htb. This certainly is a very interesting subdomain to investigate further.</p>
 					      </ol>
 							<hr class="solid">
 						  <center>
@@ -374,9 +370,6 @@ ________________________________________________
 					  </div>
 				</div>
 				<!-- END OF CONTENT -->
-				<!-- SCRIPTS -->
-				<!-- InstanceBeginEditable name="scripts" --><!-- InstanceEndEditable -->
-				<!-- END OF SCRIPTS -->
 			</div>
 		</div>
 	<!-- END OF BODY -->

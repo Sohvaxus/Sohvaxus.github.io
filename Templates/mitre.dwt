@@ -19,15 +19,11 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="../typewriter.js"></script>
 		<link rel="stylesheet" type="text/css" href="../stacksec.css">
 
 		<meta charset="UTF-8">
 		<!-- TemplateBeginEditable name="description" -->
 		<meta name="description" content="A site with documentation about security, exploits and vulnerabilities. Want to know more about hacking tools? You'll find it here!">
-		<!-- TemplateEndEditable -->
-		<!-- TemplateBeginEditable name="keywords" -->
-		<meta name="keywords" content="hackthebox,htb,ctf,security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,information security">
 		<!-- TemplateEndEditable -->
 		<meta name="author" content="Sohvaxus">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -198,9 +194,6 @@
 					  </div>
 				</div>
 				<!-- END OF CONTENT -->
-				<!-- SCRIPTS -->
-				<!-- TemplateBeginEditable name="scripts" -->scripts<!-- TemplateEndEditable -->
-				<!-- END OF SCRIPTS -->
 			</div>
 		</div>
 	<!-- END OF BODY -->

@@ -12,7 +12,7 @@
 		</script>
 		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
 		<!-- InstanceBeginEditable name="title" -->
-		<title>Nikto Web Scanner Tutorial</title>
+		<title>Nikto Web Scanner Guide and Examples</title>
 		<!-- InstanceEndEditable -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,10 +24,9 @@
 
 		<meta charset="UTF-8">
 		<!-- InstanceBeginEditable name="description" -->
-		<meta name="description" content="In-depth explanation and examples of web scanning with Nikto.">
+		<meta name="description" content="A comprehensive guide on how to use the Nikto Web Scanner to discover vulnerabilities.">
 		<!-- InstanceEndEditable -->
 		<!-- InstanceBeginEditable name="keywords" -->
-		<meta name="keywords" content="netcat, gathering, information gathering, web, scanning, security,hacking,hack,heartbleed,krack,crack,stack,memory,stacksec,it,secure,securing,hacks,hackers,system,systems,computers,documentation,tutorial,explanation,how,to,writeup,document,vulnerability,exploit,metaspoit,kali,linux,windows,mac,vulnerable,exploitable,vuln,meta,sploit,payload,scanning,nmap,black,white,grey,hat,information,info,book,write,WPA2,wifi,protocol,fix,how to">
 		<!-- InstanceEndEditable -->
 		<meta name="author" content="Sohvaxus">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,7 +66,8 @@
 				<!-- CONTENT -->
 				<div class="col-sm-8" id="content-page">
 					<div class="container-fluid"><!-- InstanceBeginEditable name="h1" -->
-					  <h1>Nikto Web Scanner</h1>
+					  	<h1>Nikto Web Scanner</h1>
+						<center><p><i>Guide and Examples</i></p></center>
 					<!-- InstanceEndEditable -->
 					<hr class="solid">
 						<!-- BREADCRUMBS -->
@@ -121,7 +121,7 @@
 						<!-- InstanceBeginEditable name="article" -->
 						<div class="row top-buffer">
 							<!-- ARTICLE CONTENT -->
-							<p>Last updated: 21 november 2018</p>
+							<p>Last updated: 10 september 2024</p>
 							<ol>
 								<li><h5>Description</h5></li>
 									<p>Nikto is an Open Source web server scanner which performs comprehensive tests against web servers for multiple items, including over 6700 potentially dangerous files/CGIs, checks for outdated versions of over 1250 servers, and version specific problems on over 270 servers. It also checks for server configuration items such as the presence of multiple index files, HTTP server options, and will attempt to identify installed web servers and software. Scan items and plugins are frequently updated and can be automatically updated.</p>
@@ -134,6 +134,7 @@
 								<code>
 # Syntax
 nikto -h [target IP] -p [port](,[port],[port],...)
+
 # Syntax alternative
 nikto -h https://[target IP]:[port]/
 
@@ -178,6 +179,7 @@ nikto -update
 								<p><strong>-s</strong> : (-ssl) Speeds up the scan if you're sure the target uses SSL. This option only tests SSL on the ports specified.</p>
 								<p><strong>-useproxy</strong> : Specifies the use of a given HTTP proxy via which to conduct scans. Nikto does not currently support SOCKS proxies.</p>
 							</ol>
+							<hr class="solid">
 							<center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
 							<h5>50URC35:</h5>
 							<ul id="sources">

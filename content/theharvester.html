@@ -12,7 +12,7 @@
 		</script>
 		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
 		<!-- InstanceBeginEditable name="title" -->
-		<title>TheHarvester Information Gathering Tutorial</title>
+		<title>TheHarvester Information Gathering Guide and Examples</title>
 		<!-- InstanceEndEditable -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,7 @@
 
 		<meta charset="UTF-8">
 		<!-- InstanceBeginEditable name="description" -->
-		<meta name="description" content="In-depth explanation and examples from information gathering with TheHarvester.">
+		<meta name="description" content="A guide with examples on how to use the OSINT tool TheHarvester. ">
 		<!-- InstanceEndEditable -->
 		<!-- InstanceBeginEditable name="keywords" -->
 		<meta name="keywords" content="theharvester,the,harvester,gathering,information gathering,security,hacking,hack,crack,it,hacks,hackers,documentation,tutorial,explanation,how,to,writeup,vulnerability,exploit,vulnerable,exploitable,vuln,scanning,nmap,black,white,grey,hat,information,info,how to">
@@ -67,8 +67,8 @@
 				<!-- CONTENT -->
 				<div class="col-sm-8" id="content-page">
 					<div class="container-fluid"><!-- InstanceBeginEditable name="h1" -->
-					  	<h1>TheHarvester</h1>
-						<center><p><i>Information Gathering Tool</i></p></center>
+					  	<h1>TheHarvester Guide and Examples</h1>
+						<center><p><i>Open Source Information Gathering</i></p></center>
 					<!-- InstanceEndEditable -->
 					<hr class="solid">
 						<!-- BREADCRUMBS -->
@@ -113,12 +113,13 @@
 						  </div>
 						<div class="col-sm-4">
 							<!-- InstanceBeginEditable name="image" -->
+							<center><img src="../images/theharvester-logo.png" alt="TheHarvester" style="max-height:200px;max-width:200px;" class="image"></center>
 								<!-- InstanceEndEditable --></div>
 					  	</div>
 						<!-- InstanceBeginEditable name="article" -->
 						<div class="row top-buffer">
                         <!-- ARTICLE CONTENT -->
-                        <p>Last updated: 21 november 2018</p>
+                        <p>Last updated: 10 september 2024</p>
                         <ol>
                             <li><h5>Description</h5></li>
                             <p>TheHarvester is an OSINT tool for gathering subdomains, email addresses, open ports, banners, employee names, and much more from different public sources. (Google, Bing, PGP key servers, ...). In order to gather this information it will do active and passive information gathering.</p>
@@ -130,12 +131,12 @@ theharvester -d [domain] -l [amount of depthness] -b [search engines] -f [filena
                             </code>
                             <br />
                             <code>
-# Basic scan of the given domain, returns 500 results for each search engine.
+# Example which scans google.com and returns 500 results while searching in all available search engines
 theharvester -d google.com -l 500 -b all
                             </code>
                             <br />
                             <code>
-# Output your scan results to a visual report in HTML format
+# Same example as above, but this one outputs all gathered information to an HTML file
 theharvester -d google.com -l 500 -b all -f results.html
                             </code>
                             <br />
@@ -143,36 +144,8 @@ theharvester -d google.com -l 500 -b all -f results.html
                             <p><strong>-l</strong> : Specifies how deep the scan should go. More is better but slower! :)</p>
                             <p><strong>-b</strong> : Specifies the search engine to search on. (options as of may 2018: google, googleCSE, bing, bingapi, pgp, linkedin, google-profiles, jigsaw, twitter, googleplus, all)</p>
                             <p><strong>-f</strong> : Specifies an output file for the found results. This file will be saved in the current directory from your terminal, unless specified otherwise, in the HTML format.</p>
-                            
-                            <li><h5>Passive gathering sources:</h5></li>
-                            <p>- <a href="https://www.threatcrowd.org/">ThreadCrowd</a>: Open source threat intelligence</p>
-                            <p>- <a href="https://www.crt.sh">crtsh</a>: Comodo certificate search</p>
-                            <p>- <a href="https://www.google.com">Google</a>: Google search engine</p>
-                            <p>- GoogleCSE: Google custom search engine</p>
-                            <p>- Google-profiles: Google search engine, specified search for Google profiles</p>
-                            <p>- <a href="https://www.bing.com">Bing</a>: Microsoft search engine</p>
-                            <p>- BingAPI: Microsoft search engine API</p>
-                            <p>- <a href="https://www.dogpile.com">Dogpile</a>: Dogpile search engine</p>
-                            <p>- PGP: PGP key server</p>
-                            <p>- LinkedIn: Google search engine, specified search for LinkedIn users</p>
-                            <p>- <a href="https://www.shodanhq.com">Shodan</a>: Shodan search engine, will search for ports and banners of the discovered hosts.</p>
-                            <p>- <a href="https://www.baidu.com">Baidu</a>: Baidu search engine</p>
-                            <p>- <a href="https://www.yahoo.com">Yahoo</a>: Yahoo search engine</p>
-                            <p>- vhost: Bing virtual hosts search</p>
-                            <p>- Twitter: Searches for Twitter accounts related to a certain domain, uses Google search</p>
-                            <p>- <a href="https://plus.google.com/discover">Google+</a>: Searches for users that work in the target company, uses Google search</p>
-                            
-                            <li><h5>Active gathering sources:</h5></li>
-                            <p>- Port scanning and takeover options</p>
-                            <p>- DNS bruteforce: A plugin that will run a dictionary brute force enumeration attack.</p>
-                            <p>- DNS reverse lookup: Reverse lookup of discovered IP's to find hostnames.</p>
-                            <p>- DNS TLD (Top-level domain) expansion: TLD dictionary brute force enumeration.</p>
-                            
-                            <li><h5>Modules that require API keys:</h5></li>
-                            <p>- GoogleCSE: You need to create a Google Custom Search engine(CSE), and add your
- Google API key and CSE ID in the plugin (discovery/googleCSE.py)</p>
-                            <p>- Shodan: You need to provide your API key in discovery/shodansearch.py</p>
                         </ol>
+						<hr class="solid">
                         <center><b><p>** For more information, check out the extra links and sources. **</p></b></center>
                         <h5>50URC35:</h5>
                         <ul id="sources">

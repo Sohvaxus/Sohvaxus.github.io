@@ -236,6 +236,10 @@
 					  </div>
 				</div>
 				<!-- END OF CONTENT -->
+				<!-- RIGHT PANE -->
+				<div class="col-sm-2" id="right-pane">
+				</div>
+				<!-- END OF RIGHT PANE -->
 				<!-- SCRIPTS -->
 				<!-- END OF SCRIPTS -->
 			</div>

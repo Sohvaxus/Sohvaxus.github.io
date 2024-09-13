@@ -153,13 +153,13 @@ p {
 
 @media (max-width:1920px) { 
 	#content-page {
-		width: 70%;
+		width: 65%;
 	}
 	#navigation {
-		width: 15%;
+		width: 17.5%;
 	}
 	#right-pane {
-		width: 15%;
+		width: 17.5%;
 	}
 }
 

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en"><!-- InstanceBegin template="/Templates/guide.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- InstanceBeginEditable name="title" -->
+		<title>Internal and External Host Discovery - A Complete Guide | Sohvaxus</title>
+		<!-- InstanceEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- InstanceBeginEditable name="description" -->
+		<meta name="description" content="A complete guide which covers internal and external host discovery using passive and active methods. Contains in-depth explanation and examples for tools like Nmap, Netdiscover, arp-scan, ...">
+		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="keywords" -->
+		<meta name="keywords" content="nmap host discovery,host,discovery,internal,external,guide,examples,nmap,p0f,netdiscover,arp-scan,bettercap,scan">
+		<!-- InstanceEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar" style="min-width: 110px;border:none;margin-left:2%">
+								<p>General</p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid">
+						<!-- InstanceBeginEditable name="h1" -->
+						<h1>Internal and External Host Discovery</h1>
+						<center><p><i>Guide and Examples</i></p></center>
+					<!-- InstanceEndEditable -->
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- InstanceBeginEditable name="breadcrumb" -->
+							<li class="breadcrumb-item"><a href="hacking-methodology-guide.html">Table of Contents</a></li>
+						  	<li class="breadcrumb-item active">Host Discovery</li>
+							<!-- InstanceEndEditable -->
+					    </ol>
+						<!-- InstanceBeginEditable name="article" -->
+						<div class="row top-buffer"><p>Last updated: 12 september 2024</p></div>
+						<div class="row top-buffer">
+						  <!-- ARTICLE CONTENT -->
+							<div class="col-sm-6">
+								<!-- TABLE OF CONTENTS -->
+								<center><h5>Table of Contents</h5></center> <br />
+								<p><a href="#external_host_discovery">&gt; 1. External Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#icmp_protocol">&gt; 1.1 ICMP Protocol (ping and fping)</a></p>
+								<p>&emsp;&emsp;<a href="#ping_os_detection">&gt; 1.2 OS Detection with Ping</a></p>
+								<p>&emsp;&emsp;<a href="#nmap_host_discovery">&gt; 1.3 Nmap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#stealthy_nmap_host_discovery">&gt; 1.3.1 Stealthy Nmap Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#masscan_host_discovery">&gt; 1.4 Masscan</a></p>
+								<p><a href="#internal_host_discovery">&gt; 2. Internal Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#passive_host_discovery">&gt; 2.1 Passive Host Discovery</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_netdiscover">&gt; 2.1.1 Netdiscover</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_p0f">&gt; 2.1.2 p0f</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_bettercap">&gt; 2.1.3 Bettercap</a></p>
+								<p>&emsp;&emsp;<a href="#active_host_discovery">&gt; 2.2 Active Host Discovery</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_netdiscover">&gt; 2.2.1 Netdiscover</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_nmap">&gt; 2.2.2 Nmap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_bettercap">&gt; 2.2.3 Bettercap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_arpscan">&gt; 2.2.4 arp-scan</a></p>
+								<br />
+							</div>
+							<div class="col-sm-6">
+								<center><h5>About</h5></center> <br />
+								<p>This guide aims to be a complete collection of tools used for internal or external host discovery. Depending on the scenario these tools can be used in different ways. When stealth is important, you might want to go for a passive discovery approach. When you can make as much noise as you want, a more active approach can be helpful. Host discovery on internal networks is also mostly different from host discovery on external networks.In this guide you will learn how to use these tools in every scenario, how stealthy each tool is and even in to as much detail as which types of packets they send out.</p>
+								<p>If any information in this guide is inaccurate or outdated, please let me know in the comments at the bottom of the page!</p>
+								<br />
+								<center><img src="../images/host-discovery.png" alt="Host Discovery Logo" style="max-height:200px;max-width:200px;" class="image"></center>
+							</div>
+						</div>
+							<!-- END TABLE OF CONTENTS -->
+						<div class="row top-buffer">
+						  	<ol>
+								<li>
+						      		<h4 id="external_host_discovery">External Host Discovery</h4>
+					        	</li>
+								<h5>Description</h5>
+								<p>The goal of this chapter is to discover internet facing hosts while you're outside of the network. It involves testing publicly available IP addresses or domains that are accessible via the internet. This part of the guide assumes that you've already obtained an IP or range of IPs against which you want to run scanning tools. If you're not sure how to obtain a range of public IP addresses, the first part of my <a href="mitre-attack-active-scanning.html">active scanning guide</a> will explain this perfectly.</p>
+								<h5 id="icmp_protocol">1.1 ICMP Protocol (ping and fping)</h5>
+								<p>The most efficient way to discovery if a target is online and reachable is utilizing the ICMP protocol. The most well known tool you can use for this is <strong>ping</strong>. Ping will send an ICMP echo request to the target and wait for an ICMP echo reply, thus actively interacting with and touching the target. This can result in pings being filtered by a firewall at the target. Additionally, if you want to conduct a ping sweep on a range of IP addresses you could use <a href="https://fping.org/">fping</a>. Note that fping is not available on Windows. There are Windows versions available on Google, but downloading these binaries is not recommended. If you must, do so with caution.</p>
+								<code>
+# Example ping - This will send a single echo request to the target
+ping -c 1 192.168.0.1
+									
+# Example fping - This will iterate over the 192.168.0.0-255 range and send an echo request to every IP in the range
+fping -g 192.168.0.0/24
+								</code>
+								<hr class="solid">
+								<h5 id="ping_os_detection">1.2 OS Detection with Ping</h5>
+								<p>Fun fact: The operating system of your target can be determined by analyzing the TTL of your ICMP packets in the ping output. When looking at the most widely used operating systems on the internet we can see the following:</p>
+								<ul>
+									<li>Unix / Linux TTL: 64</li>
+									<li>Windows TTL: 128</li>
+									<li>Solaris / AIX TTL: 265</li>
+								</ul>
+								<p>Note that there could be defenses in place that alter TTL values, which makes OS fingerprinting not accurate via TTL values. It doesn't happen often, but it's possible.</p>
+								<code>
+# Example of a ping to example.org
+C:\>ping example.org
+
+Pinging example.org [93.184.215.14] with 32 bytes of data:
+Reply from 93.184.215.14: bytes=32 time=109ms <span style="color:yellow;">TTL=52</span>
+Reply from 93.184.215.14: bytes=32 time=105ms <span style="color:yellow;">TTL=52</span>
+Reply from 93.184.215.14: bytes=32 time=104ms <span style="color:yellow;">TTL=52</span>
+
+Ping statistics for 93.184.215.14:
+    Packets: Sent = 3, Received = 3, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 104ms, Maximum = 109ms, Average = 106ms
+									
+# We observe that the TTL is not any of the values in the list above, that's because we need to add the amount of hops to our TTL value
+# Example of tracert to get the amount of hops to example.org<br>
+
+C:\>tracert example.org
+
+Tracing route to example.org [93.184.215.14]
+over a maximum of 30 hops:
+
+  1    <1 ms    <1 ms    <1 ms  192.168.2.1
+  2     2 ms     1 ms     1 ms  192.168.3.1
+  3    15 ms    11 ms    10 ms  isp.redacted [291.155.0.1]
+  4    13 ms    21 ms    12 ms  isp.redacted [244.211.55.2]
+  5     *        *        *     Request timed out.
+  6     *        *        *     Request timed out.
+  7    18 ms    15 ms    12 ms  be-zav01a-rb1-ae-19-0.aorta.net [213.46.162.1]
+  8     *        *        *     Request timed out.
+  9    15 ms    18 ms    14 ms  brx-b3-link.ip.twelve99.net [62.115.117.56]
+ 10    20 ms    22 ms    17 ms  prs-bb1-link.ip.twelve99.net [62.115.116.238]
+ 11   108 ms   104 ms   104 ms  ash-bb2-link.ip.twelve99.net [62.115.112.242]
+ 12   110 ms   110 ms   104 ms  ash-b2-link.ip.twelve99.net [62.115.123.125]
+ 13   105 ms   114 ms   106 ms  edgio-ic-315152.ip.twelve99-cust.net [213.248.83.119]
+ 14   101 ms   102 ms   100 ms  ae-66.core1.dcd.edgecastcdn.net [152.195.65.153]
+ <span style="color:yellow;">15</span>   119 ms   105 ms   105 ms  93.184.215.14
+							
+# We get 15 hops. 52 + 15 = 67. But we have 3 failed hops, so 67 - 3 = 64.
+# That means the system we just pinged is most likely a Linux system.
+								</code>
+								<hr class="solid">
+								<h5 id="nmap_host_discovery">1.3 Nmap</h5>
+								<p>Another great tool for internal or external host discovery is Nmap. Nmap is an incredibly versatile tool and can be leveraged to bypass ICMP echo filtering and get more accurate results. We can use the <strong>-sn</strong> option to do host discovery on an IP range. This option will do no port scanning after the host discovery and print out all reachable hosts it found in the IP range. It will also do a reverse DNS lookup on the IPs and return any domains names it found.</p>
+								<code>
+# Example of a Disable Port Scan (-sn) against an IP range of Porsche
+
+┌─[r00t@parrot]─[~]
+└──╼ $nmap -sn 84.21.32.0/22
+...
+Nmap scan report for 84.21.32.194
+Host is up (0.097s latency).
+Nmap scan report for dns.porsche.de (84.21.32.195)
+Host is up (0.099s latency).
+Nmap scan report for dns.porsche.ch (84.21.32.196)
+Host is up (0.10s latency).
+Nmap scan report for 84.21.32.199
+Host is up (0.087s latency).
+Nmap scan report for preview.porsche.com (84.21.32.200)
+Host is up (0.15s latency).
+Nmap scan report for mspedit.porsche.com (84.21.32.201)
+Host is up (0.20s latency).
+Nmap scan report for 84.21.32.202
+Host is up (0.17s latency).
+Nmap scan report for dealeredit.porsche.com (84.21.32.203)
+Host is up (0.093s latency).
+Nmap scan report for preview.porscheengineering.com (84.21.32.204)
+Host is up (0.095s latency).
+Nmap scan report for external.porsche.com (84.21.32.205)
+Host is up (0.10s latency).
+Nmap scan report for shopprev.porsche.com (84.21.32.206)
+Host is up (0.058s latency).
+Nmap scan report for geodns.porsche.de (84.21.32.207)
+Host is up (0.063s latency).
+Nmap scan report for 84.21.32.211
+Host is up (0.17s latency).
+...
+								</code> <br />
+								<h6>Stealthiness</h6>
+								<p>Running Nmap with the <strong>-sn</strong> option will also touch the target, and even more so than ping or fping. This option will send an ICMP echo request, a TCP SYN packet to port 443, a TCP ACK packet to port 80, and an ICMP timestamp request by default. Unprivileged Unix users (or Windows users without Npcap installed) can't send these raw packets. In that case only SYN packets are sent. Even though this scan will also touch the target, it is considered a light scan and will not attract much attention. If you would like to get more details, please refer to this <a href="https://nmap.org/book/host-discovery-controls.html">Nmap Host Discovery Controls guide</a>.</p>
+								<h6 id="stealthy_nmap_host_discovery">1.3.1 Stealthy Nmap Host Discovery</h6>
+								<p>There is a way to leverage Nmap to do host discovery without touching the target at all. When running Nmap with the <strong>-sL</strong> option, no packets will be sent to the target, but it will simply list all hosts on the IP range provided. What it will also do by default is a reverse DNS lookup which will return the names of the scanned hosts if available. This scan can still be very useful to start off with if stealth is important, since this will not set off any detection alarms like an IDS. As stated by Nmap documentation it is possible, but highly unlikely, that the target will notice all of the reverse DNS requests. If this is a concern you can use the <strong>--dns-servers</strong> option to bounce through anonymous recursive DNS servers. For more information regarding this option, please refer to this <a href="https://nmap.org/book/host-discovery-controls.html">Nmap Host Discovery Controls guide</a> and this <a href="https://nmap.org/book/subvert-ids.html#defeating-firewalls-dns-proxy">Nmap DNS Proxying guide</a>.</p>
+								<code>
+# Example of an Nmap List Scan (-sL) against a range of IP's from Porsche
+# The example shows we can still get some information on the target without even touching it with packets
+									
+└──╼ $nmap -sL 84.21.32.0/22
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-09-10 19:51 CEST
+Nmap scan report for 84.21.32.0
+Nmap scan report for 84.21.32.1
+...
+Nmap scan report for ipass01.fw.porsche.de (84.21.32.193)
+Nmap scan report for 84.21.32.194
+Nmap scan report for dns.porsche.de (84.21.32.195)
+Nmap scan report for dns.porsche.ch (84.21.32.196)
+Nmap scan report for 84.21.32.197
+Nmap scan report for 84.21.32.198
+Nmap scan report for 84.21.32.199
+Nmap scan report for preview.porsche.com (84.21.32.200)
+Nmap scan report for mspedit.porsche.com (84.21.32.201)
+Nmap scan report for 84.21.32.202
+Nmap scan report for dealeredit.porsche.com (84.21.32.203)
+Nmap scan report for preview.porscheengineering.com (84.21.32.204)
+Nmap scan report for external.porsche.com (84.21.32.205)
+Nmap scan report for shopprev.porsche.com (84.21.32.206)
+Nmap scan report for geodns.porsche.de (84.21.32.207)
+Nmap scan report for geodns.porsche.ch (84.21.32.208)
+...
+								</code>
+								<h5 id="masscan_host_discovery">1.3 Masscan</h5>
+								<p>If you're looking to scan very large networks very fast, then <a href="https://github.com/robertdavidgraham/masscan">Masscan</a> is the tool to use. This tool will send 1.6 million packets/second on a non-virtualized Linux machine. That's enough to crash your entire home network. On Windows or VM's it's a bit slower with around 300 000 packets/second. The default rate is 100 packets/second, and it can be controlled with the <strong>--rate</strong> option. Although it can overwhelm your local network, it will not do that to distant networks since it randomly switches between target IP addresses while scanning.</p>
+								<p>Masscan will scan ports, which is useful for when ICMP echos are filtered. This will make sure even though ICMP is filtered, we can still discover remote hosts. Note that it will actively send out SYN packets asychronously, so it will touch hosts for discovery. This makes it prone for IDS detection.</p>
+								<code>
+# Example of a Masscan scan on the Nmaps' 20 most used ports against a range of IPs from Porsche
+└──╼ $sudo masscan -p20,21-23,25,53,80,110,111,135,139,143,443,445,993,995,1723,3306,3389,5900,8080 84.21.32.0/22
+Starting masscan 1.3.2 (http://bit.ly/14GZzcT) at 2024-09-12 15:57:20 GMT
+Initiating SYN Stealth Scan
+Scanning 1024 hosts [21 ports/host]
+Discovered open port 443/tcp on 84.21.32.27                                    
+Discovered open port 443/tcp on 84.21.32.26                                    
+Discovered open port 80/tcp on 84.21.32.11
+								</code>
+								<hr class="solid">
+								<li>
+						      		<h4 id="internal_host_discovery">Internal Host Discovery</h4>
+					        	</li> 
+								<h5>Description</h5>
+								<p>Once you're inside the network you'll want to discover all the hosts you can reach. If you were to obtain credentials or authentication tokens it's always good to have a list of internal hosts to try these against and hopefully gain access to another host. There are a couple of ways to go about this, and that includes passive and active host discovery.</p>
+								<h6 id="passive_host_discovery">2.1 Passive Host Discovery</h6>
+								<p>Passive host discovery is the most stealthy approach. Instead of actively probing for hosts on the network, these tools will sniff for communications between hosts on the network. Note that running these tools in passive mode will put your network card in <a href="https://en.wikipedia.org/wiki/Promiscuous_mode">promiscuous mode</a>, which will require root level privileges.</p>
+								<h6 id="passive_host_discovery_netdiscover">2.1.1 Netdiscover</h6>
+								<p>One such tool is <a href="https://github.com/netdiscover-scanner/netdiscover">Netdiscover</a>. Netdiscover can passively sniff for hosts on the network, and will not send out any packets by doing so. It's also possible to sniff a range of IP addresses. It can also be used on hub/switched networks.</p>
+								<code>
+# Example of passive host discovery
+sudo netdiscover -i eth0 192.168.0.1 -p
+									
+# Example of passive host discovery of an IP range
+sudo netdiscover -i eth0 -r 192.168.0.0/24 -p
+								</code> <br />
+								<h6 id="passive_host_discovery_p0f">2.1.2 p0f</h6>
+								<p>The tool <a href="https://lcamtuf.coredump.cx/p0f3/">p0f</a> can also be used to passively discover hosts, although it doesn't do this by default. The <strong>-p</strong> option will have to be passed in the command to sniff in promiscuous mode. Promiscuous mode will not send any packets over the network for discovery, which means it will not touch any hosts. It will however only sniff packets addressed to or routed through the host it's running on.</p>
+								<code>
+# Example of passive host discovery on the current subnet
+└──╼ $sudo p0f -i enp0s3 -p
+								</code> <br />
+								<h6 id="passive_host_discovery_bettercap">2.1.3 Bettercap</h6>
+								<p>Another great tool is <a href="https://www.bettercap.org/">Bettercap</a>. In passive mode this tool will periodically read the system ARP table to discover new hosts on the network. Bettercap will not send out any packets on the network when discovering this way.</p>
+								<code>
+# Example of passive host discovery
+# Start Bettercap
+sudo bettercap
+									
+# In the interactive shell, type "net.recon on" to start discovering
+192.168.1.0/24 > 192.168.1.12  » net.recon on
+192.168.1.0/24 > 192.168.1.12  » [16:02:43] [endpoint.new] endpoint 192.168.1.169 detected as DE:AD:BE:EF:5d:75.
+192.168.1.0/24 > 192.168.1.12  » [16:02:55] [endpoint.lost] endpoint 192.168.1.169 (HomeAudio.) DE:AD:BE:EF:5d:75 lost.
+									
+# To display what Bettercap discovered so far, type "net.show"
+192.168.1.0/24 > 192.168.1.12  » net.show
+
+┌───────────────┬───────────────────┬─────────────────┬───────────────────────────┬────────┬───────┬──────────┐
+│     IP ▴      │        MAC        │      Name       │          Vendor           │  Sent  │ Recvd │   Seen   │
+├───────────────┼───────────────────┼─────────────────┼───────────────────────────┼────────┼───────┼──────────┤
+│ 192.168.1.12  │ DE:AD:BE:EF:4c:97 │ enp0s3          │ Evil Corp                 │ 0 B    │ 0 B   │ 15:57:02 │
+│ 192.168.1.1   │ DE:AD:BE:EF:00:f0 │ gateway         │                           │ 332 B  │ 256 B │ 15:57:02 │
+│               │                   │                 │                           │        │       │          │
+│ 192.168.1.169 │ DE:AD:BE:EF:5d:75 │ <span style="color:yellow;">HomeAudio.</span>      │                           │ 6.2 kB │ 0 B   │ 16:02:56 │
+└───────────────┴───────────────────┴─────────────────┴───────────────────────────┴────────┴───────┴──────────┘
+									
+# To stop discovering, type "net.recon off"
+192.168.1.0/24 > 192.168.1.12  » net.recon off
+								</code>
+								<hr class="solid">
+								<h6 id="active_host_discovery">2.2 Active Host Discovery</h6>
+								<p>Doing active host discovery is similar to doing external host discovery, but you've got more flexibilty. This way of host discovery on the other hand is not as stealthy as passive discovery. Active discovery will send packets on the network to make hosts on the network reply, making this method prone to IDS discovery. The following tools can be used for active host discovery.</p>
+								<h6 id="active_host_discovery_netdiscover">2.2.1 Netdiscover</h6>
+								<p><a href="https://github.com/netdiscover-scanner/netdiscover">Netdiscover</a> can also actively discover hosts, when doing so Netdiscover will send out ARP requests on the network and wait for hosts to reply with an ARP reply. It's also possible to scan a range of IP addresses this way. It can also be used on hub/switched networks.</p>
+								<code>
+# Example of active host discovery
+sudo netdiscover -i eth0 192.168.0.1
+									
+# Example of active host discovery of an IP range
+sudo netdiscover -i eth0 192.168.0.0/24
+								</code> <br />
+								<h6 id="active_host_discovery_nmap">2.2.2 Nmap</h6>
+								<p>The same <a href="https://nmap.org/">Nmap</a> scan as used with external host discovery can be used. As said before, this scan will also touch hosts on the network. When this scan is run by a privileged user on a local ethernet network, ARP requests are sent instead, just like Netdiscover. Unless the <strong>--send-ip</strong> option is specified.</p>
+								<code>
+# Example of a Disable Port Scan (-sn) against a local IP range
+									
+──╼ $nmap -sn 192.168.1.0/24
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-09-12 03:52 CEST
+Nmap scan report for Router (192.168.1.1)
+Host is up (0.0071s latency).
+Nmap scan report for workstation (192.168.1.12)
+Host is up (0.012s latency).
+Nmap scan report for HomeAudio (192.168.1.169)
+Host is up (0.096s latency).
+Nmap done: 256 IP addresses (3 hosts up) scanned in 3.11 seconds
+								</code> <br />
+								<h6 id="active_host_discovery_bettercap">2.2.3 Bettercap</h6>
+								<p>As well as passive host discovery, it's also possible to do active host discovery with <a href="https://www.bettercap.org/">Bettercap</a> by probing the current subnet. When using <strong>net.probe</strong> Bettercap will send out mDNS, NBNS, UPnP and WSD packets to every IP in the current subnet so the net.recon module can detect them. All packets will be sent out by default, but it is possible to enable/disable the individual packets it sends out. Throttling the packets is also possible. Needless to say, this method will send packets over the network and will touch hosts, making this method intrusive and prone to IDS detection.</p>
+								<code>
+# Example of active host discovery with Bettercap
+# Start Bettercap
+sudo bettercap
+									
+# In the interactive shell, type "net.probe on" to start host discovery
+192.168.1.0/24 > 192.168.1.12  » net.probe on
+									
+# To show what it has found
+192.168.1.0/24 > 192.168.1.12  » net.show
+
+┌───────────────┬───────────────────┬───────────────────────┬───────────────────────────┬────────┬────────┬──────────┐
+│     IP ▴      │        MAC        │         Name          │          Vendor           │  Sent  │ Recvd  │   Seen   │
+├───────────────┼───────────────────┼───────────────────────┼───────────────────────────┼────────┼────────┼──────────┤
+│ 192.168.1.12  │ DE:AD:BE:EF:4c:97 │ enp0s3                │ Evil Corp                 │ 0 B    │ 0 B    │ 15:57:02 │
+│ 192.168.1.1   │ DE:AD:BE:EF:00:f0 │ gateway               │                           │ 4.8 kB │ 3.6 kB │ 15:57:02 │
+│               │                   │                       │                           │        │        │          │
+│ 192.168.1.5   │ DE:AD:BE:EF:d5:c0 │ <span style="color:yellow;">PHONE.</span>                │                           │ 1.8 kB │ 368 B  │ 16:43:31 │
+│ 192.168.1.156 │ DE:AD:BE:EF:fe:73 │ <span style="color:yellow;">DESKTOP.</span>              │ Evil Corp                 │ 20 kB  │ 1.3 kB │ 16:43:31 │
+│ 192.168.1.169 │ DE:AD:BE:EF:5d:75 │ <span style="color:yellow;">HomeAudio.</span>            │                           │ 53 kB  │ 2.8 kB │ 16:43:31 │
+└───────────────┴───────────────────┴───────────────────────┴───────────────────────────┴────────┴────────┴──────────┘
+									
+# To enable/disable individual packets (default=true)
+192.168.1.0/24 > 192.168.1.12  » set net.probe.mdns true/false
+192.168.1.0/24 > 192.168.1.12  » set net.probe.nbns true/false
+192.168.1.0/24 > 192.168.1.12  » set net.probe.upnp true/false
+192.168.1.0/24 > 192.168.1.12  » set net.probe.wsd true/false
+									
+# To throttle packets in milliseconds (default=10)
+192.168.1.0/24 > 192.168.1.12  » set net.probe.throttle 10
+									
+# To disable discovery
+192.168.1.0/24 > 192.168.1.12  » net.probe off
+192.168.1.0/24 > 192.168.1.12  » net.recon off
+								</code><br />
+								<h6 id="active_host_discovery_arpscan">2.2.4 arp-scan</h6>
+								<p><a href="https://github.com/royhills/arp-scan">arp-scan</a> is another tool that can be used for active host discovery. It can be used to discover IPv4 hosts on the local Ethernet or wireless network, including hosts that block IP traffic. When it discovers hosts it will also identify vendor details from the MAC address, unless the <strong>--quiet</strong> option is specified. The tool itself has a ton of flexibility and options, way too much to mention here, but we will cover a few interesting things it can do. Please refer to the <a href="https://github.com/royhills/arp-scan/wiki/arp-scan-User-Guide">arp-scan User Guide</a> to discover all of its capabilities.</p>
+								<p>Note that using this tool is very visible on the local network. It will broadcast an ARP request for every IP in the local subnet, and capture the reply if a host responds. As a result this tool not stealthy and prone to IDS detection.</p>
+								<h6>2.2.4.1 Simple network scans</h6>
+								<code>
+# Example of a simple local network scan
+└──╼ $sudo arp-scan -l
+Interface: enp0s3, type: EN13MB, MAC: DE:AD:BE:EF:4c:97, IPv4: 192.168.1.12
+Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.1.1		DE:AD:BE:EF:00:f0	Gateway
+192.168.1.5		DE:AD:BE:EF:d5:c0	Corp CO., LTD.
+192.168.1.124	DE:AD:BE:EF:00:c3	EvilCorp Co.,Ltd
+192.168.1.169	DE:AD:BE:EF:5d:75	Technology Co. Ltd
+192.168.1.17	DE:AD:BE:EF:31:ec	(Unknown: locally administered)
+192.168.1.143	DE:AD:BE:EF:fe:00	(Unknown: locally administered)
+
+6 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.10.0: 256 hosts scanned in 2.025 seconds (126.42 hosts/sec). 6 responded
+									
+# Example of a scan when specifying a target IP range
+└──╼ $sudo arp-scan 192.168.0.0/24
+								</code> <br />
+								<h6>2.2.4.2 802.1Q VLAN Hopping</h6>
+								<p>If the system running arp-scan is on a switch trunk port, then host discovery is also possible in different VLANs. This can be done with the <strong>--vlan</strong> option.</p>
+								<code>
+# Example of scanning VLAN 2 by using VLAN Hopping
+└──╼ $sudo arp-scan --vlan 2
+								</code>
+					      	</ol>
+							<hr class="solid">
+							<center>
+								<b>
+									<p>** For more information, check out the extra links and sources. **</p>
+								</b>
+							</center>
+
+							<h5>50URC35:</h5>
+							<ul id="sources">
+								<li><a href="https://bunny.net/academy/network/what-is-ping-how-does-it-work-and-what-it-does/">What is ping?</a></li>
+								<li><a href="https://nmap.org/book/host-discovery-controls.html">Nmap Host Discovery Controls</a></li>
+								<li><a href="https://www.bettercap.org/modules/ethernet/net.recon/">Bettercap net.recon Documentation</a></li>
+								<li><a href="https://www.bettercap.org/modules/ethernet/net.probe/">Bettercap net.probe Documentation</a></li>
+								<li><a href="https://github.com/royhills/arp-scan/wiki/arp-scan-User-Guide">arp-scan User Guide</a></li>
+								<li><a href="https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network#discovering-hosts">HackTricks - Discovering Hosts</a></li>
+							</ul>
+							<!-- END OF ARTICLE CONTENT -->
+						</div>
+					  <!-- InstanceEndEditable -->
+						<!-- COMMENTS -->
+						<script src="https://utteranc.es/client.js"
+							repo="Sohvaxus/Sohvaxus.github.io"
+							issue-term="pathname"
+							theme="github-dark"
+							crossorigin="anonymous"
+							async>
+						</script>
+						<!-- END OF COMMENTS -->
+					  </div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- RIGHT PANE -->
+				<div class="col-sm-2" id="right-pane">
+				</div>
+				<!-- END OF RIGHT PANE -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+<!-- InstanceEnd --></html>
+

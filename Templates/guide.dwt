@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41632606-2"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-41632606-2');
+		</script>
+		<link rel="shortcut icon" href="../favicon/favicon.ico"/>
+		<!-- TemplateBeginEditable name="title" -->
+		<title>Internal and External Host Discovery Guide and Examples</title>
+		<!-- TemplateEndEditable -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../stacksec.css">
+
+		<meta charset="UTF-8">
+		<!-- TemplateBeginEditable name="description" -->
+		<meta name="description" content="A complete guide on the discovery of hosts from inside or outside of the network.">
+		<!-- TemplateEndEditable -->
+		<!-- TemplateBeginEditable name="keywords" -->
+		<meta name="keywords" content="gobuster,enumeration,golang,dns,subdirectories,hacking,ctf,tutorial,howto,brute,force,dir,vhost,subdomain,usage,example,exclude,syntax">
+		<!-- TemplateEndEditable -->
+		<meta name="author" content="Sohvaxus">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<!-- BODY -->
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- HEADER -->
+				<div class"col">
+					<nav class="navbar navbar-inverse">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="../index.html">Sohvaxus</a>
+					</nav>
+				</div>
+				<!-- END OF HEADER -->
+				<div class="col-sm-2" id="navigation">
+					<!-- NAV -->
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="collapse navbar-collapse" id="navbar" style="min-width: 110px;border:none;margin-left:2%">
+								<p>General</p>
+								<ul class="nav navbar-nav">
+									<li><a href="../index.html">HOME</a></li>
+									<li><a href="../readme.html">README.TXT</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END OF NAV -->
+				</div>
+				<!-- CONTENT -->
+				<div class="col-sm-8" id="content-page">
+					<div class="container-fluid">
+						<!-- TemplateBeginEditable name="h1" -->
+						<h1>Internal and External Host Discovery</h1>
+						<center><p><i>Guide and Examples</i></p></center>
+						<!-- TemplateEndEditable -->
+					<hr class="solid">
+						<!-- BREADCRUMBS -->
+						<ol class="breadcrumb">
+						  	<li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+							<!-- TemplateBeginEditable name="breadcrumb" -->
+							<li class="breadcrumb-item"><a href="../content/hacking-methodology-guide.html">Table of Contents</a></li>
+						  	<li class="breadcrumb-item active">Host Discovery</li>
+							<!-- TemplateEndEditable -->
+					    </ol>
+						<!-- TemplateBeginEditable name="article" -->
+						<div class="row top-buffer"><p>Last updated: 12 september 2024</p></div>
+						<div class="row top-buffer">
+						  <!-- ARTICLE CONTENT -->
+							<div class="col-sm-6">
+								<!-- TABLE OF CONTENTS -->
+								<center><h5>Table of Contents</h5></center> <br />
+								<p><a href="#external_host_discovery">&gt; 1. External Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#icmp_protocol">&gt; 1.1 ICMP Protocol (ping and fping)</a></p>
+								<p>&emsp;&emsp;<a href="#ping_os_detection">&gt; 1.2 OS Detection with Ping</a></p>
+								<p>&emsp;&emsp;<a href="#nmap_host_discovery">&gt; 1.3 Nmap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#stealthy_nmap_host_discovery">&gt; 1.3.1 Stealthy Nmap Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#masscan_host_discovery">&gt; 1.4 Masscan</a></p>
+								<p><a href="#internal_host_discovery">&gt; 2. Internal Host Discovery</a></p>
+								<p>&emsp;&emsp;<a href="#passive_host_discovery">&gt; 2.1 Passive Host Discovery</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_netdiscover">&gt; 2.1.1 Netdiscover</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_p0f">&gt; 2.1.2 p0f</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#passive_host_discovery_bettercap">&gt; 2.1.3 Bettercap</a></p>
+								<p>&emsp;&emsp;<a href="#active_host_discovery">&gt; 2.2 Active Host Discovery</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_netdiscover">&gt; 2.2.1 Netdiscover</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_nmap">&gt; 2.2.2 Nmap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_bettercap">&gt; 2.2.3 Bettercap</a></p>
+								<p>&emsp;&emsp;&emsp;&emsp;<a href="#active_host_discovery_arpscan">&gt; 2.2.4 arp-scan</a></p>
+								<br />
+							</div>
+							<div class="col-sm-6">
+								<center><h5>About</h5></center> <br />
+								<p>This guide aims to be a complete collection of tools used for internal or external host discovery. Depending on the scenario these tools can be used in different ways. When stealth is important, you might want to go for a passive discovery approach. When you can make as much noise as you want, a more active approach can be helpful. Host discovery on internal networks is also mostly different from host discovery on external networks.In this guide you will learn how to use these tools in every scenario, how stealthy each tool is and even in to as much detail as which types of packets they send out.</p>
+								<p>If any information in this guide is inaccurate or outdated, please let me know in the comments at the bottom of the page!</p>
+								<br />
+								<center><img src="../images/host-discovery.png" alt="Host Discovery Logo" style="max-height:200px;max-width:200px;" class="image"></center>
+							</div>
+						</div>
+							<!-- END TABLE OF CONTENTS -->
+						<div class="row top-buffer">
+						  	<ol>
+								<li>
+						      		<h4 id="external_host_discovery">External Host Discovery</h4>
+					        	</li>
+								<h5>Description</h5>
+								<p></p>
+					      	</ol>
+							<hr class="solid">
+							<center>
+								<b>
+									<p>** For more information, check out the extra links and sources. **</p>
+								</b>
+							</center>
+
+							<h5>50URC35:</h5>
+							<ul id="sources">
+								<li><a href="https://bunny.net/academy/network/what-is-ping-how-does-it-work-and-what-it-does/">What is ping?</a></li>
+								<li><a href="https://nmap.org/book/host-discovery-controls.html">Nmap Host Discovery Controls</a></li>
+								<li><a href="https://www.bettercap.org/modules/ethernet/net.recon/">Bettercap net.recon Documentation</a></li>
+								<li><a href="https://www.bettercap.org/modules/ethernet/net.probe/">Bettercap net.probe Documentation</a></li>
+								<li><a href="https://github.com/royhills/arp-scan/wiki/arp-scan-User-Guide">arp-scan User Guide</a></li>
+								<li><a href="https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network#discovering-hosts">HackTricks - Discovering Hosts</a></li>
+							</ul>
+							<!-- END OF ARTICLE CONTENT -->
+						</div>
+					  	<!-- TemplateEndEditable -->
+						<!-- COMMENTS -->
+						<script src="https://utteranc.es/client.js"
+							repo="Sohvaxus/Sohvaxus.github.io"
+							issue-term="pathname"
+							theme="github-dark"
+							crossorigin="anonymous"
+							async>
+						</script>
+						<!-- END OF COMMENTS -->
+					  </div>
+				</div>
+				<!-- END OF CONTENT -->
+				<!-- RIGHT PANE -->
+				<div class="col-sm-2" id="right-pane">
+				</div>
+				<!-- END OF RIGHT PANE -->
+			</div>
+		</div>
+	<!-- END OF BODY -->
+	</body>
+</html>
+
